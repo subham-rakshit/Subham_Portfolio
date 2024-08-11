@@ -245,7 +245,7 @@ function Home() {
               type="button"
               className="flex items-center font-poppins text-sm font-semibold border border-zinc-900 rounded-full px-5 py-2 bg-zinc-800 hover:bg-zinc-950 text-white gap-4 group transition-all duration-300 group"
             >
-              READE MORE
+              READE more
               <div className="w-1 group-hover:w-5 h-1 group-hover:h-5 bg-white rounded-full overflow-hidden flex items-center justify-center transition-all duration-300">
                 <MdArrowOutward
                   size="20"
