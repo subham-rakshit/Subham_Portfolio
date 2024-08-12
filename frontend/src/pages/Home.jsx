@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { MdArrowOutward } from "react-icons/md";
-import { BsFillPersonCheckFill } from "react-icons/bs";
+import { EyesPlayComponent, FeaturedProjectsComponent } from "../components";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
+import { MdArrowOutward } from "react-icons/md";
+import { BsFillPersonCheckFill } from "react-icons/bs";
 
 const wcmContent = [
   {
@@ -257,6 +259,18 @@ function Home() {
           </Link>
         </div>
       </div>
+
+      {/* Play Section */}
+      <div className="eyeplay w-full h-screen overflow-hidden cursor-pointer">
+        <div className="relative w-full h-full bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center">
+          <EyesPlayComponent queryClass="eyeplay" />
+        </div>
+      </div>
+
+      {/* Feature Projects Section */}
+      <FeaturedProjectsComponent />
+
+      {/* Journey Section */}
     </>
   );
 }
