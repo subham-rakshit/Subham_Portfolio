@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function EyesPlayComponent({ queryClass }) {
+function EyesPlayComponent({ queryClass, text, extraStyle }) {
   const [eyeAngle, setEyeAngle] = useState(0);
 
   useEffect(() => {
@@ -27,14 +27,20 @@ function EyesPlayComponent({ queryClass }) {
   }, [eyeAngle]);
 
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex items-center gap-2 sm:gap-8">
+    <div
+      className={`absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex items-center gap-2 sm:gap-8 ${
+        extraStyle ? `${extraStyle}` : ""
+      }`}
+    >
       {/* FIRST Eye */}
       <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
         {/* Black Eye */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
-          <span className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-poppins font-light text-white text-xs sm:text-lg">
-            PLAY
-          </span>
+          {text && (
+            <span className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-poppins font-light text-white text-xs sm:text-lg">
+              PLAY
+            </span>
+          )}
           {/* Small eye ball's box */}
           <div
             style={{
@@ -52,9 +58,11 @@ function EyesPlayComponent({ queryClass }) {
       <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
         {/* Black Eye */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
-          <span className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-poppins font-light text-white text-xs sm:text-lg">
-            PLAY
-          </span>
+          {text && (
+            <span className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-poppins font-light text-white text-xs sm:text-lg">
+              PLAY
+            </span>
+          )}
           {/* Small eye ball's box */}
           <div
             style={{

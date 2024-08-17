@@ -8,6 +8,7 @@ export default {
         space: ["Space Grotesk", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
         franklin: ["Libre Franklin", "sans-serif"],
+        matemasie: ["Matemasie", "sans-serif"],
       },
     },
   },

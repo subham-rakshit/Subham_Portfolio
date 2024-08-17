@@ -40,77 +40,119 @@ const wcmContent = [
   },
 ];
 
-function Home() {
+function Home({ isFixed }) {
   const [selectedWCM, setSelectedWCM] = useState("");
+  const [isShown, setIsShown] = useState(false);
   return (
     <>
       {/* Landing Section */}
-      <div className="w-full min-h-screen bg-zinc-900 flex flex-col">
+      <div className="w-full min-h-screen bg-[#FBF9ED] flex flex-col">
         {/* Masker Info Section */}
-        <div className="w-full max-w-[1300px] mx-auto my-auto font-Founders_Grotesk_X-Condensed font-bold text-white px-5">
-          {["Welcome", "I'm Subham"].map((item, index) => {
-            return (
-              <div className="masker mb-5" key={`${item}${index}`}>
-                <div className="w-fit flex items-center overflow-hidden gap-2">
-                  {index === 1 && (
-                    <div className="hidden sm:inline">
-                      <div className="w-[70px] rounded-md h-[60px] flex justify-center items-center bg-[#B8D253] overflow-hidden">
-                        <img
-                          src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/BG%20Remove%20Subham.png?alt=media&token=9602e2d7-57fd-4095-914e-317ef801d2b7"
-                          alt="profile image"
-                          className="w-[65px] h-[60px] bg-cover relative top-[2px]"
-                        />
-                      </div>
+        <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-5">
+          {isFixed && (
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: "80%", opacity: 1 }}
+              transition={{
+                ease: [0.76, 0, 0.24, 1],
+                duration: 0.6,
+                delay: 0.9,
+              }}
+              className="flex lg:justify-center overflow-hidden"
+            >
+              <img
+                src="/jitu3.jpg"
+                alt="Subham"
+                className="w-[160px] sm:w-[250px] lg:w-[400px] h-[160px] sm:h-[250px] lg:h-[400px] object-cover"
+              />
+            </motion.div>
+          )}
+
+          {isFixed && (
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{
+                ease: [0.76, 0, 0.24, 1],
+                duration: 0.5,
+                delay: 0.2,
+              }}
+              className="overflow-hidden w-full font-Founders_Grotesk_X-Condensed font-bold text-zinc-800 mt-5 lg:mt-0"
+            >
+              {["Welcome", "I'm Subham"].map((item, index) => {
+                return (
+                  <div className="masker mb-5" key={`${item}${index}`}>
+                    <div className="w-fit flex items-center overflow-hidden">
+                      {index === 1 && isFixed && (
+                        <motion.div
+                          initial={{ width: 0 }}
+                          animate={{ width: "fit-content" }}
+                          transition={{
+                            ease: [0.76, 0, 0.24, 1],
+                            duration: 0.8,
+                            delay: 1.2,
+                          }}
+                          className="hidden sm:inline-block overflow-hidden"
+                        >
+                          <div className="w-[70px] rounded-md h-[68px] flex justify-center items-center bg-[#B8D253] overflow-hidden">
+                            <img
+                              src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/BG%20Remove%20Subham.png?alt=media&token=9602e2d7-57fd-4095-914e-317ef801d2b7"
+                              alt="profile image"
+                              className="w-[65px] h-[60px] bg-cover relative top-[2px]"
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                      <h1
+                        className={`mb-[1vw] uppercase ${
+                          index === 0 ? "text-[45px]" : "text-[30px]"
+                        } sm:text-[85px] leading-[.75] tracking-tighter`}
+                      >
+                        {item}
+                      </h1>
                     </div>
-                  )}
-                  <h1
-                    className={`mb-[1vw] uppercase ${
-                      index === 0 ? "text-[45px]" : "text-[30px]"
-                    } sm:text-[85px] leading-[.75] tracking-tighter`}
-                  >
-                    {item}
-                  </h1>
+                  </div>
+                );
+              })}
+              {/* Masker Info Animated Section */}
+              <div className="masker mt-3">
+                <div className="w-fit flex items-end overflow-hidden gap-2">
+                  <span className="mb-[1vw] capitalize text-[25px] sm:text-[40px] leading-[.75] tracking-tighter font-bold">
+                    <Typewriter
+                      words={[
+                        "MERN Stack Developer",
+                        "Frontend Web Developer",
+                        "Backend Web Developer",
+                        "Web Application Developer",
+                        "Software Engineer",
+                        "API Developer",
+                        "Full-Stack Developer",
+                      ]}
+                      loop={0}
+                      cursor
+                      cursorStyle="_"
+                      cursorColor="white"
+                      typeSpeed={80}
+                      deleteSpeed={80}
+                      delaySpeed={1500}
+                    />
+                  </span>
                 </div>
               </div>
-            );
-          })}
-          {/* Masker Info Animated Section */}
-          <div className="masker mt-3">
-            <div className="w-fit flex items-end overflow-hidden gap-2">
-              <span className="mb-[1vw] capitalize text-[25px] sm:text-[60px] leading-[.75] tracking-tighter font-semibold">
-                <Typewriter
-                  words={[
-                    "MERN Stack Developer",
-                    "Frontend Web Developer",
-                    "Backend Web Developer",
-                    "Web Application Developer",
-                    "Software Engineer",
-                    "API Developer",
-                    "Full-Stack Developer",
-                  ]}
-                  loop={0}
-                  cursor
-                  cursorStyle="_"
-                  cursorColor="white"
-                  typeSpeed={80}
-                  deleteSpeed={80}
-                  delaySpeed={1500}
-                />
-              </span>
-            </div>
-          </div>
+            </motion.div>
+          )}
         </div>
 
         {/* Landing Bottom Section */}
         <div className="py-5 border-t border-zinc-700 px-5 flex flex-col gap-2 md:flex-row md:items-center justify-between">
           <div className="masker">
-            <p className="font-poppins text-white font-light text-[12px]">
+            <p className="font-poppins text-zinc-800 font-light text-[12px]">
               Building user-friendly interface
             </p>
           </div>
 
           <div className="masker">
-            <p className="font-poppins text-white font-light text-[12px]">
+            <p className="font-poppins text-zinc-800 font-light text-[12px]">
               Scalable backend architectures
             </p>
           </div>
@@ -120,25 +162,25 @@ function Home() {
             target="_blank"
             className="flex items-center gap-2 group transition-all duration-300"
           >
-            <span className="font-poppins text-white group-hover:text-zinc-900 group-hover:bg-zinc-200 font-light group-hover:font-medium text-[12px] border-[1px] border-zinc-600 rounded-full px-5 py-2 transition-all duration-300">
+            <span className="font-poppins text-zinc-800 group-hover:text-zinc-100 group-hover:bg-zinc-900 font-light group-hover:font-medium text-xs border-[1px] border-zinc-600 rounded-full px-3 sm:px-5 py-2 transition-all duration-300">
               DOWNLOAD RESUME
             </span>
             <MdArrowOutward
               size="35"
-              className="rounded-full border-[1px] border-zinc-600 p-1 text-zinc-400 group-hover:text-zinc-900 group-hover:bg-zinc-200 transition-all duration-300"
+              className="rounded-full border-[1px] border-zinc-600 p-1 text-zinc-400 group-hover:text-zinc-100 group-hover:bg-zinc-900 transition-all duration-300"
             />
           </a>
         </div>
       </div>
 
       {/* Markee Section */}
-      <div className="w-full py-16 bg-[#004D43] rounded-tl-[40px] rounded-tr-[40px]">
-        <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex gap-10">
+      <div className="w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px]">
+        <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
           <motion.h1
             initial={{ x: "0" }}
             animate={{ x: "-100%" }}
             transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-            className="text-[100px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px]"
+            className="text-[80px] sm:text-[150px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px] pr-10"
           >
             Welcome to my portfolio
           </motion.h1>
@@ -146,23 +188,7 @@ function Home() {
             initial={{ x: "0" }}
             animate={{ x: "-100%" }}
             transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-            className="text-[100px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px]"
-          >
-            Welcome to my portfolio
-          </motion.h1>
-          <motion.h1
-            initial={{ x: "0" }}
-            animate={{ x: "-100%" }}
-            transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-            className="text-[100px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px]"
-          >
-            Welcome to my portfolio
-          </motion.h1>
-          <motion.h1
-            initial={{ x: "0" }}
-            animate={{ x: "-100%" }}
-            transition={{ ease: "linear", repeat: Infinity, duration: 20 }}
-            className="text-[100px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px]"
+            className="text-[80px] sm:text-[150px] lg:text-[180px] uppercase font-Founders_Grotesk_X-Condensed leading-none tracking-tighter font-bold mb-[15px] pr-10"
           >
             Welcome to my portfolio
           </motion.h1>
@@ -170,14 +196,14 @@ function Home() {
       </div>
 
       {/* About Section */}
-      <div className="w-full min-h-screen bg-[#CDEA68] pt-20 pb-10 rounded-tl-[40px] rounded-tr-[40px]">
+      <div className="w-full min-h-screen bg-[#CDEA68] pt-10 pb-10">
         {/* About basic info */}
-        <div className="w-full max-w-[1300px] mx-auto px-5 text-[#212121] font-poppins">
-          <h1 className="text-3xl mb-4">
+        <div className="w-full max-w-[1400px] mx-auto px-5 text-[#212121] font-poppins">
+          <h1 className="text-xl sm:text-3xl mb-4">
             Hello, I'm <span className="font-bold">Subham Rakshit</span>, a
             Passionate MERN Stack Developer
           </h1>
-          <p className="text-xl tracking-tight leading-[3vw]">
+          <p className="text-lg sm:text-xl tracking-tight leading-[30px] sm:leading-[35px]">
             With a deep-rooted passion for crafting intuitive and efficient web
             applications, I specialize in the MERN stack, leveraging{" "}
             <span className="underline">MongoDB</span>,{" "}
@@ -191,20 +217,20 @@ function Home() {
           </p>
         </div>
         {/* Why choose me section */}
-        <div className="w-full border-t border-b py-5 px-10 border-zinc-900 my-10">
-          <div className="w-full max-w-[1300px] mx-auto flex justify-between">
-            <div className="flex items-center gap-3">
+        <div className="w-full max-w-[1400px] mx-auto border-t border-b border-zinc-900 py-5 px-5 my-10">
+          <div className="w-full max-w-[1300px] mx-auto flex flex-col sm:flex-row sm:justify-between">
+            <div className="flex items-center gap-3 mb-5 sm:mb-0">
               <BsFillPersonCheckFill size="30" />
               <h1 className="font-poppins text-lg">Why Choose Me?</h1>
             </div>
-            <ul className="w-[60%] flex flex-col gap-2">
+            <ul className="w-full sm:w-[60%] flex flex-col gap-2">
               {wcmContent.map((item) => {
                 return (
                   <li className="font-poppins" key={item.id}>
                     <div className="flex items-center justify-between">
                       <span
                         className={`${
-                          item.id === selectedWCM
+                          item.id === selectedWCM && isShown
                             ? "font-semibold"
                             : "font-light"
                         } transition-all duration-300 ease-in-out`}
@@ -214,11 +240,12 @@ function Home() {
                       <button
                         type="button"
                         className={`border-b border-zinc-800 ${
-                          item.id === selectedWCM
+                          item.id === selectedWCM && isShown
                             ? "font-semibold"
                             : "font-light"
                         } transition-all duration-300 ease-in-out`}
                         onClick={() => {
+                          setIsShown((prev) => !prev);
                           setSelectedWCM(item.id);
                         }}
                       >
@@ -227,7 +254,7 @@ function Home() {
                     </div>
                     <div
                       className={`${
-                        item.id === selectedWCM
+                        item.id === selectedWCM && isShown
                           ? "max-h-[fit-content] opacity-100"
                           : "max-h-0 opacity-0"
                       } my-1 overflow-hidden transition-all duration-500 ease-in-out`}
@@ -263,7 +290,7 @@ function Home() {
       {/* Play Section */}
       <div className="eyeplay w-full h-screen overflow-hidden cursor-pointer">
         <div className="relative w-full h-full bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center">
-          <EyesPlayComponent queryClass="eyeplay" />
+          <EyesPlayComponent queryClass="eyeplay" text="PLAY" />
         </div>
       </div>
 
@@ -271,6 +298,53 @@ function Home() {
       <FeaturedProjectsComponent />
 
       {/* Journey Section */}
+      <div className="journey relative w-full bg-[#CDEA68] py-5 sm:py-10 px-5 flex flex-col justify-center items-center overflow-hidden">
+        <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 sm:gap-5">
+          {/* Eye Play Mobile */}
+          <div className="relative w-full h-[200px] lg:hidden">
+            <EyesPlayComponent queryClass="journey" scale="0.2" />
+          </div>
+          {/* Eye Play Desktop */}
+          <EyesPlayComponent
+            queryClass="journey"
+            scale="0.2"
+            extraStyle="hidden lg:flex"
+          />
+          {["Ready", "To Start", "The Journey"].map((text, index) => {
+            const textId = `${text.toLowerCase().split(" ").join("_")}${index}`;
+
+            return (
+              <div
+                key={textId}
+                className="w-fit mx-auto flex items-center overflow-hidden"
+              >
+                <h1 className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-center uppercase leading-[.75] p-2">
+                  {text}
+                </h1>
+              </div>
+            );
+          })}
+
+          {/* Read More Btn */}
+          <div className="flex justify-center mt-10">
+            <Link to="/contact-me">
+              <button
+                type="button"
+                className="flex items-center font-poppins text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group"
+              >
+                CONTACT ME
+                <div className="w-1 group-hover:w-5 h-1 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200 rounded-full overflow-hidden flex items-center justify-center transition-all duration-300">
+                  <MdArrowOutward
+                    size="20"
+                    color="#000"
+                    className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
+                  />
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

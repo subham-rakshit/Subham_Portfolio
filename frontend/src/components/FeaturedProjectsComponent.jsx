@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 function FeaturedProjectsComponent() {
   return (
-    <div className="w-full bg-zinc-200 py-20">
-      <h1 className="text-4xl font-poppins tracking-tighter px-10">
+    <div className="w-full bg-[#FBF9ED] py-10">
+      <h1 className="text-xl sm:text-3xl font-poppins tracking-tighter px-5">
         Featured projects
       </h1>
-      <div className="border-t border-zinc-600 mt-10 px-10 py-10">
-        <div className="w-full max-w-[1300px] mx-auto flex flex-wrap justify-between gap-5">
+      <div className="border-t border-zinc-600 mt-10 px-5 py-5 sm:py-10">
+        <div className="w-full max-w-[1400px] mx-auto flex flex-wrap justify-between gap-5">
           {/* Shibaji Project */}
           <div className="w-full sm:w-[48%]">
             <div className="flex items-center gap-2 mb-4">
@@ -19,11 +19,24 @@ function FeaturedProjectsComponent() {
                 Shibaji Sangha
               </h1>
             </div>
-            <div className="w-full h-[400px] rounded-lg overflow-hidden p-5 bg-white cursor-pointer group">
+            <div className="relative w-full h-[220px] lg:h-[400px] rounded-lg overflow-hidden p-2 bg-white cursor-pointer group">
+              <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex justify-center items-center z-[99] overflow-hidden">
+                {"SHIBAJI".split("").map((item, index) => {
+                  return (
+                    <span
+                      key={`${item}${index}`}
+                      className="relative translate-y-full group-hover:translate-y-0 text-4xl text-[#cdea68] font-extrabold tracking-tighter text-center transition-transform duration-500"
+                      style={{ transitionDelay: `${index * 0.04}s` }}
+                    >
+                      {item}
+                    </span>
+                  );
+                })}
+              </div>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Shibaji%20Combine%20Wb.png?alt=media&token=291f1b35-b7c0-4539-bd4a-89f1a1a02f6d"
                 alt="shibaji sangha"
-                className="w-full h-full object-cover group-hover:scale-[0.9] transition-all duration-500"
+                className="w-full h-full object-cover bg-center group-hover:scale-[0.9] transition-all duration-500"
               />
             </div>
             <div className="w-full flex items-center gap-2 flex-wrap mt-3">
@@ -56,7 +69,20 @@ function FeaturedProjectsComponent() {
                 NxtWatch
               </h1>
             </div>
-            <div className="w-full h-[400px] rounded-lg overflow-hidden p-5 bg-white cursor-pointer group">
+            <div className="relative w-full h-[220px] lg:h-[400px] rounded-lg overflow-hidden p-2 bg-white cursor-pointer group">
+              <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex justify-center items-center z-[99] overflow-hidden">
+                {"NXTWATCH".split("").map((item, index) => {
+                  return (
+                    <span
+                      key={`${item}${index}`}
+                      className="relative translate-y-full group-hover:translate-y-0 text-4xl text-[#cdea68] font-extrabold tracking-tighter text-center transition-transform duration-500"
+                      style={{ transitionDelay: `${index * 0.04}s` }}
+                    >
+                      {item}
+                    </span>
+                  );
+                })}
+              </div>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/NxtWatch%20Combine.png?alt=media&token=46b239b5-f2ca-42f2-aa31-f85dc7f7b955"
                 alt="nxtwatch"
@@ -89,7 +115,20 @@ function FeaturedProjectsComponent() {
                 NxtTrendz
               </h1>
             </div>
-            <div className="w-full h-[400px] rounded-lg overflow-hidden p-5 bg-white cursor-pointer group">
+            <div className="relative w-full h-[220px] lg:h-[400px] rounded-lg overflow-hidden p-2 bg-white cursor-pointer group">
+              <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex justify-center items-center z-[99] overflow-hidden">
+                {"NXTTRENDZ".split("").map((item, index) => {
+                  return (
+                    <span
+                      key={`${item}${index}`}
+                      className="relative translate-y-full group-hover:translate-y-0 text-4xl text-[#cdea68] font-extrabold tracking-tighter text-center transition-transform duration-500"
+                      style={{ transitionDelay: `${index * 0.04}s` }}
+                    >
+                      {item}
+                    </span>
+                  );
+                })}
+              </div>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Nxt%20Trendz%20Combine.png?alt=media&token=134c5528-9db4-4d4b-8524-4a4fee99777d"
                 alt="nxttrendz"
@@ -119,13 +158,27 @@ function FeaturedProjectsComponent() {
                 Jobby App
               </h1>
             </div>
-            <div className="w-full h-[400px] rounded-lg overflow-hidden p-5 bg-white cursor-pointer group">
+            <div className="relative w-full h-[220px] lg:h-[400px] rounded-lg overflow-hidden p-2 bg-white cursor-pointer group">
+              <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex justify-center items-center z-[99] overflow-hidden">
+                {"JOBBY".split("").map((item, index) => {
+                  return (
+                    <span
+                      key={`${item}${index}`}
+                      className="relative translate-y-full group-hover:translate-y-0 text-4xl text-[#cdea68] font-extrabold tracking-tighter text-center transition-transform duration-500"
+                      style={{ transitionDelay: `${index * 0.04}s` }}
+                    >
+                      {item}
+                    </span>
+                  );
+                })}
+              </div>
               <img
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Jobby%20Combine.png?alt=media&token=9af35a1a-6a11-4a53-9953-6036f610184b"
-                alt="nxttrendz"
-                className="w-full h-full object-cover group-hover:scale-[0.9] transition-all duration-500"
+                alt="Jobby Combine"
+                className="w-full h-full object-cover group-hover:scale-90 transition-transform duration-500"
               />
             </div>
+
             <div className="w-full flex items-center gap-2 flex-wrap mt-3">
               {["ReactJs", "JWT"].map((stack, index) => {
                 const stackId = `${stack.split(" ").join("_")}${index}`;
