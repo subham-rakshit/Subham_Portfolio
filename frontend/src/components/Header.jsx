@@ -46,7 +46,7 @@ function Header({ isFixed }) {
               { name: "Home", link: "/" },
               { name: "About", link: "/about" },
               { name: "Projects", link: "/projects" },
-              { name: "Contact", link: "/contact-me" },
+              { name: "Contact", link: "/contact" },
             ].map((item, index) => (
               <Link to={item.link} key={`${item.name}${index}`}>
                 <li
@@ -105,7 +105,7 @@ function Header({ isFixed }) {
               { name: "Home", link: "/" },
               { name: "About", link: "/about" },
               { name: "Projects", link: "/projects" },
-              { name: "Contact", link: "/contact-me" },
+              { name: "Contact", link: "/contact" },
             ].map((item, index) => (
               <Link to={item.link} key={`${item.name}${index}`}>
                 <li

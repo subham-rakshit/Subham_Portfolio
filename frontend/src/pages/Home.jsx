@@ -302,14 +302,10 @@ function Home({ isFixed }) {
         <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 sm:gap-5">
           {/* Eye Play Mobile */}
           <div className="relative w-full h-[200px] lg:hidden">
-            <EyesPlayComponent queryClass="journey" scale="0.2" />
+            <EyesPlayComponent queryClass="journey" />
           </div>
           {/* Eye Play Desktop */}
-          <EyesPlayComponent
-            queryClass="journey"
-            scale="0.2"
-            extraStyle="hidden lg:flex"
-          />
+          <EyesPlayComponent queryClass="journey" extraStyle="hidden lg:flex" />
           {["Ready", "To Start", "The Journey"].map((text, index) => {
             const textId = `${text.toLowerCase().split(" ").join("_")}${index}`;
 

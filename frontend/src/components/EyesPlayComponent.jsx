@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-function EyesPlayComponent({ queryClass, text, extraStyle }) {
+function EyesPlayComponent({
+  queryClass,
+  text,
+  extraStyle,
+  scale = 1,
+  position,
+}) {
   const [eyeAngle, setEyeAngle] = useState(0);
 
   useEffect(() => {
@@ -28,9 +34,16 @@ function EyesPlayComponent({ queryClass, text, extraStyle }) {
 
   return (
     <div
-      className={`absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] flex items-center gap-2 sm:gap-8 ${
+      className={`absolute flex items-center gap-2 sm:gap-8 ${
         extraStyle ? `${extraStyle}` : ""
       }`}
+      style={{
+        top: position ? position.top : "50%",
+        left: position ? position.left : "50%",
+        transform: `translate(${position ? position.translateX : "-50%"}, ${
+          position ? position.translateY : "-50%"
+        }) scale(${scale})`,
+      }}
     >
       {/* FIRST Eye */}
       <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Footer, Header } from "./components";
+import { Footer, Header, PageTransition } from "./components";
 import { About, Contact, Home, Projects } from "./pages";
 
 import Headroom from "react-headroom";
@@ -74,14 +74,16 @@ function App() {
             <Headroom>
               <Header isFixed={isFixed} />
             </Headroom>
-            <Routes>
-              <Route>
-                <Route path="/" element={<Home isFixed={isFixed} />} />
-              </Route>
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/contact-me" element={<Contact />} />
-            </Routes>
+            <PageTransition>
+              <Routes>
+                <Route>
+                  <Route path="/" element={<Home isFixed={isFixed} />} />
+                </Route>
+                <Route path="/about" element={<About />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/contact" element={<Contact />} />
+              </Routes>
+            </PageTransition>
             <Footer />
           </BrowserRouter>
         </div>
