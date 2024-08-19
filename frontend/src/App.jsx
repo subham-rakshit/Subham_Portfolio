@@ -79,7 +79,7 @@ function App() {
                 <Route>
                   <Route path="/" element={<Home isFixed={isFixed} />} />
                 </Route>
-                <Route path="/about" element={<About />} />
+                <Route path="/about" element={<About isFixed={isFixed} />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/contact" element={<Contact />} />
               </Routes>

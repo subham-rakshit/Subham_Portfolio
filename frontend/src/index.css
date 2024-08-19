@@ -21,3 +21,9 @@ body::-webkit-scrollbar {
   background: rgba(212, 212, 212, 0.5);
   backdrop-filter: blur(10px);
 }
+
+/* About Page */
+.tech-box-img-container,
+.tech-box-name-container {
+  pointer-events: none;
+}
