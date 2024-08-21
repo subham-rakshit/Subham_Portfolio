@@ -57,7 +57,7 @@ function PageTransition({ children }) {
     <>
       {prevPathname.current !== location.pathname && (
         <>
-          <div className="transition-slide fixed top-0 left-0 w-full h-full bg-zinc-800 z-50 flex flex-col justify-between">
+          <div className="transition-slide fixed top-0 left-0 w-full h-full bg-zinc-800 z-[999999999999] flex flex-col justify-between">
             <div className="relative w-full h-full p-10">
               <div className="absolute top-1/2 -translate-y-1/2 overflow-hidden flex items-center w-fit">
                 <motion.span

@@ -13,7 +13,7 @@ function Header({ isFixed }) {
   // Onscroll navbar background change logic
   window.addEventListener("scroll", function () {
     let headerElem = document.querySelector(".navbar");
-    headerElem.classList.toggle("sticky", window.scrollY > 0);
+    headerElem.classList.toggle("sticky-nav", window.scrollY > 0);
   });
 
   // Extracting the pathname from path location
@@ -27,9 +27,9 @@ function Header({ isFixed }) {
 
   return (
     <div
-      className={`navbar w-full px-5 py-2 font-poppins text-zinc-800 transition-all duration-300 ease-in-out`}
+      className={`navbar relative w-full px-5 py-2 font-poppins text-zinc-800 transition-all duration-300 ease-in-out`}
     >
-      <div className="w-full max-w-[1300px] mx-auto flex items-center justify-between">
+      <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="logo">
           <Link to="/">
             <img
@@ -91,7 +91,7 @@ function Header({ isFixed }) {
             isClicked ? { y: 0, opacity: 1 } : { y: "-100%", opacity: 0 }
           }
           transition={{ duration: 0.7, ease: "easeInOut" }}
-          className={`absolute sm:hidden top-0 left-0 w-full h-screen overflow-hidden bg-[rgba(66,66,66,0.8)] backdrop-blur-[10px] flex flex-col justify-between p-10`}
+          className={`absolute sm:hidden top-0 left-0 w-full h-screen overflow-hidden bg-[rgba(66,66,66,0.8)] backdrop-blur-[10px] flex flex-col justify-between p-5`}
         >
           <MdClose
             color="#FBF9ED"
@@ -110,7 +110,7 @@ function Header({ isFixed }) {
               <Link to={item.link} key={`${item.name}${index}`}>
                 <li
                   key={`${item.name}${index}`}
-                  className={`w-fit text-2xl text-[#FBF9ED] font-Founders_Grotesk_X-Condensed capitalize cursor-pointer transition-all duration-300 ${
+                  className={`w-fit text-3xl text-[#FBF9ED] font-Founders_Grotesk_X-Condensed capitalize cursor-pointer transition-all duration-300 ${
                     path && path === item.link
                       ? "text-[#B8D253] font-bold"
                       : "text-[#FBF9ED] font-normal"

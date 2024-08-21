@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Footer, Header, PageTransition } from "./components";
 import { About, Contact, Home, Projects } from "./pages";
+import Lenis from "lenis";
 
 import Headroom from "react-headroom";
 import { gsap, CSSPlugin, Expo } from "gsap";
@@ -10,6 +11,16 @@ gsap.registerPlugin(CSSPlugin);
 function App() {
   const [counter, setCounter] = useState(0);
   const [isFixed, setIsFixed] = useState(false);
+
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }, [isFixed]);
 
   useEffect(() => {
     const count = setInterval(() => {
@@ -23,6 +34,7 @@ function App() {
         }
       });
     }, 25);
+
     return () => clearInterval(count);
   }, []); // Ensure this useEffect runs only once on mount
 
@@ -71,7 +83,7 @@ function App() {
         </p>
         <div className="content min-h-screen w-0 absolute left-0 top-0 z-[4] bg-[#FBF9ED] overflow-hidden">
           <BrowserRouter>
-            <Headroom>
+            <Headroom style={{ zIndex: 999 }}>
               <Header isFixed={isFixed} />
             </Headroom>
             <PageTransition>

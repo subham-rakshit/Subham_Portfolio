@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 function EyesPlayComponent({
   queryClass,
@@ -8,21 +8,23 @@ function EyesPlayComponent({
   position,
 }) {
   const [eyeAngles, setEyeAngles] = useState({ leftEye: 0, rightEye: 0 });
-  const componentRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
       let mouseX = e.clientX;
       let mouseY = e.clientY;
 
-      const eyeContainer = componentRef.current;
-      if (!eyeContainer) return;
+      const eyeContainer = document.querySelector(`.${queryClass}`);
 
+      if (!eyeContainer) return; // Guard clause if the container isn't found
+
+      // Get the relative position of the eye container
       const containerRect = eyeContainer.getBoundingClientRect();
 
       const leftEyeElement = eyeContainer.querySelector(".left-eye");
       const rightEyeElement = eyeContainer.querySelector(".right-eye");
 
+      // Get the center points of both eyes relative to the container
       const leftEyeRect = leftEyeElement.getBoundingClientRect();
       const leftEyeCenterX =
         leftEyeRect.left + leftEyeRect.width / 2 - containerRect.left;
@@ -35,6 +37,7 @@ function EyesPlayComponent({
       const rightEyeCenterY =
         rightEyeRect.top + rightEyeRect.height / 2 - containerRect.top;
 
+      // Calculate the angles for both eyes
       let leftEyeDeltaX = mouseX - (containerRect.left + leftEyeCenterX);
       let leftEyeDeltaY = mouseY - (containerRect.top + leftEyeCenterY);
       let leftEyeAngle =
@@ -51,30 +54,21 @@ function EyesPlayComponent({
       });
     };
 
-    const sectionElement = document.querySelector(`.${queryClass}`);
+    const eyeContainer = document.querySelector(`.${queryClass}`);
 
-    if (sectionElement) {
-      sectionElement.addEventListener("mouseenter", () => {
-        sectionElement.addEventListener("mousemove", handleMouseMove);
-      });
-
-      sectionElement.addEventListener("mouseleave", () => {
-        sectionElement.removeEventListener("mousemove", handleMouseMove);
-      });
+    if (eyeContainer) {
+      eyeContainer.addEventListener("mousemove", handleMouseMove);
     }
 
     return () => {
-      if (sectionElement) {
-        sectionElement.removeEventListener("mouseenter", () => {
-          sectionElement.removeEventListener("mousemove", handleMouseMove);
-        });
+      if (eyeContainer) {
+        eyeContainer.removeEventListener("mousemove", handleMouseMove);
       }
     };
-  }, [queryClass]);
+  }, [queryClass]); // Add queryClass as a dependency to rerun effect when it changes
 
   return (
     <div
-      ref={componentRef}
       className={`absolute flex items-center gap-2 sm:gap-8 ${
         extraStyle ? `${extraStyle}` : ""
       }`}
@@ -86,8 +80,8 @@ function EyesPlayComponent({
         }) scale(${scale})`,
       }}
     >
-      {/* LEFT Eye */}
-      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
+      {/* FIRST Eye */}
+      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200 left-eye">
         {/* Black Eye */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
           {text && (
@@ -95,34 +89,36 @@ function EyesPlayComponent({
               PLAY
             </span>
           )}
-          {/* Small White Eye Ball */}
+          {/* Small eye ball's box */}
           <div
             style={{
               transform: `translate(-50%, -50%) rotate(${eyeAngles.leftEye}deg)`,
             }}
-            className="left-eye absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
+            className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
           >
+            {/* Small eye ball */}
             <div className="w-4 h-full bg-zinc-200 rounded-full"></div>
           </div>
         </div>
       </div>
 
-      {/* RIGHT Eye */}
-      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
-        {/* Black Eye Ball */}
+      {/* SECOND Eye */}
+      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200 right-eye">
+        {/* Black Eye */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
           {text && (
             <span className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] font-poppins font-light text-white text-xs sm:text-lg">
               PLAY
             </span>
           )}
-          {/* Small White Eye Ball */}
+          {/* Small eye ball's box */}
           <div
             style={{
               transform: `translate(-50%, -50%) rotate(${eyeAngles.rightEye}deg)`,
             }}
-            className="right-eye absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
+            className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
           >
+            {/* Small eye ball */}
             <div className="w-4 h-full bg-zinc-200 rounded-full"></div>
           </div>
         </div>

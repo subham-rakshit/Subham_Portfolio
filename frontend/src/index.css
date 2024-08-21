@@ -17,7 +17,7 @@ body::-webkit-scrollbar {
 }
 
 /* Navbar Blur Effect onScroll */
-.sticky {
+.sticky-nav {
   background: rgba(212, 212, 212, 0.5);
   backdrop-filter: blur(10px);
 }
@@ -26,4 +26,8 @@ body::-webkit-scrollbar {
 .tech-box-img-container,
 .tech-box-name-container {
   pointer-events: none;
+}
+
+.certificated-main-container::-webkit-scrollbar {
+  display: none;
 }

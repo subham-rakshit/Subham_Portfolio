@@ -1,140 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
-import { EyesPlayComponent } from "../components";
-
-const skillsLists = [
-  {
-    id: "skill_list_1",
-    category: "Languages",
-    technologies: [
-      {
-        id: "python_1",
-        tech: "Python",
-        imagePath: "/python.png",
-      },
-      {
-        id: "javascript_2",
-        tech: "JavaScript",
-        imagePath: "/js.png",
-      },
-    ],
-  },
-  {
-    id: "skill_list_2",
-    category: "Frontend Technologies",
-    technologies: [
-      {
-        id: "html_1",
-        tech: "HTML",
-        imagePath: "/html.png",
-      },
-      {
-        id: "css_2",
-        tech: "CSS",
-        imagePath: "/css.png",
-      },
-      {
-        id: "tailwind_css_3",
-        tech: "Tailwind CSS",
-        imagePath: "/tailwind.png",
-      },
-      {
-        id: "bootstrap_4",
-        tech: "Bootstrap",
-        imagePath: "/bootstrap.png",
-      },
-      {
-        id: "flowbite_react_5",
-        tech: "Flowbite React",
-        imagePath: "/flowbitereact.jpg",
-      },
-    ],
-  },
-  {
-    id: "skill_list_3",
-    category: "Backend Technologies",
-    technologies: [
-      {
-        id: "express_1",
-        tech: "Express.js",
-        imagePath: "/express.png",
-      },
-      {
-        id: "nodejs_2",
-        tech: "Node.js",
-        imagePath: "/nodejs.png",
-      },
-      {
-        id: "jwt_3",
-        tech: "JSON Web Tokens",
-        imagePath: "/jwt.png",
-      },
-      {
-        id: "nodemailer_4",
-        tech: "Nodemailer",
-        imagePath: "/nodemailer.png",
-      },
-      {
-        id: "firebase_5",
-        tech: "Firebase",
-        imagePath: "/firebase.png",
-      },
-    ],
-  },
-  {
-    id: "skill_list_4",
-    category: "JavaScript Libraries",
-    technologies: [
-      {
-        id: "react_1",
-        tech: "React",
-        imagePath: "/react2.png",
-      },
-      {
-        id: "redux_2",
-        tech: "Redux Toolkit",
-        imagePath: "/redux.png",
-      },
-      {
-        id: "gsap_3",
-        tech: "GSAP",
-        imagePath: "/gsap.png",
-      },
-      {
-        id: "framer_motion_4",
-        tech: "Framer Motion",
-        imagePath: "/framermotion.png",
-      },
-    ],
-  },
-  {
-    id: "skill_list_5",
-    category: "Database Technologies",
-    technologies: [
-      {
-        id: "sql_1",
-        tech: "SQL",
-        imagePath: "/sql.jpg",
-      },
-      {
-        id: "mongodb_2",
-        tech: "MongoDB",
-        imagePath: "/mongodb.png",
-      },
-      {
-        id: "atlas_3",
-        tech: "MongoDB Atlas",
-        imagePath: "/mongodbatlas.png",
-      },
-      {
-        id: "compass_4",
-        tech: "MongoDB Compass",
-        imagePath: "/mongodbcompass.png",
-      },
-    ],
-  },
-];
+import {
+  CertificateSection,
+  EyesPlayComponent,
+  JourneySection,
+} from "../components";
+import { skillsLists } from "../data/data";
 
 function About({ isFixed }) {
   const [skillId, setSkillId] = useState(null);
@@ -156,7 +28,6 @@ function About({ isFixed }) {
     const selectedCategoryData = skillsLists.find(
       (skill) => skill.id === e.target.id
     );
-
     const newTechList = selectedCategoryData.technologies.map(
       (tech, index) => ({
         ...tech,
@@ -168,7 +39,8 @@ function About({ isFixed }) {
 
   //* Handle technologies box functionality
   const handleTechChanged = (e) => {
-    setSkillId(e.target.id);
+    const clickedTechId = e.target.id;
+    setSkillId(clickedTechId);
   };
 
   //* Handle technologies box after clicked animation functionality
@@ -196,15 +68,15 @@ function About({ isFixed }) {
   }, [skillId]);
 
   return (
-    <div className="about-section w-full min-h-screen">
+    <div className="about-section w-full min-h-screen relative">
       {/* About Masker Section */}
-      <div className="masker-section-container w-full h-[50vh] px-5 border-b border-zinc-600">
-        <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-4">
+      <div className="masker-section-container w-full h-[30vh] sm:h-[50vh] px-5 border-b border-zinc-600">
+        <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
           {["Driving Innovation", "with code"].map((item, index) => {
             return (
               <div
                 key={`${item.split(" ").join("_")}${index}`}
-                className="masker-inner-container w-full h-[62px] flex items-center"
+                className="masker-inner-container w-full h-[45px] sm:h-[62px] flex items-center"
               >
                 <div className="flex items-center">
                   {index === 1 && isFixed && (
@@ -221,13 +93,13 @@ function About({ isFixed }) {
                       <img
                         src="/about-photo.png"
                         alt="about image"
-                        className="w-[95px] h-[70px] bg-cover"
+                        className="w-[50px] sm:w-[92px] h-[35px] sm:h-[65px] bg-cover"
                       />
                     </motion.div>
                   )}
                   <h1
-                    className="font-poppins font-extrabold text-5xl uppercase tracking-tighter leading-[0.75]"
-                    style={{ transform: "scaleY(1.3)" }}
+                    className="font-poppins font-extrabold text-xl sm:text-5xl uppercase tracking-tighter leading-[0.75]"
+                    style={{ transform: "scaleY(1.5)" }}
                   >
                     {item}
                   </h1>
@@ -239,7 +111,7 @@ function About({ isFixed }) {
       </div>
       {/* About Details Section */}
       <div className="w-full px-5 py-10">
-        <div className="w-full max-w-[1400px] mx-auto font-familjen flex justify-between gap-5">
+        <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col sm:flex-row justify-between gap-5">
           <h1 className="w-full">About me:</h1>
           <div className="w-full flex flex-col gap-3 tracking-tighter">
             <p>
@@ -258,7 +130,7 @@ function About({ isFixed }) {
               exceptional web application at a time.
             </p>
           </div>
-          <div className="w-full flex justify-end">
+          <div className="w-full flex justify-start sm:justify-end">
             <button
               type="button"
               className="h-fit flex items-center text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
@@ -276,12 +148,12 @@ function About({ isFixed }) {
         </div>
       </div>
       {/* Eye Play Section */}
-      <div className="relative w-full h-[60vh] p-5">
+      <div className="relative w-full h-[60vh] p-5 hidden sm:inline-block">
         <EyesPlayComponent queryClass="about-section" scale={1.2} />
       </div>
 
       {/* Markee Section */}
-      <div className="w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden">
+      <div className="markee-section relative w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden">
         {/* Markee Animate Text */}
         <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
           <motion.h1
@@ -302,16 +174,16 @@ function About({ isFixed }) {
           </motion.h1>
         </div>
         {/* Technologies */}
-        <div className="w-full max-w-[1300px] mx-auto px-5 mt-20 flex justify-between items-center">
+        <div className="w-full max-w-[1300px] mx-auto px-5 mt-10 sm:mt-20 flex flex-col lg:flex-row gap-5  sm:gap-16 justify-between items-center">
           {/* Tech Category Buttons */}
-          <div className="w-[48%] flex flex-col gap-5">
+          <div className="w-full lg:w-[48%] flex flex-row flex-wrap gap-1 sm:gap-3 lg:gap-5">
             {skillsLists.map((item) => {
               return (
                 <button
                   type="button"
                   key={item.id}
                   id={item.id}
-                  className={`w-fit font-poppins text-lg text-[#BFDA62] border-2 border-[#CDEA68] px-5 py-1 rounded-full cursor-pointer ${
+                  className={`w-fit font-poppins text-xs sm:text-lg text-[#BFDA62] border-2 border-[#CDEA68] px-2 sm:px-4 py-1 rounded-lg sm:rounded-full cursor-pointer ${
                     selectedCategory === item.id
                       ? "blur-0 bg-[#CDEA68] text-black font-semibold"
                       : "blur-[1px]"
@@ -334,9 +206,8 @@ function About({ isFixed }) {
             transition={{
               ease: "easeInOut",
               duration: 0.8,
-              loop: Infinity,
             }}
-            className="tech-box-main relative w-[48%] h-[60vh] cursor-pointer rounded-xl transition-all duration-500 ease-in-out shadow-md shadow-[#CDEA68]"
+            className="tech-box-main relative w-full sm:w-[80%] lg:w-[48%] h-[60vh] cursor-pointer rounded-xl transition-all duration-500 ease-in-out shadow-md shadow-[#CDEA68]"
           >
             {techList.map((tech) => {
               return (
@@ -356,7 +227,7 @@ function About({ isFixed }) {
                   }}
                   id={tech.id}
                   key={`${tech.id + new Date().getTime()}`}
-                  className={`absolute top-0 left-0 p-4 w-full h-full rounded-xl transition-all duration-500 ease-linear flex flex-col justify-between bg-zinc-200`}
+                  className={`each-tech-box absolute top-0 left-0 p-4 w-full h-full rounded-xl transition-all duration-500 ease-linear flex flex-col justify-between bg-zinc-200`}
                   style={{ zIndex: tech.zIndex }}
                   onClick={handleTechChanged}
                 >
@@ -366,7 +237,7 @@ function About({ isFixed }) {
                       alt="portfolio logo"
                       className="w-[50px] h-[40px] cursor-pointer filter brightness-0"
                     />
-                    <div className="w-[200px] h-[200px] rounded-xl overflow-hidden flex justify-center items-center bg-zinc-300">
+                    <div className="w-[100px] sm:w-[200px] h-[100px] sm:h-[200px] rounded-xl overflow-hidden flex justify-center items-center bg-zinc-300">
                       <img
                         src={tech.imagePath}
                         alt={tech.tech}
@@ -376,13 +247,13 @@ function About({ isFixed }) {
                   </div>
                   <div className="tech-box-name-container w-full flex justify-between gap-2">
                     <span
-                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-3xl uppercase"
+                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-2xl sm:text-4xl uppercase"
                       style={{ transform: "scaleY(1.2)" }}
                     >
                       {tech.tech}
                     </span>
                     <span
-                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-3xl uppercase"
+                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-2xl sm:text-3xl uppercase"
                       style={{ transform: "scaleY(1.2)" }}
                     >
                       {tech.id.split("_")[tech.id.split("_").length - 1]} /{" "}
@@ -395,6 +266,24 @@ function About({ isFixed }) {
           </motion.div>
         </div>
       </div>
+
+      {/* Certificate Sections */}
+      <div className="certificated-main-container w-full px-5 py-20">
+        <CertificateSection />
+      </div>
+
+      {/* Map Section */}
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1791.8098675173826!2d86.89186425639798!3d23.81294109463465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6df5adbc3b40d%3A0x395a9735a3cc0a4b!2sMahabir%20Colony%20Kali%20mandir!5e1!3m2!1sen!2sin!4v1724230446001!5m2!1sen!2sin"
+        className="w-full min-h-[500px]"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
+
+      {/* Journey Section */}
+      <JourneySection queryClass="about-section" />
     </div>
   );
 }
