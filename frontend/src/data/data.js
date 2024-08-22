@@ -1,3 +1,36 @@
+export const wcmContent = [
+  {
+    id: "WCM_1",
+    title: "Versatile Skill Set",
+    content:
+      "I bring a comprehensive skill set that spans the entire development stack. Whether it's front-end design with React, back-end logic with Node.js, or database management with MongoDB, I have the expertise to handle every aspect of your project. My versatility ensures that I can see the bigger picture and deliver a cohesive, fully functional application.",
+  },
+  {
+    id: "WCM_2",
+    title: "Proven Track Record",
+    content:
+      "I have successfully completed numerous projects across various fileds, from small to big applications. My portfolio includes a wide range of web applications, each designed to solve specific category and deliver measurable results in terms of quality, reliability, and user interface.",
+  },
+  {
+    id: "WCM_3",
+    title: "Best Practices",
+    content:
+      "I follows industry best practices in coding, security, and user experience design. This commitment ensures that the applications I develop are not only functional but also secure, maintainable, and future-proof. I use modern development tools and workflows to ensure that your project is delivered on time and to the highest standards.",
+  },
+  {
+    id: "WCM_4",
+    title: "Problem-Solving Skills",
+    content:
+      "Complex challenges excite me. I enjoy diving into the basics of a problem, understanding its core, and devising effective solutions. My problem-solving mindset ensures that I can tackle any issues that arise during development, ensuring smooth progress and a high-quality end product.",
+  },
+  {
+    id: "WCM_5",
+    title: "Dedication to Growth",
+    content:
+      "When you bring me on board, you're not just hiring a developer, you're investing in someone who is committed to growing alongside your company. I'm passionate about contributing to the long-term success of the organization, continuously seeking ways to enhance my skills and bring more value to the team.",
+  },
+];
+
 export const certificateList = [
   {
     id: "cer_1",

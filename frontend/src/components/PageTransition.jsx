@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap, Expo } from "gsap";
 import { useLocation } from "react-router-dom";

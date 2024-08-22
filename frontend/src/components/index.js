@@ -5,6 +5,7 @@ import FeaturedProjectsComponent from "./FeaturedProjectsComponent";
 import PageTransition from "./PageTransition";
 import CertificateSection from "./CertificateSection";
 import JourneySection from "./JourneySection";
+import FlipWords from "./FlipWords";
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   PageTransition,
   CertificateSection,
   JourneySection,
+  FlipWords,
 };

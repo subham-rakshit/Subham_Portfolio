@@ -81,7 +81,9 @@ function App() {
         <p className="count hide absolute text-[100px] sm:text-[130px] text-zinc-200 -translate-y-[15px] font-extrabold">
           {counter}%
         </p>
-        <div className="content min-h-screen w-0 absolute left-0 top-0 z-[4] bg-[#FBF9ED] overflow-hidden">
+        <div
+          className={`content min-h-screen w-0 absolute left-0 top-0 z-[4] bg-[#FBF9ED] overflow-hidden`}
+        >
           <BrowserRouter>
             <Headroom style={{ zIndex: 999 }}>
               <Header isFixed={isFixed} />
@@ -92,8 +94,14 @@ function App() {
                   <Route path="/" element={<Home isFixed={isFixed} />} />
                 </Route>
                 <Route path="/about" element={<About isFixed={isFixed} />} />
-                <Route path="/projects" element={<Projects />} />
-                <Route path="/contact" element={<Contact />} />
+                <Route
+                  path="/projects"
+                  element={<Projects isFixed={isFixed} />}
+                />
+                <Route
+                  path="/contact"
+                  element={<Contact isFixed={isFixed} />}
+                />
               </Routes>
             </PageTransition>
             <Footer />
