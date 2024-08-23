@@ -11,7 +11,7 @@ function FlipWords({ children, href }) {
       <motion.div
         initial="initial"
         whileHover="hover"
-        className="relative overflow-hidden whitespace-nowrap font-poppins text-7xl font-extrabold tracking-tighter uppercase"
+        className="relative overflow-hidden whitespace-nowrap font-poppins text-4xl sm:text-7xl font-extrabold tracking-tighter uppercase"
         style={{ transform: "scaleY(1.3) scaleX(1.2)", lineHeight: 0.78 }}
       >
         {/* Main Word */}
