@@ -20,17 +20,21 @@ function Home({ isFixed }) {
       {/* Landing Section */}
       <div className="w-full min-h-screen bg-[#FBF9ED] flex flex-col">
         {/* Masker Info Section */}
-        <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-5">
+        <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-5 overflow-hidden">
           {isFixed && (
             <motion.div
-              initial={{ width: 0, opacity: 0 }}
-              animate={{ width: "80%", opacity: 1 }}
-              transition={{
-                ease: [0.76, 0, 0.24, 1],
-                duration: 0.6,
-                delay: 0.9,
+              initial={{ scale: 0, opacity: 0, rotate: 360 }}
+              whileInView={{
+                scale: 1,
+                opacity: 1,
+                rotate: 0,
               }}
-              className="flex lg:justify-center overflow-hidden"
+              viewport={{ margin: "-50px" }}
+              transition={{
+                ease: [0.34, 1.56, 0.64, 1],
+                duration: 1.1,
+              }}
+              className="flex lg:justify-center w-fit lg:w-[40%] overflow-hidden"
             >
               <img
                 src="/jitu3.jpg"
@@ -41,28 +45,32 @@ function Home({ isFixed }) {
           )}
 
           {isFixed && (
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{
-                ease: [0.76, 0, 0.24, 1],
-                duration: 0.5,
-                delay: 0.2,
-              }}
-              className="overflow-hidden w-full font-Founders_Grotesk_X-Condensed font-bold text-zinc-800 mt-5 lg:mt-0"
-            >
+            <div className="overflow-hidden w-full lg:w-[56%] font-Founders_Grotesk_X-Condensed font-bold text-zinc-800 mt-5 lg:mt-0">
               {["Welcome", "I'm Subham"].map((item, index) => {
                 return (
-                  <div className="masker mb-5" key={`${item}${index}`}>
-                    <div className="w-fit flex items-center overflow-hidden">
+                  <div
+                    className="masker mb-5 overflow-hidden"
+                    key={`${item}${index}`}
+                  >
+                    <motion.div
+                      initial={{ y: "100%" }}
+                      whileInView={{ y: 0 }}
+                      viewport={{ margin: "-50px" }}
+                      transition={{
+                        ease: [0.34, 1.56, 0.64, 1],
+                        duration: 1.2,
+                      }}
+                      className="w-fit flex items-center overflow-hidden"
+                    >
                       {index === 1 && isFixed && (
                         <motion.div
                           initial={{ width: 0 }}
-                          animate={{ width: "fit-content" }}
+                          whileInView={{ width: "fit-content" }}
+                          viewport={{ margin: "-50px" }}
                           transition={{
-                            ease: [0.76, 0, 0.24, 1],
+                            ease: [0.34, 1.56, 0.64, 1],
                             duration: 0.8,
-                            delay: 1.2,
+                            delay: 0.4,
                           }}
                           className="hidden sm:inline-block overflow-hidden"
                         >
@@ -82,13 +90,22 @@ function Home({ isFixed }) {
                       >
                         {item}
                       </h1>
-                    </div>
+                    </motion.div>
                   </div>
                 );
               })}
               {/* Masker Info Animated Section */}
               <div className="masker mt-3">
-                <div className="w-fit flex items-end overflow-hidden gap-2">
+                <motion.div
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ margin: "-50px" }}
+                  transition={{
+                    ease: [0.34, 1.56, 0.64, 1],
+                    duration: 1.5,
+                  }}
+                  className="w-fit flex items-end overflow-hidden gap-2"
+                >
                   <span className="mb-[1vw] capitalize text-[25px] sm:text-[40px] leading-[.75] tracking-tighter font-bold">
                     <Typewriter
                       words={[
@@ -109,9 +126,9 @@ function Home({ isFixed }) {
                       delaySpeed={1500}
                     />
                   </span>
-                </div>
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -171,9 +188,29 @@ function Home({ isFixed }) {
       <div className="w-full min-h-screen bg-[#CDEA68] pt-10 pb-10">
         {/* About basic info */}
         <div className="w-full max-w-[1400px] mx-auto px-5 text-[#212121] font-poppins">
-          <h1 className="text-xl sm:text-3xl mb-4">
-            Hello, I'm <span className="font-bold">Subham Rakshit</span>, a
-            Passionate MERN Stack Developer
+          <h1 className="text-xl sm:text-3xl mb-4 overflow-hidden">
+            Hello, I'm{" "}
+            <span className="font-bold overflow-hidden">
+              {"Subham Rakshit".split("").map((l, i) => {
+                return (
+                  <motion.span
+                    initial={{ y: "100%" }}
+                    whileInView={{ y: 0 }}
+                    viewport={{ margin: "-10px" }}
+                    transition={{
+                      ease: [0.34, 1.56, 0.64, 1],
+                      duration: 0.25,
+                      delay: 0.025 * i,
+                    }}
+                    key={`${l}_${i}`}
+                    className={`inline-block ${l === "m" ? "mr-2" : ""}`}
+                  >
+                    {l}
+                  </motion.span>
+                );
+              })}
+            </span>
+            , a Passionate MERN Stack Developer
           </h1>
           <p className="text-lg sm:text-xl tracking-tight leading-[30px] sm:leading-[35px]">
             With a deep-rooted passion for crafting intuitive and efficient web
@@ -261,7 +298,10 @@ function Home({ isFixed }) {
 
       {/* Play Section */}
       <div className="eyeplay w-full h-screen overflow-hidden cursor-pointer">
-        <div className="relative w-full h-full bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center">
+        <div
+          className="relative w-full h-full bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center"
+          style={{ backgroundAttachment: "fixed" }}
+        >
           <EyesPlayComponent queryClass="home-section" text="PLAY" />
         </div>
       </div>

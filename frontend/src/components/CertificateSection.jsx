@@ -25,13 +25,25 @@ function CertificateSection() {
   };
   return (
     <div className="w-full max-w-[1400px] mx-auto">
-      <h1 className="text-xl sm:text-3xl font-poppins tracking-tighter mb-10">
-        Featured Certificates
-      </h1>
+      <div className="overflow-hidden mb-10">
+        <motion.h1
+          initial={{ y: "100%" }}
+          whileInView={{ y: 0 }}
+          viewport={{ margin: "-50px" }}
+          transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
+          className="text-xl sm:text-3xl font-poppins tracking-tighter"
+        >
+          Featured Certificates
+        </motion.h1>
+      </div>
       {/* Certificates Main Container */}
       <div className="flex items-center justify-between gap-5">
-        <div className="hidden sm:inline-block w-[40%] max-w-[400px]">
-          <img
+        <div className="hidden sm:inline-block w-[40%] max-w-[400px] overflow-hidden">
+          <motion.img
+            initial={{ rotate: 360 }}
+            whileInView={{ rotate: 0 }}
+            viewport={{ margin: "-200px" }}
+            transition={{ duration: 1.5, ease: [0.34, 1.56, 0.64, 1] }}
             src="/jitu5.jpg"
             alt="subham"
             className="w-full h-full object-cover"

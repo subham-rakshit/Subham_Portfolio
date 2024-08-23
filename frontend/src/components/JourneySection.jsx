@@ -6,7 +6,7 @@ import EyesPlayComponent from "./EyesPlayComponent";
 function JourneySection({ queryClass }) {
   return (
     <div className="journey relative w-full bg-[#CDEA68] py-5 sm:py-10 px-5 flex flex-col justify-center items-center overflow-hidden cursor-move">
-      <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 sm:gap-5">
+      <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 lg:gap-5">
         {/* Eye Play Mobile */}
         <div className="relative w-full h-[200px] lg:hidden">
           <EyesPlayComponent queryClass={queryClass} />
@@ -24,7 +24,7 @@ function JourneySection({ queryClass }) {
               key={textId}
               className="w-fit mx-auto flex items-center overflow-hidden"
             >
-              <h1 className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-900 uppercase leading-[.75] p-2 z-[99]">
+              <h1 className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-6xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-900 uppercase leading-[.75] py-2 z-[99]">
                 {text}
               </h1>
             </div>
@@ -32,7 +32,7 @@ function JourneySection({ queryClass }) {
         })}
 
         {/* Read More Btn */}
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 overflow-hidden">
           <Link to="/contact">
             <button
               type="button"

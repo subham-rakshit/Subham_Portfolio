@@ -2,13 +2,26 @@ import React from "react";
 import { CgWebsite } from "react-icons/cg";
 import { MdArrowOutward } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function FeaturedProjectsComponent() {
   return (
     <div className="w-full bg-[#FBF9ED] py-10">
-      <h1 className="text-xl sm:text-3xl font-poppins tracking-tighter px-5">
-        Featured projects
-      </h1>
+      <div className="w-full max-w-[1400px] px-5 overflow-hidden">
+        <motion.h1
+          initial={{ y: "100%" }}
+          whileInView={{ y: 0 }}
+          viewport={{ amout: 0.5 }}
+          transition={{
+            ease: [0.34, 1.56, 0.64, 1],
+            duration: 0.8,
+            delay: 0.5,
+          }}
+          className="text-xl sm:text-3xl font-poppins tracking-tighter"
+        >
+          Featured projects
+        </motion.h1>
+      </div>
       <div className="border-t border-zinc-600 mt-10 px-5 py-5 sm:py-10">
         <div className="w-full max-w-[1400px] mx-auto flex flex-wrap justify-between gap-5">
           {/* Shibaji Project */}
@@ -33,7 +46,14 @@ function FeaturedProjectsComponent() {
                   );
                 })}
               </div>
-              <img
+              <motion.img
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ margin: "-50px" }}
+                transition={{
+                  ease: [0.61, 1, 0.88, 1],
+                  duration: 0.5,
+                }}
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Shibaji%20Combine%20Wb.png?alt=media&token=291f1b35-b7c0-4539-bd4a-89f1a1a02f6d"
                 alt="shibaji sangha"
                 className="w-full h-full object-cover bg-center group-hover:scale-[0.9] transition-all duration-500"
@@ -83,7 +103,15 @@ function FeaturedProjectsComponent() {
                   );
                 })}
               </div>
-              <img
+              <motion.img
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ margin: "-50px" }}
+                transition={{
+                  ease: [0.61, 1, 0.88, 1],
+                  duration: 0.5,
+                  delay: 0.5,
+                }}
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/NxtWatch%20Combine.png?alt=media&token=46b239b5-f2ca-42f2-aa31-f85dc7f7b955"
                 alt="nxtwatch"
                 className="w-full h-full object-cover group-hover:scale-[0.9] transition-all duration-500"
@@ -129,7 +157,14 @@ function FeaturedProjectsComponent() {
                   );
                 })}
               </div>
-              <img
+              <motion.img
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ margin: "-50px" }}
+                transition={{
+                  ease: [0.61, 1, 0.88, 1],
+                  duration: 0.5,
+                }}
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Nxt%20Trendz%20Combine.png?alt=media&token=134c5528-9db4-4d4b-8524-4a4fee99777d"
                 alt="nxttrendz"
                 className="w-full h-full object-cover group-hover:scale-[0.9] transition-all duration-500"
@@ -172,7 +207,15 @@ function FeaturedProjectsComponent() {
                   );
                 })}
               </div>
-              <img
+              <motion.img
+                initial={{ scale: 0.5 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ margin: "-50px" }}
+                transition={{
+                  ease: [0.61, 1, 0.88, 1],
+                  duration: 0.5,
+                  delay: 0.5,
+                }}
                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Jobby%20Combine.png?alt=media&token=9af35a1a-6a11-4a53-9953-6036f610184b"
                 alt="Jobby Combine"
                 className="w-full h-full object-cover group-hover:scale-90 transition-transform duration-500"

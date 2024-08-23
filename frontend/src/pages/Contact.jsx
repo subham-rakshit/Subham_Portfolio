@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
 import { EyesPlayComponent, FlipWords } from "../components";
@@ -327,7 +327,7 @@ function Contact({ isFixed }) {
       </div>
 
       {/* Social Links */}
-      <div className="relative w-full min-h-screen flex flex-col justify-center items-center gap-5 sm:gap-8 px-5 text-zinc-900 bg-[#CDEA68]">
+      <div className="relative w-full py-20 sm:py-0 sm:min-h-screen flex flex-col justify-center items-center gap-5 sm:gap-8 px-5 text-zinc-900 bg-[#CDEA68]">
         <EyesPlayComponent queryClass="contact-page-section" />
 
         <FlipWords href="https://www.linkedin.com/in/subhamjitu97/">

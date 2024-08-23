@@ -70,7 +70,7 @@ function About({ isFixed }) {
   return (
     <div className="about-section w-full min-h-screen relative">
       {/* About Masker Section */}
-      <div className="masker-section-container w-full h-[30vh] sm:h-[50vh] px-5 border-b border-zinc-600">
+      <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-5 border-b border-zinc-600">
         <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
           {["Driving Innovation", "with code"].map((item, index) => {
             return (
@@ -82,11 +82,11 @@ function About({ isFixed }) {
                   {index === 1 && isFixed && (
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={{ width: "fit-content", marginRight: "5px" }}
+                      whileInView={{ width: "fit-content", marginRight: "5px" }}
+                      viewport={{ margin: "-10px" }}
                       transition={{
-                        ease: [0.76, 0, 0.24, 1],
-                        duration: 0.8,
-                        delay: 0.5,
+                        ease: [0.34, 1.56, 0.64, 1],
+                        duration: 1,
                       }}
                       className="overflow-hidden"
                     >
@@ -148,12 +148,29 @@ function About({ isFixed }) {
         </div>
       </div>
       {/* Eye Play Section */}
-      <div className="relative w-full h-[60vh] p-5 hidden sm:inline-block">
+      <motion.div
+        initial={{ y: "100%" }}
+        whileInView={{ y: 0 }}
+        transition={{
+          ease: [0.34, 1.56, 0.64, 1],
+          duration: 0.6,
+        }}
+        className="relative w-full h-[60vh] p-5 hidden sm:inline-block"
+      >
         <EyesPlayComponent queryClass="about-section" scale={1.2} />
-      </div>
+      </motion.div>
 
       {/* Markee Section */}
-      <div className="markee-section relative w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0.5 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ amount: 0.5 }}
+        transition={{
+          ease: [0.34, 1.56, 0.64, 1],
+          duration: 1.2,
+        }}
+        className="markee-section relative w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden"
+      >
         {/* Markee Animate Text */}
         <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
           <motion.h1
@@ -265,7 +282,7 @@ function About({ isFixed }) {
             })}
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Certificate Sections */}
       <div className="certificated-main-container w-full px-5 py-20">
