@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "axios": "^1.7.3",
+    "flowbite-react": "^0.10.1",
     "framer-motion": "^11.3.28",
     "gsap": "^3.12.5",
     "lenis": "^1.1.10",
