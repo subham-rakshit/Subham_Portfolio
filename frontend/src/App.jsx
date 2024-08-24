@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Footer, Header, PageTransition } from "./components";
-import { About, Contact, Home, Projects } from "./pages";
+import { Footer, Header, PageTransition, ScrollToTop } from "./components";
+import { About, Admin, Contact, Home, Projects } from "./pages";
 import Lenis from "lenis";
 
 import Headroom from "react-headroom";
@@ -89,6 +89,7 @@ function App() {
               <Header isFixed={isFixed} />
             </Headroom>
             <PageTransition>
+            <ScrollToTop />
               <Routes>
                 <Route>
                   <Route path="/" element={<Home isFixed={isFixed} />} />
@@ -102,6 +103,7 @@ function App() {
                   path="/contact"
                   element={<Contact isFixed={isFixed} />}
                 />
+                <Route path="/admin" element={<Admin />} />
               </Routes>
             </PageTransition>
             <Footer />

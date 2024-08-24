@@ -6,6 +6,8 @@ import PageTransition from "./PageTransition";
 import CertificateSection from "./CertificateSection";
 import JourneySection from "./JourneySection";
 import FlipWords from "./FlipWords";
+import ScrollToTop from "./ScrollToTop";
+import OAuth from "./OAuth.jsx";
 
 export {
   Header,
@@ -16,4 +18,6 @@ export {
   CertificateSection,
   JourneySection,
   FlipWords,
+  ScrollToTop,
+  OAuth,
 };

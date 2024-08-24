@@ -7,6 +7,7 @@ import { MdClose } from "react-icons/md";
 
 function Header({ isFixed }) {
   const [isClicked, setIsClicked] = useState(false);
+  const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [path, setPath] = useState(null);
   const location = useLocation();
 
@@ -15,6 +16,10 @@ function Header({ isFixed }) {
     let headerElem = document.querySelector(".navbar");
     headerElem.classList.toggle("sticky-nav", window.scrollY > 0);
   });
+
+  const handleProfile = () => {
+    setIsProfileClicked((prev) => !prev);
+  };
 
   // Extracting the pathname from path location
   useEffect(() => {
@@ -40,49 +45,93 @@ function Header({ isFixed }) {
           </Link>
         </div>
         {/* Destop NavItems View */}
-        <div className="hidden sm:inline-block">
-          <ul className="list-none pl-0 flex items-center gap-5">
-            {[
-              { name: "Home", link: "/" },
-              { name: "About", link: "/about" },
-              { name: "Projects", link: "/projects" },
-              { name: "Contact", link: "/contact" },
-            ].map((item, index) => (
-              <Link to={item.link} key={`${item.name}${index}`}>
-                <li
-                  key={`${item.name}${index}`}
-                  className={`text-sm capitalize cursor-pointer hover:font-medium transition-all duration-500 ease-in-out ${
-                    index === 3 && "ml-20 lg:ml-36"
-                  } ${path && path === item.link && "font-medium"}`}
-                >
-                  {item.name}
-                  <motion.hr
-                    initial={{ width: 0, border: "none" }}
-                    animate={
-                      path && path === item.link
-                        ? {
-                            width: "100%",
-                            border: "1px solid rgb(217, 102, 255)",
-                          }
-                        : { width: 0, border: "none" }
-                    }
-                    transition={{ duration: 0.4, delay: 0.2, ease: "linear" }}
-                    className="w-0"
-                  />
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </div>
+        <div className="flex items-center gap-8">
+          {/* NavLinks */}
+          <div className="hidden sm:inline-block">
+            <ul className="list-none pl-0 flex items-center gap-5">
+              {[
+                { name: "Home", link: "/" },
+                { name: "About", link: "/about" },
+                { name: "Projects", link: "/projects" },
+                { name: "Contact", link: "/contact" },
+              ].map((item, index) => (
+                <Link to={item.link} key={`${item.name}${index}`}>
+                  <li
+                    key={`${item.name}${index}`}
+                    className={`text-sm capitalize cursor-pointer hover:font-medium transition-all duration-500 ease-in-out ${
+                      index === 3 && "ml-10 lg:ml-36"
+                    } ${path && path === item.link && "font-medium"}`}
+                  >
+                    {item.name}
+                    <motion.hr
+                      initial={{ width: 0, border: "none" }}
+                      animate={
+                        path && path === item.link
+                          ? {
+                              width: "100%",
+                              border: "1px solid rgb(217, 102, 255)",
+                            }
+                          : { width: 0, border: "none" }
+                      }
+                      transition={{ duration: 0.4, delay: 0.2, ease: "linear" }}
+                      className="w-0"
+                    />
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
 
-        {/* NavItems Mobile View */}
-        <button
-          type="button"
-          className="sm:hidden transition-all duration-300 delay-200"
-          onClick={() => setIsClicked((prev) => !prev)}
-        >
-          <FaGripLines size="20" />
-        </button>
+          {/* NavLinks Mobile View */}
+          <div className="flex items-center gap-5">
+            {/* Nav Toggle Button in Mobile view */}
+            <button
+              type="button"
+              className="sm:hidden transition-all duration-300 delay-200"
+              onClick={() => setIsClicked((prev) => !prev)}
+            >
+              <FaGripLines size="20" />
+            </button>
+
+            {/* Profile */}
+            <div
+              className="relative w-9 h-9 rounded-full cursor-pointer"
+              style={{ boxShadow: "0px 0px 5px 1px #000" }}
+              onClick={handleProfile}
+            >
+              <img
+                src="/jitu2.jpg"
+                alt="profile"
+                className="w-full h-full rounded-full object-cover"
+              />
+              <div
+                className={`absolute top-[100%] left-[100%] -translate-x-[100%] w-[220px] flex flex-col justify-center items-start gap-2 overflow-hidden ${
+                  isProfileClicked ? "h-[140px] px-3 shadow-customInset" : "h-0"
+                } transition-all duration-500 ease-linear rounded-lg bg-zinc-100 mt-[1px] z-[99] tracking-tighter`}
+              >
+                <span className="flex flex-col text-[12px] font-poppins text-zinc-500">
+                  <span>subhamrakshit667</span>
+                  <span>subhamrakshit667@gmail.com</span>
+                </span>
+
+                <Link to="/admin">
+                  <button
+                    type="button"
+                    className="text-xs font-poppins text-zinc-500 hover:text-zinc-700 transition-all duration-200 ease-linear font-[500]"
+                  >
+                    Dashboard
+                  </button>
+                </Link>
+                <button
+                  type="button"
+                  className="text-xs font-poppins font-[500] text-blue-800 hover:text-red-500 transition-all duration-200 ease-linear"
+                >
+                  Sign out
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Nav Items Container */}
         <motion.div

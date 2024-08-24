@@ -15,6 +15,7 @@ import { BsFillPersonCheckFill } from "react-icons/bs";
 function Home({ isFixed }) {
   const [selectedWCM, setSelectedWCM] = useState("");
   const [isShown, setIsShown] = useState(false);
+
   return (
     <div className="home-section">
       {/* Landing Section */}
@@ -297,13 +298,8 @@ function Home({ isFixed }) {
       </div>
 
       {/* Play Section */}
-      <div className="eyeplay w-full h-screen overflow-hidden cursor-pointer">
-        <div
-          className="relative w-full h-full bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center"
-          style={{ backgroundAttachment: "fixed" }}
-        >
-          <EyesPlayComponent queryClass="home-section" text="PLAY" />
-        </div>
+      <div className="eyeplay relative w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center bg-fixed overflow-hidden cursor-pointer">
+        <EyesPlayComponent queryClass="home-section" text="PLAY" />
       </div>
 
       {/* Feature Projects Section */}
