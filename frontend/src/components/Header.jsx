@@ -351,7 +351,7 @@ function Header({ isFixed }) {
                   Authenticate
                 </Button>
                 <Button color="failure" onClick={() => setOpenModal(false)}>
-                  No, cancel
+                  Close
                 </Button>
               </div>
             </div>
