@@ -6,9 +6,19 @@ import { FaGripLines } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Button, Modal } from "flowbite-react";
+import { toast } from "react-toastify";
+import { PuffLoader } from "react-spinners";
+
+import { useDispatch, useSelector } from "react-redux";
+import {
+  keyAuthStart,
+  keyAuthSuccess,
+  keyAuthFailure,
+} from "../redux-slices/AdminKeySlice";
 
 function Header({ isFixed }) {
-  const [authKey, setAuthKey] = useState(null);
+  const { loading, isAuthenticated } = useSelector((state) => state.adminKey);
+  const [authKey, setAuthKey] = useState("");
   const [focusedInput, setFocusedInput] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
@@ -16,6 +26,7 @@ function Header({ isFixed }) {
   const [path, setPath] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Onscroll navbar background change logic
   window.addEventListener("scroll", function () {
@@ -42,12 +53,53 @@ function Header({ isFixed }) {
     setAuthKey(value);
   };
 
-  const handleAdminAuth = () => {
-    if (authKey === "7980-1997") {
-      setOpenModal(false);
-      setAuthKey(null);
-      setFocusedInput(false);
-      navigate("/admin");
+  // Admin Key Checks
+  const handleAdminAuth = async (e) => {
+    e.preventDefault();
+
+    if (authKey.length > 0) {
+      try {
+        dispatch(keyAuthStart());
+        const apiURL = "/api/admin/key";
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ authKey }),
+        };
+        const res = await fetch(apiURL, options);
+        const data = await res.json();
+
+        if (res.ok) {
+          if (data.success) {
+            setAuthKey("");
+            setFocusedInput(false);
+            setOpenModal(false);
+            dispatch(keyAuthSuccess());
+            toast.success(data.message, {
+              theme: "colored",
+              position: "bottom-center",
+            });
+            navigate("/admin");
+          }
+        } else {
+          setAuthKey("");
+          setFocusedInput(false);
+          dispatch(keyAuthFailure());
+          toast.error(data.extraDetails, {
+            theme: "colored",
+            position: "bottom-center",
+          });
+        }
+      } catch (error) {
+        console.log(`Admin Key Error: ${error.message}`);
+      }
+    } else {
+      toast.error("Please provide the key!", {
+        theme: "colored",
+        position: "bottom-center",
+      });
     }
   };
 
@@ -153,7 +205,9 @@ function Header({ isFixed }) {
                 <button
                   type="button"
                   className="text-xs font-poppins text-zinc-500 hover:text-zinc-700 transition-all duration-200 ease-linear font-[500]"
-                  onClick={() => setOpenModal(true)}
+                  onClick={() =>
+                    isAuthenticated ? navigate("/admin") : setOpenModal(true)
+                  }
                 >
                   Dashboard
                 </button>
@@ -265,7 +319,15 @@ function Header({ isFixed }) {
           <Modal.Header />
           <Modal.Body>
             <div className="text-center flex flex-col gap-5">
-              <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+              {loading ? (
+                <PuffLoader
+                  color="#fff"
+                  className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200"
+                />
+              ) : (
+                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+              )}
+
               <div className="relative w-full flex-1 group">
                 {!authKey && !focusedInput && (
                   <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-200 group-hover:text-zinc-400 font-light py-1 pointer-events-none">

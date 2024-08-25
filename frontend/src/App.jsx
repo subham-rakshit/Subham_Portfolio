@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Footer, Header, PageTransition, ScrollToTop } from "./components";
+import {
+  AdminProtectedRoute,
+  Footer,
+  Header,
+  PageTransition,
+  ScrollToTop,
+} from "./components";
 import { About, Admin, Contact, Home, Projects } from "./pages";
 import Lenis from "lenis";
 
@@ -89,7 +95,7 @@ function App() {
               <Header isFixed={isFixed} />
             </Headroom>
             <PageTransition>
-            <ScrollToTop />
+              <ScrollToTop />
               <Routes>
                 <Route>
                   <Route path="/" element={<Home isFixed={isFixed} />} />
@@ -103,7 +109,9 @@ function App() {
                   path="/contact"
                   element={<Contact isFixed={isFixed} />}
                 />
-                <Route path="/admin" element={<Admin />} />
+                <Route element={<AdminProtectedRoute />}>
+                  <Route path="/admin" element={<Admin />} />
+                </Route>
               </Routes>
             </PageTransition>
             <Footer />

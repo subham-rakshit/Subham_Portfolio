@@ -8,6 +8,7 @@ import JourneySection from "./JourneySection";
 import FlipWords from "./FlipWords";
 import ScrollToTop from "./ScrollToTop";
 import OAuth from "./OAuth.jsx";
+import AdminProtectedRoute from "./AdminProtectedRoute";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   FlipWords,
   ScrollToTop,
   OAuth,
+  AdminProtectedRoute,
 };
