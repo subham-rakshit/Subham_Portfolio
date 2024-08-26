@@ -3,10 +3,12 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 import authKeyReducer from "../redux-slices/AdminKeySlice";
+import userReducer from "../redux-slices/UserSlice";
 
 // Root Reducers
 const rootReducer = combineReducers({
   adminKey: authKeyReducer,
+  user: userReducer,
 });
 
 // Persist Configerations

@@ -9,6 +9,8 @@ import FlipWords from "./FlipWords";
 import ScrollToTop from "./ScrollToTop";
 import OAuth from "./OAuth.jsx";
 import AdminProtectedRoute from "./AdminProtectedRoute";
+import DashboardProtectedRoute from "./DashboardProtectedRoute";
+import DashSideBar from "./DashSideBar";
 
 export {
   Header,
@@ -22,4 +24,6 @@ export {
   ScrollToTop,
   OAuth,
   AdminProtectedRoute,
+  DashboardProtectedRoute,
+  DashSideBar,
 };

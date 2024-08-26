@@ -5,16 +5,16 @@ import { errorMiddleware } from "./middlewares/ErrorMiddleware.js";
 import { adminKeyRouter, userRouter } from "./router/index.js";
 
 const app = express();
-app.use(express.json()); // JSON parse
+app.use(express.json()); //INFO: JSON parse
 
-// API route
+//NOTE: API route
 app.use("/api/admin", adminKeyRouter);
 app.use("/api/admin", userRouter);
 
-// Error middleware
+//NOTE: Error middleware
 app.use(errorMiddleware);
 
-// Connection
+//NOTE: Connection
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

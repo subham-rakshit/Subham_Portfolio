@@ -68,7 +68,7 @@ function About({ isFixed }) {
   }, [skillId]);
 
   return (
-    <div className="about-section w-full min-h-screen relative">
+    <div className="relative w-full min-h-screen about-section">
       {/* About Masker Section */}
       <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-5 border-b border-zinc-600">
         <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
@@ -113,7 +113,7 @@ function About({ isFixed }) {
       <div className="w-full px-5 py-10">
         <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col sm:flex-row justify-between gap-5">
           <h1 className="w-full">About me:</h1>
-          <div className="w-full flex flex-col gap-3 tracking-tighter">
+          <div className="flex flex-col w-full gap-3 tracking-tighter">
             <p>
               In the world of web development, agility and precision are
               paramount. These aren't just buzzwords—they're the essence of my
@@ -130,13 +130,13 @@ function About({ isFixed }) {
               exceptional web application at a time.
             </p>
           </div>
-          <div className="w-full flex justify-start sm:justify-end">
+          <div className="flex justify-start w-full sm:justify-end">
             <button
               type="button"
               className="h-fit flex items-center text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
             >
               My Works
-              <div className="w-1 group-hover:w-5 h-1 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200 rounded-full overflow-hidden flex items-center justify-center transition-all duration-300">
+              <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
                 <MdArrowOutward
                   size="20"
                   color="#000"
@@ -248,7 +248,7 @@ function About({ isFixed }) {
                   style={{ zIndex: tech.zIndex }}
                   onClick={handleTechChanged}
                 >
-                  <div className="tech-box-img-container w-full flex justify-between gap-2">
+                  <div className="flex justify-between w-full gap-2 tech-box-img-container">
                     <img
                       src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/PORTFOLIO%20LOGO%20(2).png?alt=media&token=ca91aa87-3de1-41af-9a8a-a0260af1a218"
                       alt="portfolio logo"
@@ -262,15 +262,15 @@ function About({ isFixed }) {
                       />
                     </div>
                   </div>
-                  <div className="tech-box-name-container w-full flex justify-between gap-2">
+                  <div className="flex justify-between w-full gap-2 tech-box-name-container">
                     <span
-                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-2xl sm:text-4xl uppercase"
+                      className="text-2xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-800 sm:text-4xl"
                       style={{ transform: "scaleY(1.2)" }}
                     >
                       {tech.tech}
                     </span>
                     <span
-                      className="font-poppins tracking-tighter font-extrabold text-zinc-800 text-2xl sm:text-3xl uppercase"
+                      className="text-2xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-800 sm:text-3xl"
                       style={{ transform: "scaleY(1.2)" }}
                     >
                       {tech.id.split("_")[tech.id.split("_").length - 1]} /{" "}
@@ -285,7 +285,7 @@ function About({ isFixed }) {
       </motion.div>
 
       {/* Certificate Sections */}
-      <div className="certificated-main-container w-full px-5 py-20">
+      <div className="w-full px-5 py-20 certificated-main-container">
         <CertificateSection />
       </div>
 

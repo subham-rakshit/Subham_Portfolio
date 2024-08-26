@@ -7,12 +7,10 @@ const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
     required: true,
-    unique: true,
   },
   lastname: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -25,7 +23,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// Middleware for hash the password before save in DB
+//INFO: Middleware for hash the password before save in DB
 userSchema.pre("save", async function (next) {
   const me = this; // me = existed user details in DB
 
@@ -42,7 +40,7 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Middleware for Token Generation
+//INFO: Middleware for Token Generation
 userSchema.methods.generateToken = function () {
   try {
     return jwt.sign(
@@ -60,7 +58,7 @@ userSchema.methods.generateToken = function () {
   }
 };
 
-// Middleware for Compare Password
+//INFO: Middleware for Compare Password
 userSchema.methods.comparePassword = function (password, comparePassword) {
   return bcrypt.compareSync(password, comparePassword);
 };

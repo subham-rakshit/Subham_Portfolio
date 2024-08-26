@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   AdminProtectedRoute,
+  DashboardProtectedRoute,
   Footer,
   Header,
   PageTransition,
   ScrollToTop,
 } from "./components";
-import { About, Admin, Contact, Home, Projects } from "./pages";
+import { About, Admin, Contact, Dashboard, Home, Projects } from "./pages";
 import Lenis from "lenis";
 
 import Headroom from "react-headroom";
@@ -78,7 +79,7 @@ function App() {
 
   return (
     <div className="relative">
-      <div className="loading w-full min-h-screen bg-zinc-800 flex justify-center items-center absolute top-0">
+      <div className="absolute top-0 flex items-center justify-center w-full min-h-screen loading bg-zinc-800">
         <div className="follow absolute bg-[#f48049] h-[2px] w-0 left-0 z-[3]"></div>
         <div
           style={{ width: counter + "%" }}
@@ -111,6 +112,9 @@ function App() {
                 />
                 <Route element={<AdminProtectedRoute />}>
                   <Route path="/admin" element={<Admin />} />
+                </Route>
+                <Route element={<DashboardProtectedRoute />}>
+                  <Route path="/dashboard" element={<Dashboard />} />
                 </Route>
               </Routes>
             </PageTransition>

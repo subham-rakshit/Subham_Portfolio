@@ -18,6 +18,7 @@ import {
 
 function Header({ isFixed }) {
   const { loading, isAuthenticated } = useSelector((state) => state.adminKey);
+  const { userInfo } = useSelector((state) => state.user);
   const [authKey, setAuthKey] = useState("");
   const [focusedInput, setFocusedInput] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -136,7 +137,7 @@ function Header({ isFixed }) {
         <div className="flex items-center gap-8">
           {/* NavLinks */}
           <div className="hidden sm:inline-block">
-            <ul className="list-none pl-0 flex items-center gap-5">
+            <ul className="flex items-center gap-5 pl-0 list-none">
               {[
                 { name: "Home", link: "/" },
                 { name: "About", link: "/about" },
@@ -175,7 +176,7 @@ function Header({ isFixed }) {
             {/* Nav Toggle Button in Mobile view */}
             <button
               type="button"
-              className="sm:hidden transition-all duration-300 delay-200"
+              className="transition-all duration-300 delay-200 sm:hidden"
               onClick={() => setIsClicked((prev) => !prev)}
             >
               <FaGripLines size="20" />
@@ -183,14 +184,14 @@ function Header({ isFixed }) {
 
             {/* Profile */}
             <div
-              className="relative w-9 h-9 rounded-full cursor-pointer"
+              className="relative rounded-full cursor-pointer w-9 h-9"
               style={{ boxShadow: "0px 0px 5px 1px #000" }}
               onClick={handleProfile}
             >
               <img
                 src="/jitu2.jpg"
                 alt="profile"
-                className="w-full h-full rounded-full object-cover"
+                className="object-cover w-full h-full rounded-full"
               />
               <div
                 className={`absolute top-[100%] left-[100%] -translate-x-[100%] w-[220px] flex flex-col justify-center items-start gap-2 overflow-hidden ${
@@ -205,11 +206,16 @@ function Header({ isFixed }) {
                 <button
                   type="button"
                   className="text-xs font-poppins text-zinc-500 hover:text-zinc-700 transition-all duration-200 ease-linear font-[500]"
-                  onClick={() =>
-                    isAuthenticated ? navigate("/admin") : setOpenModal(true)
+                  onClick={
+                    () =>
+                      isAuthenticated
+                        ? userInfo
+                          ? navigate("/dashboard") //INFO: If authenticated and userInfo is present
+                          : navigate("/admin") // INFO: authenticated but userInfo is null
+                        : setOpenModal(true) // INFO: not authenticated
                   }
                 >
-                  Dashboard
+                  {isAuthenticated && userInfo ? "Dashboard" : "Admin Login"}
                 </button>
 
                 <button
@@ -239,7 +245,7 @@ function Header({ isFixed }) {
             onClick={() => setIsClicked((prev) => !prev)}
           />
           {/* Navigation Items Mobile view */}
-          <ul className="list-none pl-0 flex flex-col gap-5 mt-5">
+          <ul className="flex flex-col gap-5 pl-0 mt-5 list-none">
             {[
               { name: "Home", link: "/" },
               { name: "About", link: "/about" },
@@ -274,7 +280,7 @@ function Header({ isFixed }) {
           </ul>
 
           {/* Social Links Mobile view */}
-          <ul className="list-none pl-0 flex justify-between items-center gap-2 mt-5">
+          <ul className="flex items-center justify-between gap-2 pl-0 mt-5 list-none">
             {[
               {
                 name: "linkedin_1",
@@ -318,17 +324,17 @@ function Header({ isFixed }) {
         >
           <Modal.Header />
           <Modal.Body>
-            <div className="text-center flex flex-col gap-5">
+            <div className="flex flex-col gap-5 text-center">
               {loading ? (
                 <PuffLoader
                   color="#fff"
-                  className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200"
+                  className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200"
                 />
               ) : (
-                <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
+                <HiOutlineExclamationCircle className="mx-auto mb-4 text-gray-400 h-14 w-14 dark:text-gray-200" />
               )}
 
-              <div className="relative w-full flex-1 group">
+              <div className="relative flex-1 w-full group">
                 {!authKey && !focusedInput && (
                   <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-200 group-hover:text-zinc-400 font-light py-1 pointer-events-none">
                     Please provide the KEY *

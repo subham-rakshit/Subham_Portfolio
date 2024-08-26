@@ -1,12 +1,13 @@
 import UserCollection from "../models/User.js";
 
 export const userController = {
-  //? Login Controller
+  //NOTE: Login Controller
   async login(req, res, next) {
     try {
-      const { firstname, lastname, email, password } = req.body;
+      const { formDetails } = req.body;
+      const { firstname, lastname, email, password } = formDetails;
 
-      //? Firstname checks
+      //INFO: Firstname checks
       if (firstname.length < 3 || firstname.length > 20) {
         if (firstname.length < 3) {
           const nameTooSmallErr = {
@@ -25,7 +26,7 @@ export const userController = {
         }
       }
 
-      //? Lastname checks
+      //INFO: Lastname checks
       if (lastname.length < 3 || lastname.length > 20) {
         if (lastname.length < 3) {
           const nameTooSmallErr = {
@@ -44,7 +45,7 @@ export const userController = {
         }
       }
 
-      //? Email checks
+      //INFO: Email checks
       if (!email.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
         const emailError = {
           status: 401,
@@ -54,7 +55,7 @@ export const userController = {
         return next(emailError);
       }
 
-      //? Password Checks
+      //INFO: Password Checks
       if (
         !password.match(
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{12,20}$/
@@ -69,26 +70,26 @@ export const userController = {
         return next(passwordError);
       }
 
-      //? Checks user existence
+      //INFO: Checks user existence
       const userExists = await UserCollection.findOne({ email });
 
-      // If user details present
+      //INFO: If user details present
       if (userExists) {
-        // Comapre the password
+        //INFO: Comapre the password
         const isPasswordValid = await userExists.comparePassword(
           password,
           userExists.password
         );
 
-        // Successfully compared
+        //INFO: Successfully compared
         if (isPasswordValid) {
-          const { password: userPassword, ...rest } = userExists._doc; // Separate the password from user details
+          const { password: userPassword, ...rest } = userExists._doc; //INFO: Separate the password from user details
 
           return res
             .status(200)
             .cookie("jwt_token", await userExists.generateToken(), {
               httpOnly: true,
-              expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+              expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days from now
             })
             .json({
               success: true,
@@ -96,6 +97,7 @@ export const userController = {
               userDetails: rest,
             });
         } else {
+          //INFO: Unsuccessful compared
           const loginError = {
             status: 401,
             message: "Invalid user entry",
@@ -105,7 +107,18 @@ export const userController = {
           return next(loginError);
         }
       } else {
-        // Create a new user
+        //INFO: Only store ADMIN data in DB. (Only one user  details item is present in UserCollection)
+        const usersCount = await UserCollection.countDocuments({});
+        if (usersCount > 0) {
+          const adminExistsError = {
+            status: 400,
+            message: "Only one admin account is allowed in the system.",
+            extraDetails: "Admin already exists!",
+          };
+          return next(adminExistsError);
+        }
+
+        //INFO: Create a new user
         const userCreated = new UserCollection({
           firstname: firstname.trim(),
           lastname: lastname.trim(),
@@ -113,7 +126,7 @@ export const userController = {
           password: password.trim(),
         });
 
-        await userCreated.save(); // Save the use details in DB
+        await userCreated.save(); //INFO: Save the use details in DB
 
         const { password: userPassword, ...rest } = userCreated._doc;
 
@@ -121,7 +134,7 @@ export const userController = {
           .status(201)
           .cookie("jwt_token", await userCreated.generateToken(), {
             httpOnly: true,
-            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days
+            expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days
           })
           .json({
             success: true,
@@ -130,7 +143,20 @@ export const userController = {
           });
       }
     } catch (error) {
-      console.log(error);
+      console.log(`Login Controller Error: ${error}`);
+      return next(error);
+    }
+  },
+
+  //NOTE: Signout Controller
+  async signOut(req, res, next) {
+    try {
+      return res.clearCookie("jwt_token").status(200).json({
+        success: true,
+        message: "You have successfully Signed Out.",
+      });
+    } catch (error) {
+      console.log(`SingOut Controller Error: ${error}`);
       return next(error);
     }
   },
