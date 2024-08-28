@@ -1,30 +1,31 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
-import { OAuth } from "../components";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
-  loginStart,
-  loginSuccess,
-  loginFailure,
+  updateStart,
+  updateSuccess,
+  updateFailure,
 } from "../redux-slices/UserSlice";
 
-function Admin() {
+function DashProfilePage() {
+  const { userInfo, loading } = useSelector((state) => state.user);
+
   const [formDetails, setFormDetails] = useState({
-    firstname: "",
-    lastname: "",
-    email: "",
-    password: "",
+    firstname: userInfo.firstname,
+    lastname: userInfo.lastname,
+    email: userInfo.email,
+    newPassword: "",
   });
+
   const [focusedInput, setFocusedInput] = useState({
-    firstname: false,
-    lastname: false,
-    email: false,
-    password: false,
+    firstname: true,
+    lastname: true,
+    email: true,
+    newPassword: false,
   });
-  const { loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,21 +58,20 @@ function Admin() {
     });
   };
 
-  //INFO: Handle Admin form
-  const handleAdminForm = async (e) => {
+  //INFO: Handle Update Profile form
+  const handleUpdateForm = async (e) => {
     e.preventDefault();
-    console.log(formDetails);
     if (
-      formDetails.firstname &&
-      formDetails.lastname &&
-      formDetails.email &&
-      formDetails.password
+      formDetails.firstname !== userInfo.firstname ||
+      formDetails.lastname !== userInfo.lastname ||
+      formDetails.email !== userInfo.email ||
+      formDetails.newPassword
     ) {
       try {
-        dispatch(loginStart());
-        const apiUrl = "/api/admin/login";
+        dispatch(updateStart());
+        const apiUrl = `/api/admin/updateInfo/${userInfo._id}`;
         const options = {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -86,32 +86,32 @@ function Admin() {
             position: "bottom-center",
           });
           setFormDetails({
-            firstname: "",
-            lastname: "",
-            email: "",
-            password: "",
+            firstname: userInfo.firstname,
+            lastname: userInfo.lastname,
+            email: userInfo.email,
+            newPassword: "",
           });
           setFocusedInput({
-            firstname: false,
-            lastname: false,
-            email: false,
-            password: false,
+            firstname: true,
+            lastname: true,
+            email: true,
+            newPassword: false,
           });
-          dispatch(loginSuccess(data.userDetails));
+          dispatch(updateSuccess(data.userDetails));
           navigate("/dashboard?tab=dashboard");
         } else {
           toast.error(data.extraDetails, {
             theme: "colored",
             position: "bottom-center",
           });
-          dispatch(loginFailure());
+          dispatch(updateFailure());
         }
       } catch (error) {
-        console.log(`Admin Login Error: ${error}`);
-        dispatch(loginFailure());
+        console.log(`Dashboard Profile Error: ${error}`);
+        dispatch(updateFailure());
       }
     } else {
-      toast.error("Please fill all input fields!", {
+      toast.error("No changes made!", {
         theme: "colored",
         position: "bottom-center",
       });
@@ -119,40 +119,75 @@ function Admin() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full min-h-screen px-5">
-      <div className="w-full max-w-[1400px] mx-auto min-h-screen">
-        {/* Masker Section */}
-        <div className="w-full h-[40vh] text-[35px] sm:text-5xl text-zinc-800 font-extrabold font-poppins tracking-tight uppercase flex flex-col justify-center gap-2 sm:gap-4">
-          {["Welcome to", "Admin Panel"].map((item, index) => {
-            return (
-              <div
-                key={`${item.toLowerCase().split(" ").join("_")}_${index}`}
-                className="flex items-center gap-1 overflow-hidden w-fit"
-                style={{ transform: "scaleY(1.4)" }}
-              >
-                {index === 0 && (
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "fit-content" }}
-                    viewport={{ amount: 0.5 }}
-                    transition={{ duration: 1.5, ease: [0.34, 1.56, 0.64, 1] }}
-                    className="overflow-hidden rounded-md"
-                  >
-                    <img
-                      src="/admin.jpg"
-                      alt="admin"
-                      className="w-[80px] h-[35px] sm:w-[100px] sm:h-[48px] object-cover"
-                    />
-                  </motion.div>
-                )}
-                <h1>{item}</h1>
-              </div>
-            );
-          })}
-        </div>
+    <div className="flex-1 min-h-screen px-5">
+      <div className="w-full max-w-[1200px] mx-auto">
+        {/* Profile Image section */}
+        <motion.div
+          initial="initial"
+          whileInView="view"
+          className="flex flex-col sm:flex-row sm:items-center w-full gap-5 py-10"
+        >
+          <motion.div
+            variants={{
+              initial: { scale: 0 },
+              view: { scale: 1 },
+            }}
+            transition={{
+              duration: 1.2,
+              ease: [0.68, -0.6, 0.32, 1.6],
+            }}
+            className="overflow-hidden rounded-full"
+          >
+            <img
+              src="/jitu2.jpg"
+              alt="profile_image"
+              className="w-[200px] sm:w-[250px] lg:w-[300px] h-[200px] sm:h-[250px] lg:h-[300px]"
+            />
+          </motion.div>
+          <div className="flex flex-row flex-wrap gap-3">
+            <span className="overflow-hidden">
+              {userInfo.firstname.split("").map((l, i) => (
+                <motion.span
+                  variants={{
+                    initial: { y: "100%" },
+                    view: { y: 0 },
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    ease: [0.68, -0.6, 0.32, 1.6],
+                    delay: 0.025 * i,
+                  }}
+                  key={i}
+                  className="inline-block text-5xl lg:text-6xl font-bold tracking-tighter uppercase font-poppins"
+                >
+                  {l}
+                </motion.span>
+              ))}
+            </span>
+            <span className="overflow-hidden">
+              {userInfo.lastname.split("").map((l, i) => (
+                <motion.span
+                  variants={{
+                    initial: { y: "100%" },
+                    view: { y: 0 },
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    ease: [0.68, -0.6, 0.32, 1.6],
+                    delay: 0.035 * i,
+                  }}
+                  key={i}
+                  className="inline-block text-5xl lg:text-6xl font-bold tracking-tighter uppercase font-poppins"
+                >
+                  {l}
+                </motion.span>
+              ))}
+            </span>
+          </div>
+        </motion.div>
         {/* Form Section */}
         <form
-          onSubmit={handleAdminForm}
+          onSubmit={handleUpdateForm}
           className="w-full max-w-[1400px] min-h-screen mx-auto py-10"
         >
           {/* Form Heading */}
@@ -164,7 +199,7 @@ function Admin() {
               transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
               className="tracking-tighter font-poppins"
             >
-              Fill the form below :
+              Update your profile below :
             </motion.h1>
           </div>
 
@@ -181,7 +216,7 @@ function Admin() {
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
                 <span style={{ transform: "scaleY(1.1)" }}>
-                  Enter your first name
+                  Your first name
                 </span>
                 {/* Input Filed */}
                 <div className="relative flex-1 group">
@@ -211,9 +246,7 @@ function Admin() {
                 transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
-                <span style={{ transform: "scaleY(1.1)" }}>
-                  Enter your last name
-                </span>
+                <span style={{ transform: "scaleY(1.1)" }}>Your last name</span>
                 {/* Input Filed */}
                 <div className="relative flex-1 group">
                   {!focusedInput.lastname && !formDetails.lastname && (
@@ -246,7 +279,7 @@ function Admin() {
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-end lg:gap-5"
               >
                 <span style={{ transform: "scaleY(1.1)" }}>
-                  Please provide your email address here
+                  Here is your registered email address
                 </span>
                 {/* Input Filed */}
                 <div className="relative flex-1 w-full group">
@@ -280,20 +313,20 @@ function Admin() {
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
                 <span style={{ transform: "scaleY(1.1)" }}>
-                  Enter your password
+                  Enter your new password
                 </span>
                 {/* Input Filed */}
                 <div className="relative flex-1 w-full group">
-                  {!focusedInput.password && !formDetails.password && (
+                  {!focusedInput.newPassword && !formDetails.newPassword && (
                     <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
                       ************
                     </span>
                   )}
                   <input
                     type="password"
-                    id="password"
-                    name="password"
-                    value={formDetails.password}
+                    id="newPassword"
+                    name="newPassword"
+                    value={formDetails.newPassword}
                     onFocus={handleOnFocus}
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}
@@ -302,13 +335,13 @@ function Admin() {
                   />
                 </div>
                 <span style={{ transform: "scaleY(1.1)" }}>
-                  to access ADMIN panel
+                  to enhance your security
                 </span>
               </motion.div>
             </div>
           </div>
 
-          {/* Sign In and Google Button */}
+          {/* Update Button */}
           <motion.div
             initial="initial"
             whileInView="view"
@@ -367,7 +400,7 @@ function Admin() {
                     className="h-fit flex items-center text-sm font-normal font-poppins tracking-tight border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
                     disabled={loading}
                   >
-                    {loading ? "Processing" : "Login"}
+                    {loading ? "Updating" : "Update Details"}
                     {!loading && (
                       <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
                         <MdArrowOutward
@@ -380,24 +413,6 @@ function Admin() {
                   </button>
                 </motion.div>
               </div>
-
-              {/* Google Btn */}
-              <div className="overflow-hidden">
-                <motion.div
-                  variants={{
-                    initial: { y: "100%" },
-                    buttonView: { y: 0 },
-                  }}
-                  viewport={{ margin: "-100px" }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.3,
-                    ease: [0.76, 0, 0.24, 1],
-                  }}
-                >
-                  <OAuth />
-                </motion.div>
-              </div>
             </motion.div>
           </motion.div>
         </form>
@@ -406,4 +421,4 @@ function Admin() {
   );
 }
 
-export default Admin;
+export default DashProfilePage;

@@ -11,6 +11,7 @@ const adminKeySlice = createSlice({
   reducers: {
     initialRender: (state) => {
       state.loading = false;
+      state.isAuthenticated = false;
     },
     keyAuthStart: (state) => {
       state.loading = true;

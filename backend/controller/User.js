@@ -1,4 +1,5 @@
 import UserCollection from "../models/User.js";
+import bcrypt from "bcryptjs";
 
 export const userController = {
   //NOTE: Login Controller
@@ -87,7 +88,7 @@ export const userController = {
 
           return res
             .status(200)
-            .cookie("jwt_token", await userExists.generateToken(), {
+            .cookie("token", await userExists.generateToken(), {
               httpOnly: true,
               expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days from now
             })
@@ -132,7 +133,7 @@ export const userController = {
 
         return res
           .status(201)
-          .cookie("jwt_token", await userCreated.generateToken(), {
+          .cookie("token", await userCreated.generateToken(), {
             httpOnly: true,
             expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days
           })
@@ -151,12 +152,146 @@ export const userController = {
   //NOTE: Signout Controller
   async signOut(req, res, next) {
     try {
-      return res.clearCookie("jwt_token").status(200).json({
+      return res.clearCookie("token").status(200).json({
         success: true,
         message: "You have successfully Signed Out.",
       });
     } catch (error) {
       console.log(`SingOut Controller Error: ${error}`);
+      return next(error);
+    }
+  },
+
+  //NOTE: Get User Details
+  async getProfileDetails(req, res, next) {
+    const { email } = req.body;
+    try {
+      const userInfo = await UserCollection.findOne({ email });
+      if (!userInfo) {
+        const userNotFoundError = {
+          status: 404,
+          message: "User not found!",
+        };
+        return next(userNotFoundError);
+      }
+
+      const { password, ...rest } = userInfo._doc;
+      return res.status(200).json({
+        success: true,
+        userDetails: rest,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  //NOTE: Profile update
+  async updateInfo(req, res, next) {
+    const { formDetails } = req.body;
+    const { firstname, lastname, email, newPassword } = formDetails;
+
+    //INFO: Check the user is admin or not
+    if (req.user.userId !== req.params.userId) {
+      const nonAdminError = {
+        status: 404,
+        message: "Not a valid Admin!",
+        extraDetails: "You are not allowed to update the profile.",
+      };
+      return next(nonAdminError);
+    }
+
+    //INFO: Firstname checks
+    if (firstname.length < 3 || firstname.length > 20) {
+      if (firstname.length < 3) {
+        const nameTooSmallErr = {
+          status: 400,
+          message: "Invalid firstname.",
+          extraDetails: "Name must be at least 3 letters!",
+        };
+        return next(nameTooSmallErr);
+      } else if (firstname.length > 20) {
+        const nameTooLargeErr = {
+          status: 400,
+          message: "Invalid firstname.",
+          extraDetails: "Name must be less than 20 letters!",
+        };
+        return next(nameTooLargeErr);
+      }
+    }
+
+    //INFO: Lastname checks
+    if (lastname.length < 3 || lastname.length > 20) {
+      if (lastname.length < 3) {
+        const nameTooSmallErr = {
+          status: 400,
+          message: "Invalid lastname.",
+          extraDetails: "Name must be at least 3 letters!",
+        };
+        return next(nameTooSmallErr);
+      } else if (lastname.length > 20) {
+        const nameTooLargeErr = {
+          status: 400,
+          message: "Invalid lastname.",
+          extraDetails: "Name must be less than 20 letters!",
+        };
+        return next(nameTooLargeErr);
+      }
+    }
+
+    //INFO: Email checks
+    if (!email.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/)) {
+      const emailError = {
+        status: 401,
+        message: "Invalid credentials!",
+        extraDetails: "Please provide actual email address!",
+      };
+      return next(emailError);
+    }
+
+    //INFO: NewPassword Checks
+    if (
+      newPassword &&
+      !newPassword.match(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{12,20}$/
+      )
+    ) {
+      const passwordError = {
+        status: 400,
+        message: "Invalid credentials!",
+        extraDetails:
+          "Password must be 12-20 characters long, including at least one uppercase letter, one lowercase letter, one digit, and one special character.",
+      };
+      return next(passwordError);
+    }
+
+    //INFO: Update functionality
+    try {
+      const userInfo = await UserCollection.findOne({
+        _id: req.params.userId,
+      });
+
+      const updateProfileDetails = await UserCollection.findByIdAndUpdate(
+        req.params.userId,
+        {
+          $set: {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: newPassword
+              ? await bcrypt.hash(newPassword, 10)
+              : userInfo.password,
+          },
+        },
+        { new: true }
+      );
+
+      const { password: updatedPassword, ...rest } = updateProfileDetails._doc;
+      return res.status(200).json({
+        status: true,
+        message: "Details successfully updated.",
+        userDetails: rest,
+      });
+    } catch (error) {
       return next(error);
     }
   },

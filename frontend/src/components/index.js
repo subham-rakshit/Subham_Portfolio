@@ -11,6 +11,15 @@ import OAuth from "./OAuth.jsx";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import DashboardProtectedRoute from "./DashboardProtectedRoute";
 import DashSideBar from "./DashSideBar";
+import DashboardPage from "./DashboardPage";
+import DashProfilePage from "./DashProfilePage.jsx";
+import DashProjectsPage from "./DashProjectsPage.jsx";
+import DashSkillsPage from "./DashSkillsPage.jsx";
+import DashCertificatesPage from "./DashCertificatesPage";
+import DashCreateProjectsPage from "./DashCreateProjectsPage";
+import DashCreateSkillsPage from "./DashCreateSkillsPage.jsx";
+import DashCreateCertificatePage from "./DashCreateCertificatePage";
+import DashCreateAboutPage from "./DashCreateAboutPage";
 
 export {
   Header,
@@ -26,4 +35,13 @@ export {
   AdminProtectedRoute,
   DashboardProtectedRoute,
   DashSideBar,
+  DashboardPage,
+  DashProfilePage,
+  DashProjectsPage,
+  DashSkillsPage,
+  DashCertificatesPage,
+  DashCreateProjectsPage,
+  DashCreateSkillsPage,
+  DashCreateCertificatePage,
+  DashCreateAboutPage,
 };

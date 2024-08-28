@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialRender } from "./AdminKeySlice";
 
 const initialState = {
   userInfo: null,
@@ -24,10 +23,40 @@ const userSlice = createSlice({
     loginFailure: (state) => {
       state.loading = false;
     },
+    updateStart: (state) => {
+      state.loading = true;
+    },
+    updateSuccess: (state, action) => {
+      state.loading = false;
+      state.userInfo = action.payload;
+    },
+    updateFailure: (state) => {
+      state.loading = false;
+    },
+    signOutStart: (state) => {
+      state.loading = true;
+    },
+    signOutSuccess: (state) => {
+      state.loading = false;
+      state.userInfo = null;
+    },
+    signOutFailure: (state) => {
+      state.loading = false;
+    },
   },
 });
 
-export const { initialLogin, loginStart, loginSuccess, loginFailure } =
-  userSlice.actions;
+export const {
+  initialLogin,
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  updateStart,
+  updateSuccess,
+  updateFailure,
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
+} = userSlice.actions;
 
 export default userSlice.reducer;

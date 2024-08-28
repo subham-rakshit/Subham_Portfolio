@@ -11,10 +11,17 @@ import { PuffLoader } from "react-spinners";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
+  initialRender,
   keyAuthStart,
   keyAuthSuccess,
   keyAuthFailure,
 } from "../redux-slices/AdminKeySlice";
+
+import {
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
+} from "../redux-slices/UserSlice";
 
 function Header({ isFixed }) {
   const { loading, isAuthenticated } = useSelector((state) => state.adminKey);
@@ -29,19 +36,19 @@ function Header({ isFixed }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // Onscroll navbar background change logic
+  //NOTE: Onscroll navbar background change logic
   window.addEventListener("scroll", function () {
     let headerElem = document.querySelector(".navbar");
     headerElem.classList.toggle("sticky-nav", window.scrollY > 0);
   });
 
-  //? Authentication for ADMIN --->
-  // Handle placeholder gets disappear when specific input field gets focused
+  //IDEA: Authentication for ADMIN --->
+  //NOTE: Handle placeholder gets disappear when specific input field gets focused
   const handleOnFocus = () => {
     setFocusedInput(true);
   };
 
-  // Handle placeholder gets visible when specific input filed gets empty value
+  //NOTE: Handle placeholder gets visible when specific input filed gets empty value
   const handleOnBlur = (e) => {
     const { value } = e.target;
     if (!value) {
@@ -54,7 +61,7 @@ function Header({ isFixed }) {
     setAuthKey(value);
   };
 
-  // Admin Key Checks
+  //NOTE: Admin Key Checks
   const handleAdminAuth = async (e) => {
     e.preventDefault();
 
@@ -104,7 +111,39 @@ function Header({ isFixed }) {
     }
   };
 
-  //? Authentication for ADMIN --->
+  //NOTE: Sign out handle
+  const handleSignOut = async () => {
+    if (userInfo) {
+      try {
+        dispatch(signOutStart());
+        const apiURL = "/api/admin/signout";
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+        const res = await fetch(apiURL, options);
+        if (res.ok) {
+          toast.success("You have successfully Sign Out.", {
+            theme: "colored",
+            position: "bottom-center",
+          });
+          dispatch(signOutSuccess());
+          dispatch(initialRender());
+        }
+      } catch (error) {
+        dispatch(signOutFailure());
+        console.log(`SignOut Error: ${error.message}`);
+      }
+    } else {
+      toast.error("Please Login first!", {
+        theme: "colored",
+        position: "bottom-center",
+      });
+    }
+  };
+  //IDEA: Authentication for ADMIN --->
 
   const handleProfile = () => {
     setIsProfileClicked((prev) => !prev);
@@ -210,7 +249,7 @@ function Header({ isFixed }) {
                     () =>
                       isAuthenticated
                         ? userInfo
-                          ? navigate("/dashboard") //INFO: If authenticated and userInfo is present
+                          ? navigate("/dashboard?tab=dashboard") //INFO: If authenticated and userInfo is present
                           : navigate("/admin") // INFO: authenticated but userInfo is null
                         : setOpenModal(true) // INFO: not authenticated
                   }
@@ -220,6 +259,7 @@ function Header({ isFixed }) {
 
                 <button
                   type="button"
+                  onClick={handleSignOut}
                   className="text-xs font-poppins font-[500] text-blue-800 hover:text-red-500 transition-all duration-200 ease-linear"
                 >
                   Sign out

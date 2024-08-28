@@ -12,8 +12,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body::-webkit-scrollbar {
-  display: none;
+/* Scrollbar style */
+html::-webkit-scrollbar {
+  width: 0.8vw;
+}
+html::-webkit-scrollbar-thumb {
+  background-color: #9db350;
+  border-radius: 30px;
+  cursor: pointer;
+}
+html::-webkit-scrollbar-track {
+  background-color: #cdea68;
+}
+.sidebar-tab-container::-webkit-scrollbar {
+  width: 0.8vw;
+}
+.sidebar-tab-container::-webkit-scrollbar-thumb {
+  background-color: #9db350;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.sidebar-tab-container::-webkit-scrollbar-track {
+  background: rgba(212, 212, 212, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
 }
 
 /* Navbar Blur Effect onScroll */
@@ -28,6 +50,11 @@ body::-webkit-scrollbar {
   pointer-events: none;
 }
 
-.certificated-main-container::-webkit-scrollbar {
-  display: none;
+/* Dashboard */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0px 8px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: "blur(5.5px)";
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
