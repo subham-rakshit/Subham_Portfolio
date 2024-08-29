@@ -23,6 +23,16 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please fill the input properly"],
     },
+    projectLink: {
+      type: String,
+      required: [true, "Please fill the input properly"],
+      unique: true,
+    },
+    gitHubLink: {
+      type: String,
+      required: [true, "Please fill the input properly"],
+      unique: true,
+    },
     thumbnailURL: {
       type: String,
       required: [true, "Please fill the input properly"],
