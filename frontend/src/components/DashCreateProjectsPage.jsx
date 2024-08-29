@@ -23,6 +23,8 @@ function DashCreateProjectsPage() {
     projectDescription: "",
     challenges: "",
     solutions: "",
+    projectLink: "",
+    gitHubLink: "",
     thumbnailURL: "",
     largeScreenViewURL: "",
     mediumScreenViewURL: "",
@@ -35,6 +37,8 @@ function DashCreateProjectsPage() {
     projectDescription: false,
     challenges: false,
     solutions: false,
+    projectLink: false,
+    gitHubLink: false,
   });
   //NOTE: Image files state
   const [imageUploadFile, setImageUploadFile] = useState({
@@ -283,7 +287,7 @@ function DashCreateProjectsPage() {
             />
           </motion.div>
           <div className="overflow-hidden" style={{ transform: "scaleY(1.5)" }}>
-            {"Your Projects".split("").map((l, i) => (
+            {"Your Project".split("").map((l, i) => (
               <motion.span
                 variants={{
                   initial: { y: "100%" },
@@ -487,6 +491,72 @@ function DashCreateProjectsPage() {
                     id="solutions"
                     name="solutions"
                     value={projectDetails.solutions}
+                    onFocus={handleOnFocus}
+                    onBlur={handleOnBlur}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Project URL Link */}
+            <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
+              <motion.div
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
+              >
+                <span style={{ transform: "scaleY(1.1)" }}>
+                  Provide project URL
+                </span>
+                {/* Input Filed */}
+                <div className="relative flex-1 w-full group">
+                  {!focusedInput.projectLink && !projectDetails.projectLink && (
+                    <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
+                      Project link*
+                    </span>
+                  )}
+                  <input
+                    type="text"
+                    id="projectLink"
+                    name="projectLink"
+                    value={projectDetails.projectLink}
+                    onFocus={handleOnFocus}
+                    onBlur={handleOnBlur}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                  />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Project GitHub Link */}
+            <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
+              <motion.div
+                initial={{ y: "100%" }}
+                whileInView={{ y: 0 }}
+                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
+              >
+                <span style={{ transform: "scaleY(1.1)" }}>
+                  Provide project's GitHub link
+                </span>
+                {/* Input Filed */}
+                <div className="relative flex-1 w-full group">
+                  {!focusedInput.gitHubLink && !projectDetails.gitHubLink && (
+                    <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
+                      Project github link*
+                    </span>
+                  )}
+                  <input
+                    type="text"
+                    id="gitHubLink"
+                    name="gitHubLink"
+                    value={projectDetails.gitHubLink}
                     onFocus={handleOnFocus}
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}

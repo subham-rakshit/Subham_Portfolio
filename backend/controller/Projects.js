@@ -9,6 +9,8 @@ export const projectsControllerObj = {
       projectDescription,
       challenges,
       solutions,
+      projectLink,
+      gitHubLink,
       thumbnailURL,
       largeScreenViewURL,
       mediumScreenViewURL,
@@ -32,6 +34,8 @@ export const projectsControllerObj = {
       !projectDescription ||
       !challenges ||
       !solutions ||
+      !projectLink ||
+      !gitHubLink ||
       !thumbnailURL ||
       !largeScreenViewURL ||
       !mediumScreenViewURL ||
@@ -83,6 +87,8 @@ export const projectsControllerObj = {
         projectDescription: projectDescription.trim(),
         challenges: challenges.trim(),
         solutions: solutions.trim(),
+        projectLink,
+        gitHubLink,
         thumbnailURL: thumbnailURL.trim(),
         largeScreenViewURL,
         mediumScreenViewURL,
