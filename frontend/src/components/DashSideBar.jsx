@@ -19,7 +19,7 @@ function DashSideBar({ tab }) {
       }}
       animate={
         open
-          ? { width: "250px", height: "100%", borderRadius: "20px" }
+          ? { width: "250px", height: "fit-content", borderRadius: "20px" }
           : { width: "fit-content", height: "fit-content", borderRadius: "50%" }
       }
       transition={{ duration: 0.4, ease: [0.68, -0.2, 0.32, 1.6] }}
@@ -55,7 +55,7 @@ function DashSideBar({ tab }) {
           open
             ? {
                 width: "100%",
-                height: "100%",
+                height: "fit-content",
                 marginTop: "10px",
                 marginBottom: "10px",
                 opacity: 1,
@@ -69,7 +69,7 @@ function DashSideBar({ tab }) {
               }
         }
         transition={{ duration: 0.3, ease: [0.68, -0.2, 0.32, 1.6] }}
-        className={`flex flex-col gap-3 w-full h-full overflow-y-auto overflow-x-hidden ${
+        className={`flex flex-col gap-3 py-5 w-full overflow-y-auto overflow-x-hidden ${
           open ? "inline-block" : "hidden"
         } transition-all duration-500 ease-in-out sidebar-tab-container`}
       >
@@ -272,7 +272,7 @@ function DashSideBar({ tab }) {
           type="button"
           className={`${
             open ? "inline-block" : "hidden"
-          } w-full h-fit flex justify-between items-center text-sm font-semibold font-poppins tracking-tight border border-zinc-900 rounded-full px-3 py-2 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 ease-in-out group`}
+          } w-full h-fit flex justify-between items-center text-sm font-semibold font-poppins tracking-tight border border-zinc-900 rounded-full px-3 py-2 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 ease-in-out`}
         >
           Clear All
           <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
