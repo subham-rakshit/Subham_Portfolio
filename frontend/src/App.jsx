@@ -6,6 +6,7 @@ import {
   Footer,
   Header,
   PageTransition,
+  ProjectItemDetails,
   ScrollToTop,
 } from "./components";
 import { About, Admin, Contact, Dashboard, Home, Projects } from "./pages";
@@ -98,17 +99,24 @@ function App() {
             <PageTransition>
               <ScrollToTop />
               <Routes>
-                <Route>
-                  <Route path="/" element={<Home isFixed={isFixed} />} />
-                </Route>
+                {/* Home */}
+                <Route path="/" element={<Home isFixed={isFixed} />} />
+                {/* About */}
                 <Route path="/about" element={<About isFixed={isFixed} />} />
+                {/* All Projects */}
                 <Route
                   path="/projects"
                   element={<Projects isFixed={isFixed} />}
                 />
+                {/* Contact */}
                 <Route
                   path="/contact"
                   element={<Contact isFixed={isFixed} />}
+                />
+                {/* Project Item */}
+                <Route
+                  path="/project/:projectSlug"
+                  element={<ProjectItemDetails />}
                 />
                 <Route element={<AdminProtectedRoute />}>
                   <Route path="/admin" element={<Admin />} />

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -12,6 +14,8 @@ import {
 import VerifiedIcon from "@mui/icons-material/Verified";
 
 function DashCreateProjectsPage() {
+  const { userInfo } = useSelector((state) => state.user);
+
   //NOTE: Project Details State without Image
   const [projectDetails, setProjectDetails] = useState({
     name: "",
@@ -67,6 +71,7 @@ function DashCreateProjectsPage() {
     mediumScreenViewURL: false,
     smallScreenViewURL: false,
   });
+  const navigate = useNavigate();
 
   //INFO: Handle placeholder gets disappear when specific input field gets focused
   const handleOnFocus = (e) => {
@@ -201,23 +206,56 @@ function DashCreateProjectsPage() {
   const handleImageUpdateInState = (e) => {
     const name = e.target.name;
     const url = imageUploadFileURL[name];
-    setProjectDetails({
-      ...projectDetails,
-      [name]: url,
-    });
-    setIsImageStored({
-      ...isImageStored,
-      [name]: true,
-    });
+    if (imageUploadFileURL[name]) {
+      setProjectDetails({
+        ...projectDetails,
+        [name]: url,
+      });
+      setIsImageStored({
+        ...isImageStored,
+        [name]: true,
+      });
+    }
   };
 
   //INFO: Handle Admin form
   const handleCreateProjectForm = async (e) => {
     e.preventDefault();
-    console.log(projectDetails);
-    console.log(imageUploadFile);
-    console.log(imageUploadFileURL);
+    try {
+      const apiUrl = `/api/admin/project/create/${userInfo._id}`;
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ projectDetails }),
+      };
+      const res = await fetch(apiUrl, options);
+      const data = await res.json();
+
+      if (res.ok) {
+        toast.success(data.message, {
+          theme: "colored",
+          position: "bottom-center",
+        });
+        navigate(`/project/${data.projectInfo.slug}`); //TODO: Create ProjectItem component
+      } else {
+        toast.error(data.extraDetails, {
+          theme: "colored",
+          position: "bottom-center",
+        });
+        setIsImageStored({
+          thumbnailURL: false,
+          largeScreenViewURL: false,
+          mediumScreenViewURL: false,
+          smallScreenViewURL: false,
+        });
+      }
+    } catch (error) {
+      console.log(`Create Project Error: ${error}`);
+    }
   };
+
   return (
     <div className="flex-1 min-h-screen px-5">
       <div className="w-full max-w-[1200px] mx-auto py-10">

@@ -20,6 +20,7 @@ import DashCreateProjectsPage from "./DashCreateProjectsPage";
 import DashCreateSkillsPage from "./DashCreateSkillsPage.jsx";
 import DashCreateCertificatePage from "./DashCreateCertificatePage";
 import DashCreateAboutPage from "./DashCreateAboutPage";
+import ProjectItemDetails from "./ProjectItemDetails";
 
 export {
   Header,
@@ -44,4 +45,5 @@ export {
   DashCreateSkillsPage,
   DashCreateCertificatePage,
   DashCreateAboutPage,
+  ProjectItemDetails,
 };

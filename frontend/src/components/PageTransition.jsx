@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { gsap, Expo } from "gsap";
 import { useLocation } from "react-router-dom";
@@ -8,19 +8,28 @@ function PageTransition({ children }) {
   const location = useLocation();
   const prevPathname = useRef(location.pathname);
 
+  //NOTE: Compute the display text based on the path segments
+  const pathSegments = location.pathname.split("/");
+  const displayText =
+    pathSegments.length > 2
+      ? pathSegments[2].split("-").join(" ")
+      : pathSegments[1] === ""
+      ? "Home"
+      : pathSegments[1];
+
   useEffect(() => {
-    // If the pathname hasn't changed, skip the transition
+    //INFO: If the pathname hasn't changed, skip the transition
     if (prevPathname.current === location.pathname) {
       return;
     }
 
-    // Update the previous pathname with the current one
+    //INFO: Update the previous pathname with the current one
     prevPathname.current = location.pathname;
 
     const cntx = gsap.context(() => {
       const tl = gsap.timeline();
 
-      // Animate the div sliding from left to right
+      //INFO: Animate the div sliding from left to right
       tl.from(".transition-slide", {
         y: "100%",
         duration: 1.5,
@@ -36,7 +45,7 @@ function PageTransition({ children }) {
           duration: 0.3,
         });
 
-      // Animate the content fade-in and slide up
+      //INFO: Animate the content fade-in and slide up
       tl.from(".page", {
         opacity: 0,
         y: "100%",
@@ -50,7 +59,7 @@ function PageTransition({ children }) {
       });
     });
 
-    return () => cntx.revert(); // Cleanup the context on unmount
+    return () => cntx.revert(); //INFO: Cleanup the context on unmount
   }, [location.pathname]);
 
   return (
@@ -59,22 +68,20 @@ function PageTransition({ children }) {
         <>
           <div className="transition-slide fixed top-0 left-0 w-full h-full bg-zinc-800 z-[999999999999] flex flex-col justify-between">
             <div className="relative w-full h-full p-10">
-              <div className="absolute top-1/2 -translate-y-1/2 overflow-hidden flex items-center w-fit">
+              <div className="absolute flex items-center overflow-hidden -translate-y-1/2 top-1/2 w-fit">
                 <motion.span
                   key={location.pathname}
-                  initial={{ y: "100%" }} // Start invisible
-                  animate={{ y: ["100%", "0%", "-100%"] }} // Move to original position and then top
+                  initial={{ y: "100%" }} //INFO: Start invisible
+                  animate={{ y: ["100%", "0%", "-100%"] }} //INFO: Move to original position and then top
                   transition={{
-                    duration: 1.5, // Duration for the entire animation
-                    delay: 0.6, // Delay for start the animation
-                    times: [0, 0.5, 1], // Timing for each phase
-                    ease: [0.76, 0, 0.24, 1], // Easing function from easings.net (easeInOutQuart)
+                    duration: 1.5, //INFO: Duration for the entire animation
+                    delay: 0.6, //INFO: Delay for start the animation
+                    times: [0, 0.5, 1], //INFO: Timing for each phase
+                    ease: [0.76, 0, 0.24, 1], //INFO: Easing function from easings.net (easeInOutQuart)
                   }}
                   className="w-fit font-franklin text-4xl sm:text-6xl text-[#FBF9ED] font-extrabold uppercase"
                 >
-                  {location.pathname.split("/")[1] === ""
-                    ? "home"
-                    : location.pathname.split("/")[1]}
+                  {displayText}
                 </motion.span>
               </div>
               <div className="absolute top-full left-full -translate-x-full -translate-y-full w-fit h-[150px]">
