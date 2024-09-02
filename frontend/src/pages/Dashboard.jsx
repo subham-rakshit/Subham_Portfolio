@@ -28,8 +28,9 @@ function Dashboard() {
     }
   }, [location.search]);
   return (
-    <div className="relative w-full min-h-screen flex bg-[#FBF9ED]">
+    <div className="relative min-h-screen flex bg-[#FBF9ED] w-full max-w-[1400px] mx-auto">
       <DashSideBar tab={tab} />
+
       {/* Tab Sections */}
       {tab === "dashboard" && <DashboardPage />}
       {tab === "profile" && <DashProfilePage />}

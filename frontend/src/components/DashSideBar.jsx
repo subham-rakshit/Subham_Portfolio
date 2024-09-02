@@ -205,44 +205,6 @@ function DashSideBar({ tab }) {
                 </motion.span>
               </div>
             </Link>
-            {/* Create Skills */}
-            <Link to="/dashboard?tab=create-skills">
-              <div
-                className={`flex items-center gap-2 py-1 pl-2 rounded-lg cursor-pointer hover:shadow-custom ${
-                  tab === "create-skills" ? "shadow-custom" : ""
-                }`}
-              >
-                <IoCreate size="23" className="text-zinc-700" />
-                <motion.span
-                  variants={{
-                    initial: { x: "100%" },
-                    view: { x: 0 },
-                  }}
-                  transition={{ duration: 1.6, ease: [0.34, 1.56, 0.64, 1] }}
-                >
-                  Create Skills
-                </motion.span>
-              </div>
-            </Link>
-            {/* Create Certificate */}
-            <Link to="/dashboard?tab=create-certificate">
-              <div
-                className={`flex items-center gap-2 py-1 pl-2 rounded-lg cursor-pointer hover:shadow-custom ${
-                  tab === "create-certificate" ? "shadow-custom" : ""
-                }`}
-              >
-                <IoCreate size="23" className="text-zinc-700" />
-                <motion.span
-                  variants={{
-                    initial: { x: "100%" },
-                    view: { x: 0 },
-                  }}
-                  transition={{ duration: 1.7, ease: [0.34, 1.56, 0.64, 1] }}
-                >
-                  Create Certificate
-                </motion.span>
-              </div>
-            </Link>
             {/* Create About */}
             <Link to="/dashboard?tab=create-about">
               <div
