@@ -23,7 +23,7 @@ function DashSideBar({ tab }) {
           : { width: "fit-content", height: "fit-content", borderRadius: "50%" }
       }
       transition={{ duration: 0.4, ease: [0.68, -0.2, 0.32, 1.6] }}
-      className="absolute top-0 left-0 mx-5 rounded-full px-2 py-2 glass-effect flex flex-col justify-start items-start overflow-auto sidebar-scetion z-[999]"
+      className="absolute top-0 left-0 mx-2 sm:mx-5 rounded-full px-2 py-2 glass-effect flex flex-col justify-start items-start overflow-auto sidebar-scetion z-[999]"
     >
       {/* Toggle Button */}
       <div className={`flex items-center w-full rounded-full overflow-hidden`}>

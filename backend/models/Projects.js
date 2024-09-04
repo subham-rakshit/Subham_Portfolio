@@ -15,14 +15,6 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please fill the input properly"],
     },
-    challenges: {
-      type: String,
-      required: [true, "Please fill the input properly"],
-    },
-    solutions: {
-      type: String,
-      required: [true, "Please fill the input properly"],
-    },
     projectLink: {
       type: String,
       required: [true, "Please fill the input properly"],

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
 import { toast } from "react-toastify";
 import { app } from "../firebase";
+import JoditEditor from "jodit-react";
 import {
   getDownloadURL,
   getStorage,
@@ -21,8 +22,6 @@ function DashCreateProjectsPage() {
     name: "",
     technologies: [],
     projectDescription: "",
-    challenges: "",
-    solutions: "",
     projectLink: "",
     gitHubLink: "",
     thumbnailURL: "",
@@ -34,7 +33,6 @@ function DashCreateProjectsPage() {
   const [focusedInput, setFocusedInput] = useState({
     name: false,
     technologies: false,
-    projectDescription: false,
     challenges: false,
     solutions: false,
     projectLink: false,
@@ -76,6 +74,7 @@ function DashCreateProjectsPage() {
     smallScreenViewURL: false,
   });
   const navigate = useNavigate();
+  const descriptionEditor = useRef(null);
 
   //INFO: Handle placeholder gets disappear when specific input field gets focused
   const handleOnFocus = (e) => {
@@ -261,7 +260,7 @@ function DashCreateProjectsPage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-5">
+    <div className="flex-1 min-h-screen px-1 sm:px-5">
       <div className="w-full max-w-[1200px] mx-auto py-10">
         {/* Masker section */}
         <motion.div
@@ -333,7 +332,7 @@ function DashCreateProjectsPage() {
           </motion.div>
 
           {/* Create Form */}
-          <div className="flex flex-col gap-1 my-5 sm:gap-5">
+          <div className="flex flex-col gap-4 my-5 lg:gap-5">
             {/* Project Name */}
             <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
               <motion.div
@@ -401,105 +400,44 @@ function DashCreateProjectsPage() {
               </motion.div>
             </div>
 
-            {/* Project Desription */}
-            <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
-              <motion.div
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-                className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
+            {/* Project Description */}
+            <motion.div
+              initial="initial"
+              whileInView="view"
+              className="overflow-hidden"
+            >
+              <span
+                style={{ transform: "scaleY(1.1)" }}
+                className="inline-block font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden"
               >
-                <span style={{ transform: "scaleY(1.1)" }}>
-                  Project description
-                </span>
-                {/* Input Filed */}
-                <div className="relative flex-1 w-full group">
-                  {!focusedInput.projectDescription &&
-                    !projectDetails.projectDescription && (
-                      <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
-                        Project's description*
-                      </span>
-                    )}
-                  <input
-                    type="text"
-                    id="projectDescription"
-                    name="projectDescription"
-                    value={projectDetails.projectDescription}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    onChange={handleInputChange}
-                    autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
-                  />
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Project Challenges */}
-            <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
+                Describe project details :
+              </span>
               <motion.div
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-                className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
+                variants={{
+                  initial: { y: "100%" },
+                  view: { y: 0 },
+                }}
+                transition={{ duration: 1.5, ease: [0.34, 1.56, 0.64, 1] }}
               >
-                <span style={{ transform: "scaleY(1.1)" }}>
-                  Challenges you faced
-                </span>
-                {/* Input Filed */}
-                <div className="relative flex-1 w-full group">
-                  {!focusedInput.challenges && !projectDetails.challenges && (
-                    <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
-                      Describe challenges*
-                    </span>
-                  )}
-                  <input
-                    type="text"
-                    id="challenges"
-                    name="challenges"
-                    value={projectDetails.challenges}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    onChange={handleInputChange}
-                    autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
-                  />
-                </div>
+                <JoditEditor
+                  ref={descriptionEditor}
+                  config={{
+                    placeholder: "Project details...",
+                    showCharsCounter: false,
+                    showWordsCounter: false,
+                    showXPathInStatusbar: false,
+                  }}
+                  value={projectDetails.projectDescription}
+                  onBlur={(newContent) =>
+                    setProjectDetails({
+                      ...projectDetails,
+                      projectDescription: newContent,
+                    })
+                  }
+                  className="text-sm tracking-tighter text-zinc-700 font-poppins"
+                />
               </motion.div>
-            </div>
-
-            {/* Project Solutions */}
-            <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
-              <motion.div
-                initial={{ y: "100%" }}
-                whileInView={{ y: 0 }}
-                transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-                className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
-              >
-                <span style={{ transform: "scaleY(1.1)" }}>
-                  How you slove those challenges
-                </span>
-                {/* Input Filed */}
-                <div className="relative flex-1 w-full group">
-                  {!focusedInput.solutions && !projectDetails.solutions && (
-                    <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
-                      Describe solutions*
-                    </span>
-                  )}
-                  <input
-                    type="text"
-                    id="solutions"
-                    name="solutions"
-                    value={projectDetails.solutions}
-                    onFocus={handleOnFocus}
-                    onBlur={handleOnBlur}
-                    onChange={handleInputChange}
-                    autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
-                  />
-                </div>
-              </motion.div>
-            </div>
+            </motion.div>
 
             {/* Project URL Link */}
             <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">

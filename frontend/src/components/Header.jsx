@@ -160,7 +160,7 @@ function Header({ isFixed }) {
 
   return (
     <div
-      className={`navbar relative w-full px-5 py-2 font-poppins text-zinc-800 transition-all duration-300 ease-in-out`}
+      className={`navbar relative w-full px-1 sm:px-5 py-2 font-poppins text-zinc-800 transition-all duration-300 ease-in-out`}
     >
       <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="logo">

@@ -4,9 +4,7 @@ import {
   DashboardPage,
   DashCertificatesPage,
   DashCreateAboutPage,
-  DashCreateCertificatePage,
   DashCreateProjectsPage,
-  DashCreateSkillsPage,
   DashProfilePage,
   DashProjectsPage,
   DashSideBar,
@@ -38,8 +36,6 @@ function Dashboard() {
       {tab === "skills" && <DashSkillsPage />}
       {tab === "certificates" && <DashCertificatesPage />}
       {tab === "create-projects" && <DashCreateProjectsPage />}
-      {tab === "create-skills" && <DashCreateSkillsPage />}
-      {tab === "create-certificate" && <DashCreateCertificatePage />}
       {tab === "create-about" && <DashCreateAboutPage />}
     </div>
   );

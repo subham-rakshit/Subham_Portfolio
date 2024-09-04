@@ -17,8 +17,6 @@ import DashProjectsPage from "./DashProjectsPage.jsx";
 import DashSkillsPage from "./DashSkillsPage.jsx";
 import DashCertificatesPage from "./DashCertificatesPage";
 import DashCreateProjectsPage from "./DashCreateProjectsPage";
-import DashCreateSkillsPage from "./DashCreateSkillsPage.jsx";
-import DashCreateCertificatePage from "./DashCreateCertificatePage";
 import DashCreateAboutPage from "./DashCreateAboutPage";
 import ProjectItemDetails from "./ProjectItemDetails";
 
@@ -42,8 +40,6 @@ export {
   DashSkillsPage,
   DashCertificatesPage,
   DashCreateProjectsPage,
-  DashCreateSkillsPage,
-  DashCreateCertificatePage,
   DashCreateAboutPage,
   ProjectItemDetails,
 };

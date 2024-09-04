@@ -3,12 +3,11 @@ import ProjectsCollection from "../models/Projects.js";
 export const projectsControllerObj = {
   async createNewProject(req, res, next) {
     const { projectDetails } = req.body;
+
     const {
       name,
       technologies,
       projectDescription,
-      challenges,
-      solutions,
       projectLink,
       gitHubLink,
       thumbnailURL,
@@ -32,8 +31,6 @@ export const projectsControllerObj = {
       !name ||
       technologies.length === 0 ||
       !projectDescription ||
-      !challenges ||
-      !solutions ||
       !projectLink ||
       !gitHubLink ||
       !thumbnailURL ||
@@ -85,8 +82,6 @@ export const projectsControllerObj = {
         name: name.trim(),
         technologies,
         projectDescription: projectDescription.trim(),
-        challenges: challenges.trim(),
-        solutions: solutions.trim(),
         projectLink,
         gitHubLink,
         thumbnailURL: thumbnailURL.trim(),

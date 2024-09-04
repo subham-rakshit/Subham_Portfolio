@@ -119,13 +119,13 @@ function DashProfilePage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-5">
+    <div className="flex-1 min-h-screen px-1 sm:px-5">
       <div className="w-full max-w-[1200px] mx-auto">
         {/* Profile Image section */}
         <motion.div
           initial="initial"
           whileInView="view"
-          className="flex flex-col sm:flex-row sm:items-center w-full gap-5 py-10"
+          className="flex flex-col w-full gap-5 py-10 sm:flex-row sm:items-center"
         >
           <motion.div
             variants={{
@@ -158,7 +158,7 @@ function DashProfilePage() {
                     delay: 0.025 * i,
                   }}
                   key={i}
-                  className="inline-block text-5xl lg:text-6xl font-bold tracking-tighter uppercase font-poppins"
+                  className="inline-block text-5xl font-bold tracking-tighter uppercase lg:text-6xl font-poppins"
                 >
                   {l}
                 </motion.span>
@@ -177,7 +177,7 @@ function DashProfilePage() {
                     delay: 0.035 * i,
                   }}
                   key={i}
-                  className="inline-block text-5xl lg:text-6xl font-bold tracking-tighter uppercase font-poppins"
+                  className="inline-block text-5xl font-bold tracking-tighter uppercase lg:text-6xl font-poppins"
                 >
                   {l}
                 </motion.span>

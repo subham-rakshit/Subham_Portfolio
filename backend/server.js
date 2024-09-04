@@ -3,7 +3,12 @@ import cookieParser from "cookie-parser";
 import { PORT } from "./config/envConfig.js";
 import { connectDB } from "./utilis/mongodb.js";
 import { errorMiddleware } from "./middlewares/ErrorMiddleware.js";
-import { adminKeyRouter, projectRouter, userRouter } from "./router/index.js";
+import {
+  aboutRouter,
+  adminKeyRouter,
+  projectRouter,
+  userRouter,
+} from "./router/index.js";
 
 const app = express();
 app.use(cookieParser());
@@ -13,6 +18,7 @@ app.use(express.json()); //INFO: JSON parse
 app.use("/api/admin", adminKeyRouter);
 app.use("/api/admin", userRouter);
 app.use("/api/admin", projectRouter);
+app.use("/api/admin", aboutRouter);
 
 //NOTE: Error middleware
 app.use(errorMiddleware);

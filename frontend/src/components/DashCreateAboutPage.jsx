@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -16,10 +15,11 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import { skillsLists } from "../data/data";
 
 function DashCreateAboutPage() {
+  const { userInfo } = useSelector((state) => state.user);
   const editor = useRef(null); //INFO: Jodit React editor ref
 
   //NOTE: Project Details State without Image
-  const [projectDetails, setProjectDetails] = useState({
+  const [aboutDetails, setAboutDetails] = useState({
     aboutMe: "",
     techName: "",
     selectedCategory: skillsLists[0].category,
@@ -37,6 +37,7 @@ function DashCreateAboutPage() {
     techImage: null,
     certificateImage: null,
   });
+
   //NOTE: Image file URL state
   const [imageUploadFileURL, setImageUploadFileURL] = useState({
     techImageURL: null,
@@ -57,6 +58,8 @@ function DashCreateAboutPage() {
     techImageURL: false,
     certificateImageURL: false,
   });
+  //NOTE: API fetching loading state
+  const [isFetching, setIsFetching] = useState(false);
 
   //INFO: Handle placeholder gets disappear when specific input field gets focused
   const handleOnFocus = (e) => {
@@ -170,8 +173,8 @@ function DashCreateAboutPage() {
     const name = e.target.name;
     const url = imageUploadFileURL[name];
     if (imageUploadFileURL[name]) {
-      setProjectDetails({
-        ...projectDetails,
+      setAboutDetails({
+        ...aboutDetails,
         [name]: url,
       });
       setIsImageStored({
@@ -182,15 +185,83 @@ function DashCreateAboutPage() {
   };
 
   //INFO: Handle Admin form
-  const handleCreateProjectForm = async (e) => {
+  const handleCreateAboutForm = async (e) => {
     e.preventDefault();
-    console.log(projectDetails);
+    if (
+      !aboutDetails.aboutMe &&
+      !aboutDetails.techName &&
+      aboutDetails.selectedCategory === "Languages" &&
+      !aboutDetails.techImageURL &&
+      !aboutDetails.issueDate &&
+      !aboutDetails.certificateImageURL
+    ) {
+      toast.error("Please fill the input field", {
+        theme: "colored",
+        position: "bottom-center",
+      });
+    } else if (
+      aboutDetails.aboutMe ||
+      aboutDetails.techName ||
+      aboutDetails.selectedCategory ||
+      aboutDetails.techImageURL ||
+      aboutDetails.issueDate ||
+      aboutDetails.certificateImageURL
+    ) {
+      try {
+        setIsFetching(true);
+        const apiUrl = `/api/admin/about/create/${userInfo._id}`;
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ aboutDetails }),
+        };
+        const res = await fetch(apiUrl, options);
+        const data = await res.json();
+
+        if (res.ok) {
+          toast.success(data.message, {
+            theme: "colored",
+            position: "bottom-center",
+          });
+          setAboutDetails({
+            aboutMe: "",
+            techName: "",
+            selectedCategory: skillsLists[0].category,
+            issueDate: "",
+            techImageURL: "",
+            certificateImageURL: "",
+          });
+          setFocusedInput({ techName: false });
+          setImageUploadFile({ techImage: null, certificateImage: null });
+          setImageUploadFileURL({
+            techImageURL: null,
+            certificateImageURL: null,
+          });
+          setImageUploadingProgress({
+            techImage: null,
+            certificateImage: null,
+          });
+          setIsImageUploading({ techImage: false, certificateImage: false });
+          setIsImageStored({ techImageURL: false, certificateImageURL: false });
+        } else {
+          setIsFetching(false);
+          toast.error(data.extraDetails, {
+            theme: "colored",
+            position: "bottom-center",
+          });
+        }
+      } catch (error) {
+        console.log(`Create About Form Error: ${error}`);
+      }
+    }
   };
 
   return (
-    <div className="flex-1 min-h-screen px-2 sm:px-5">
+    <div className="flex-1 min-h-screen px-1 sm:px-5">
       <div className="w-full max-w-[1200px] mx-auto py-10">
-        {/* Masker section */}
+        {/* //IDEA: Masker section */}
         <motion.div
           initial="initial"
           whileInView="view"
@@ -236,9 +307,9 @@ function DashCreateAboutPage() {
           </div>
         </motion.div>
 
-        {/* Create Projects Form Section */}
-        <form onSubmit={handleCreateProjectForm} className="mt-10 font-poppins">
-          {/* Form Heading */}
+        {/* //IDEA: Create Projects Form Section */}
+        <form onSubmit={handleCreateAboutForm} className="mt-10 font-poppins">
+          {/* //NOTE: Form Heading */}
           <motion.div
             initial="initial"
             whileInView="view"
@@ -259,7 +330,7 @@ function DashCreateAboutPage() {
             </motion.h1>
           </motion.div>
 
-          {/* Create Form */}
+          {/* //IDEA: Create Form */}
           <div className="flex flex-col gap-2 my-10 sm:gap-5 lg:gap-10">
             {/* //NOTE: About Me Input details STARTS */}
             <div>
@@ -287,11 +358,12 @@ function DashCreateAboutPage() {
                       placeholder: "About you...",
                       showCharsCounter: false,
                       showWordsCounter: false,
+                      showXPathInStatusbar: false,
                     }}
-                    value={projectDetails.aboutMe}
+                    value={aboutDetails.aboutMe}
                     onBlur={(newContent) =>
-                      setProjectDetails({
-                        ...projectDetails,
+                      setAboutDetails({
+                        ...aboutDetails,
                         aboutMe: newContent,
                       })
                     }
@@ -328,7 +400,7 @@ function DashCreateAboutPage() {
                     </span>
                     {/* Input Filed */}
                     <div className="relative flex-1 group">
-                      {!focusedInput.techName && !projectDetails.techName && (
+                      {!focusedInput.techName && !aboutDetails.techName && (
                         <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
                           Tech name*
                         </span>
@@ -337,12 +409,12 @@ function DashCreateAboutPage() {
                         type="text"
                         id="techName"
                         name="techName"
-                        value={projectDetails.techName}
+                        value={aboutDetails.techName}
                         onFocus={handleOnFocus}
                         onBlur={handleOnBlur}
                         onChange={(e) =>
-                          setProjectDetails({
-                            ...projectDetails,
+                          setAboutDetails({
+                            ...aboutDetails,
                             techName: e.target.value,
                           })
                         }
@@ -363,10 +435,10 @@ function DashCreateAboutPage() {
                     <div className="relative flex-1 group">
                       <select
                         name="selectedCategory"
-                        value={projectDetails.selectedCategory}
+                        value={aboutDetails.selectedCategory}
                         onChange={(e) =>
-                          setProjectDetails({
-                            ...projectDetails,
+                          setAboutDetails({
+                            ...aboutDetails,
                             selectedCategory: e.target.value,
                           })
                         }
@@ -471,14 +543,13 @@ function DashCreateAboutPage() {
                       type="date"
                       id="issueDate"
                       name="issueDate"
-                      value={projectDetails.issueDate}
+                      value={aboutDetails.issueDate}
                       onChange={(e) =>
-                        setProjectDetails({
-                          ...projectDetails,
+                        setAboutDetails({
+                          ...aboutDetails,
                           issueDate: e.target.value,
                         })
                       }
-                      required
                       className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                     />
                   </div>
@@ -542,7 +613,7 @@ function DashCreateAboutPage() {
             {/* //NOTE: Cetificates Input details ENDS */}
           </div>
 
-          {/* Create About Button */}
+          {/* //IDEA: Create About Button */}
           <motion.div
             initial="initial"
             whileInView="view"

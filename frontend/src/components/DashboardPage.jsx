@@ -5,7 +5,7 @@ import { IoRibbon } from "react-icons/io5";
 
 function DashboardPage() {
   return (
-    <div className="flex-1 min-h-screen px-5">
+    <div className="flex-1 min-h-screen px-1 sm:px-5">
       <div className="w-full max-w-[1200px] mx-auto py-10">
         {/* Cards */}
         <div className="flex flex-wrap items-center w-full gap-5">
