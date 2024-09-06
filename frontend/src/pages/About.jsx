@@ -68,7 +68,7 @@ function About({ isFixed }) {
   }, [skillId]);
 
   return (
-    <div className="relative w-full min-h-screen about-section">
+    <div className="min-h-screen -full about-section">
       {/* About Masker Section */}
       <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-5 border-b border-zinc-600">
         <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
@@ -86,7 +86,7 @@ function About({ isFixed }) {
                       viewport={{ margin: "-10px" }}
                       transition={{
                         ease: [0.34, 1.56, 0.64, 1],
-                        duration: 1,
+                        duration: 1.5,
                       }}
                       className="overflow-hidden"
                     >
@@ -111,7 +111,7 @@ function About({ isFixed }) {
       </div>
       {/* About Details Section */}
       <div className="w-full px-5 py-10">
-        <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col sm:flex-row justify-between gap-5">
+        <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col lg:flex-row justify-between gap-5">
           <h1 className="w-full">About me:</h1>
           <div className="flex flex-col w-full gap-3 tracking-tighter">
             <p>
@@ -130,7 +130,7 @@ function About({ isFixed }) {
               exceptional web application at a time.
             </p>
           </div>
-          <div className="flex justify-start w-full sm:justify-end">
+          <div className="flex justify-start w-full lg:justify-end">
             <button
               type="button"
               className="h-fit flex items-center text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
@@ -224,7 +224,7 @@ function About({ isFixed }) {
               ease: "easeInOut",
               duration: 0.8,
             }}
-            className="tech-box-main relative w-full sm:w-[80%] lg:w-[48%] h-[60vh] cursor-pointer rounded-xl transition-all duration-500 ease-in-out shadow-md shadow-[#CDEA68]"
+            className="tech-box-main relative w-full sm:w-[80%] lg:w-[48%] h-[40vh] lg:h-[60vh] cursor-pointer rounded-xl transition-all duration-500 ease-in-out shadow-md shadow-[#CDEA68]"
           >
             {techList.map((tech) => {
               return (

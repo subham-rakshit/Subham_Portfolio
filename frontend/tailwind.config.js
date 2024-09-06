@@ -13,10 +13,10 @@ export default {
         matemasie: ["Matemasie", "sans-serif"],
       },
       boxShadow: {
-        custom: "0px 0px 5px 1px #000",
+        custom: "0px 0px 5px 5px #cccccc",
         customInset: "inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff",
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite.plugin(), require("tailwind-scrollbar")],
 };

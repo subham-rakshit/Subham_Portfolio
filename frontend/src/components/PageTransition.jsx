@@ -49,12 +49,12 @@ function PageTransition({ children }) {
       tl.from(".page", {
         opacity: 0,
         y: "100%",
-        duration: 0.8,
+        duration: 0.3,
         ease: [0.16, 1, 0.3, 1],
       }).to(".page", {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: 0.3,
         ease: [0.16, 1, 0.3, 1],
       });
     });

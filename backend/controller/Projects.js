@@ -1,6 +1,7 @@
 import ProjectsCollection from "../models/Projects.js";
 
 export const projectsControllerObj = {
+  //IDEA: Create a NEW Project
   async createNewProject(req, res, next) {
     const { projectDetails } = req.body;
 
@@ -102,6 +103,68 @@ export const projectsControllerObj = {
       } catch (error) {
         return next(error);
       }
+    }
+  },
+
+  //IDEA: Get ALL Projects
+  async getAllProjects(req, res, next) {
+    try {
+      //INFO: Get all projects list with DESC order
+      const projectsList = await ProjectsCollection.find()
+        .sort({
+          createdAt: -1,
+        })
+        .limit(req.query.limit);
+
+      //INFO: Total count of projects
+      const totalProjectsCount = await ProjectsCollection.countDocuments();
+
+      //INFO: Calulate the last month from current date
+      const now = new Date();
+      const oneMonthAgo = new Date(
+        now.getFullYear(),
+        now.getMonth() - 1,
+        now.getDate()
+      );
+
+      //INFO: Count number of projects in last month
+      const lastMonthProjectsCount = await ProjectsCollection.countDocuments({
+        createdAt: { $gte: oneMonthAgo },
+      });
+
+      //INFO: RESPONSE
+      res.status(200).json({
+        success: true,
+        projectsList,
+        totalProjectsCount,
+        lastMonthProjectsCount,
+      });
+    } catch (error) {
+      return next(error);
+    }
+  },
+
+  //IDEA: Delete specific project
+  async deleteSpecificProject(req, res, next) {
+    console.log(req.params.projectId);
+
+    if (req.user.userId !== req.params.userId) {
+      const notAllowedErr = {
+        status: 406, //INFO: Not acceptable status
+        message: "User not valid administrator.",
+        extraDetails: "You are not allowed to delete the project!",
+      };
+      return next(notAllowedErr);
+    }
+
+    try {
+      await ProjectsCollection.findByIdAndDelete(req.params.projectId);
+      res.status(200).json({
+        success: true,
+        message: "Project has been removed successfully.",
+      });
+    } catch (error) {
+      next(error);
     }
   },
 };

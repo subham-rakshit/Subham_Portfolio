@@ -87,7 +87,7 @@ function EyesPlayComponent({
       }}
     >
       {/* LEFT Eye */}
-      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
+      <div className="relative w-32 h-32 rounded-full sm:w-44 sm:h-44 bg-zinc-200">
         {/* Black Eye */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
           {text && (
@@ -102,13 +102,13 @@ function EyesPlayComponent({
             }}
             className="left-eye absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
           >
-            <div className="w-4 h-full bg-zinc-200 rounded-full"></div>
+            <div className="w-4 h-full rounded-full bg-zinc-200"></div>
           </div>
         </div>
       </div>
 
       {/* RIGHT Eye */}
-      <div className="relative w-32 sm:w-44 h-32 sm:h-44 rounded-full bg-zinc-200">
+      <div className="relative w-32 h-32 rounded-full sm:w-44 sm:h-44 bg-zinc-200">
         {/* Black Eye Ball */}
         <div className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/5 h-3/5 bg-black rounded-full overflow-hidden">
           {text && (
@@ -123,7 +123,7 @@ function EyesPlayComponent({
             }}
             className="right-eye absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-full h-4"
           >
-            <div className="w-4 h-full bg-zinc-200 rounded-full"></div>
+            <div className="w-4 h-full rounded-full bg-zinc-200"></div>
           </div>
         </div>
       </div>

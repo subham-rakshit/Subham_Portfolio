@@ -159,9 +159,7 @@ function Header({ isFixed }) {
   }, [location, isFixed]);
 
   return (
-    <div
-      className={`navbar relative w-full px-1 sm:px-5 py-2 font-poppins text-zinc-800 transition-all duration-300 ease-in-out`}
-    >
+    <div className="relative w-full px-1 py-2 transition-all duration-300 ease-in-out navbar sm:px-5 font-poppins text-zinc-800 z-[9999]">
       <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="logo">
           <Link to="/">
@@ -376,7 +374,7 @@ function Header({ isFixed }) {
 
               <div className="relative flex-1 w-full group">
                 {!authKey && !focusedInput && (
-                  <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-200 group-hover:text-zinc-400 font-light py-1 pointer-events-none">
+                  <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-500 group-hover:text-zinc-400 font-light py-1 pointer-events-none">
                     Please provide the KEY *
                   </span>
                 )}
@@ -389,7 +387,7 @@ function Header({ isFixed }) {
                   onBlur={handleOnBlur}
                   onChange={handleInputChange}
                   autoComplete="off"
-                  className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-semibold text-zinc-200 text-xl px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                  className="border-t-0 border-r-0 border-l-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-semibold text-zinc-800 text-xl px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                 />
               </div>
               <div className="flex justify-center gap-4">
