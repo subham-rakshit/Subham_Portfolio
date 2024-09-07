@@ -17,8 +17,8 @@ function JourneySection({ queryClass }) {
           return (
             <div
               key={textId}
-              className="px-2 pb-2 mx-auto w-fit"
-              style={{ transform: "scaleY(1.2)" }}
+              className="px-2 pb-1 mx-auto sm:pb-2 w-fit"
+              style={{ transform: "scaleY(1.3)" }}
             >
               <h1
                 className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"

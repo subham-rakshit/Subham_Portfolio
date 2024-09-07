@@ -38,7 +38,7 @@ function FeaturedProjectsComponent({ project, i }) {
           }}
           src={project.thumbnailURL}
           alt={project.name}
-          className="w-full h-[56vw] sm:h-[30vw]"
+          className="w-full h-[56vw] sm:h-[27vw]"
         />
       </div>
       {/* //INFO: Project's Tech Stacks */}

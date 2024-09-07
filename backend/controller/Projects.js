@@ -110,7 +110,11 @@ export const projectsControllerObj = {
   async getAllProjects(req, res, next) {
     try {
       //INFO: Get all projects list with DESC order
-      const projectsList = await ProjectsCollection.find()
+      const projectsList = await ProjectsCollection.find({
+        ...(req.query.category && { category: req.query.category }),
+        ...(req.query.slug && { slug: req.query.slug }),
+        ...(req.query.projectId && { _id: req.query.projectId }),
+      })
         .sort({
           createdAt: -1,
         })

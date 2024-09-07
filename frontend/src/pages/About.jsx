@@ -70,13 +70,14 @@ function About({ isFixed }) {
   return (
     <div className="min-h-screen -full about-section">
       {/* About Masker Section */}
-      <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-5 border-b border-zinc-600">
+      <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-1 sm:px-5 border-b border-zinc-600">
         <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
           {["Driving Innovation", "with code"].map((item, index) => {
             return (
               <div
                 key={`${item.split(" ").join("_")}${index}`}
                 className="masker-inner-container w-full h-[45px] sm:h-[62px] flex items-center"
+                style={{ transform: "scaleY(1.1)" }}
               >
                 <div className="flex items-center">
                   {index === 1 && isFixed && (
@@ -93,12 +94,12 @@ function About({ isFixed }) {
                       <img
                         src="/about-photo.png"
                         alt="about image"
-                        className="w-[50px] sm:w-[92px] h-[35px] sm:h-[65px] bg-cover"
+                        className="w-[50px] sm:w-[92px] h-[30px] sm:h-[65px] bg-cover"
                       />
                     </motion.div>
                   )}
                   <h1
-                    className="font-poppins font-extrabold text-xl sm:text-5xl uppercase tracking-tighter leading-[0.75]"
+                    className="font-poppins font-extrabold text-xl sm:text-5xl uppercase tracking-none leading-[0.75]"
                     style={{ transform: "scaleY(1.5)" }}
                   >
                     {item}
@@ -110,7 +111,7 @@ function About({ isFixed }) {
         </div>
       </div>
       {/* About Details Section */}
-      <div className="w-full px-5 py-10">
+      <div className="w-full px-1 py-5 sm:py-10 sm:px-5">
         <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col lg:flex-row justify-between gap-5">
           <h1 className="w-full">About me:</h1>
           <div className="flex flex-col w-full gap-3 tracking-tighter">
@@ -161,16 +162,7 @@ function About({ isFixed }) {
       </motion.div>
 
       {/* Markee Section */}
-      <motion.div
-        initial={{ opacity: 0.5 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ amount: 0.5 }}
-        transition={{
-          ease: [0.34, 1.56, 0.64, 1],
-          duration: 1.2,
-        }}
-        className="markee-section relative w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden"
-      >
+      <div className="markee-section relative w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px] overflow-hidden">
         {/* Markee Animate Text */}
         <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
           <motion.h1
@@ -191,7 +183,7 @@ function About({ isFixed }) {
           </motion.h1>
         </div>
         {/* Technologies */}
-        <div className="w-full max-w-[1300px] mx-auto px-5 mt-10 sm:mt-20 flex flex-col lg:flex-row gap-5  sm:gap-16 justify-between items-center">
+        <div className="w-full max-w-[1300px] mx-auto px-1 sm:px-5 mt-10 sm:mt-20 flex flex-col lg:flex-row gap-5  sm:gap-16 justify-between items-center">
           {/* Tech Category Buttons */}
           <div className="w-full lg:w-[48%] flex flex-row flex-wrap gap-1 sm:gap-3 lg:gap-5">
             {skillsLists.map((item) => {
@@ -282,10 +274,10 @@ function About({ isFixed }) {
             })}
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Certificate Sections */}
-      <div className="w-full px-5 py-20 certificated-main-container">
+      <div className="w-full px-1 py-20 sm:px-5 certificated-main-container">
         <CertificateSection />
       </div>
 

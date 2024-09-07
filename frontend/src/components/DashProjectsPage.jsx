@@ -15,7 +15,7 @@ import {
   MdEditNote,
   MdOutlineInsertLink,
 } from "react-icons/md";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { HiOutlineExclamationCircle, HiExternalLink } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { SyncLoader } from "react-spinners";
@@ -111,7 +111,7 @@ function DashProjectsPage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-5 overflow-x-scroll table-auto scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-200">
+    <div className="flex-1 min-h-screen px-1 overflow-x-scroll table-auto sm:px-5 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-200">
       {fetchLoading ? (
         //INFO: Loading while fetch
         <div className="w-full max-w-[1200px] mx-auto flex items-center justify-center h-screen">
@@ -204,20 +204,29 @@ function DashProjectsPage() {
                       {formatedDate}
                     </TableCell>
                     <TableCell>
-                      <img
-                        src={project.thumbnailURL}
-                        alt={project.name}
-                        className="w-[73px] h-[45px]"
-                      />
+                      <Link to={`/project/${project.slug}`}>
+                        <img
+                          src={project.thumbnailURL}
+                          alt={project.name}
+                          className="w-[73px] h-[45px]"
+                        />
+                      </Link>
                     </TableCell>
-                    <TableCell>{project.name}</TableCell>
+                    <TableCell className="text-[#007bff]">
+                      <Link to={`/project/${project.slug}`}>
+                        <span className="flex items-center gap-1 hover:text-cyan-700">
+                          {project.name}
+                          <HiExternalLink />
+                        </span>
+                      </Link>
+                    </TableCell>
                     <TableCell className="text-xs">
                       {project.technologies.length === formatedTechStacks.length
                         ? formatedTechStacks.join(" ")
                         : `${formatedTechStacks.join(" ")} ...`}
                     </TableCell>
                     <TableCell className="text-xs">
-                      <Link to={`/project/${project.slug}`}>
+                      <Link to={project.projectLink} target="_blank">
                         <span className="flex items-center gap-1 text-cyan-500 hover:text-cyan-700">
                           Click
                           <MdOutlineInsertLink />

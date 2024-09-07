@@ -199,7 +199,7 @@ function Admin() {
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}
                     autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                    className="border-t-0 border-r-0 border-l-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                   />
                 </div>
               </motion.div>
@@ -230,7 +230,7 @@ function Admin() {
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}
                     autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                    className="border-t-0 border-r-0 border-l-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                   />
                 </div>
               </motion.div>
@@ -264,7 +264,7 @@ function Admin() {
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}
                     autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                    className="border-t-0 border-r-0 border-l-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                   />
                 </div>
               </motion.div>
@@ -298,7 +298,7 @@ function Admin() {
                     onBlur={handleOnBlur}
                     onChange={handleInputChange}
                     autoComplete="off"
-                    className="border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
+                    className="border-t-0 border-r-0 border-l-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full cursor-pointer"
                   />
                 </div>
                 <span style={{ transform: "scaleY(1.1)" }}>
@@ -367,7 +367,7 @@ function Admin() {
                     className="h-fit flex items-center text-sm font-normal font-poppins tracking-tight border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
                     disabled={loading}
                   >
-                    {loading ? "Processing" : "Login"}
+                    {loading ? "Processing" : "Admin Login"}
                     {!loading && (
                       <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
                         <MdArrowOutward
@@ -378,24 +378,6 @@ function Admin() {
                       </div>
                     )}
                   </button>
-                </motion.div>
-              </div>
-
-              {/* Google Btn */}
-              <div className="overflow-hidden">
-                <motion.div
-                  variants={{
-                    initial: { y: "100%" },
-                    buttonView: { y: 0 },
-                  }}
-                  viewport={{ margin: "-100px" }}
-                  transition={{
-                    duration: 0.8,
-                    delay: 0.3,
-                    ease: [0.76, 0, 0.24, 1],
-                  }}
-                >
-                  <OAuth />
                 </motion.div>
               </div>
             </motion.div>

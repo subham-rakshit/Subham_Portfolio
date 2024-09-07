@@ -11,7 +11,6 @@ import {
 } from "./components";
 import { About, Admin, Contact, Dashboard, Home, Projects } from "./pages";
 import Lenis from "lenis";
-
 import Headroom from "react-headroom";
 import { gsap, CSSPlugin, Expo } from "gsap";
 gsap.registerPlugin(CSSPlugin);
@@ -22,13 +21,17 @@ function App() {
 
   useEffect(() => {
     const lenis = new Lenis();
-
+    // Create a requestAnimationFrame loop for Lenis
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
-  }, [isFixed]);
+    // Cleanup Lenis on unmount
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const count = setInterval(() => {

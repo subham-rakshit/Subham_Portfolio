@@ -25,16 +25,10 @@ function CertificateSection() {
   };
   return (
     <div className="w-full max-w-[1400px] mx-auto">
-      <div className="overflow-hidden mb-10">
-        <motion.h1
-          initial={{ y: "100%" }}
-          whileInView={{ y: 0 }}
-          viewport={{ margin: "-50px" }}
-          transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
-          className="text-xl sm:text-3xl font-poppins tracking-tighter"
-        >
+      <div className="mb-5 overflow-hidden">
+        <h1 className="text-xl tracking-tighter sm:text-3xl font-poppins">
           Featured Certificates
-        </motion.h1>
+        </h1>
       </div>
       {/* Certificates Main Container */}
       <div className="flex items-center justify-between gap-5">
@@ -46,7 +40,7 @@ function CertificateSection() {
             transition={{ duration: 1.5, ease: [0.34, 1.56, 0.64, 1] }}
             src="/jitu5.jpg"
             alt="subham"
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
         <div className="realtive overflow-hidden rounded-xl w-full sm:w-[55%] bg-transparent">
@@ -68,7 +62,7 @@ function CertificateSection() {
             {certificateList.map((certi, index) => (
               <div
                 key={certi.id}
-                className="realtive w-full shrink-0 rounded-xl overflow-hidden group"
+                className="w-full overflow-hidden realtive shrink-0 rounded-xl group"
               >
                 <img
                   src={certi.image}
@@ -80,7 +74,7 @@ function CertificateSection() {
           </motion.div>
 
           {/* Changing Buttons */}
-          <div className="mt-4 flex w-full justify-center gap-2">
+          <div className="flex justify-center w-full gap-2 mt-4">
             {certificateList.map((_, index) => {
               return (
                 <button

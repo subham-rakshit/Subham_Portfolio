@@ -327,19 +327,23 @@ function Contact({ isFixed }) {
       </div>
 
       {/* Social Links */}
-      <div className="relative w-full py-20 sm:py-0 sm:min-h-screen flex flex-col justify-center items-center gap-5 sm:gap-8 px-5 text-zinc-900 bg-[#CDEA68]">
-        <EyesPlayComponent queryClass="contact-page-section" />
+      <div className="w-full h-fit py-5 flex flex-col justify-center items-center px-1 sm:px-5 text-zinc-900 bg-[#CDEA68]">
+        <div className="relative w-full h-[30vh]">
+          <EyesPlayComponent queryClass="contact-page-section" scale={0.8} />
+        </div>
 
-        <FlipWords href="https://www.linkedin.com/in/subhamjitu97/">
-          Linkedin
-        </FlipWords>
-        <FlipWords href="https://github.com/subham-rakshit">GitHub</FlipWords>
-        <FlipWords href="https://www.facebook.com/subham.rakshit.142">
-          Facebook
-        </FlipWords>
-        <FlipWords href="https://www.instagram.com/subham_rakshit_1/">
-          Instagram
-        </FlipWords>
+        <div className="flex flex-col items-center w-full gap-5 py-5">
+          <FlipWords href="https://www.linkedin.com/in/subhamjitu97/">
+            Linkedin
+          </FlipWords>
+          <FlipWords href="https://github.com/subham-rakshit">GitHub</FlipWords>
+          <FlipWords href="https://www.facebook.com/subham.rakshit.142">
+            Facebook
+          </FlipWords>
+          <FlipWords href="https://www.instagram.com/subham_rakshit_1/">
+            Instagram
+          </FlipWords>
+        </div>
       </div>
     </div>
   );
