@@ -11,6 +11,7 @@ import {
   Button,
 } from "flowbite-react";
 import {
+  MdArrowOutward,
   MdDeleteForever,
   MdEditNote,
   MdOutlineInsertLink,
@@ -19,6 +20,7 @@ import { HiOutlineExclamationCircle, HiExternalLink } from "react-icons/hi";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { SyncLoader } from "react-spinners";
+import EyesPlayComponent from "./EyesPlayComponent";
 import { Link } from "react-router-dom";
 
 function DashProjectsPage() {
@@ -28,7 +30,7 @@ function DashProjectsPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [fetchLoading, setFetchLoading] = useState(false);
-  // <SyncLoader color="#9eff00" />;
+  const [fetchError, setFetchError] = useState(false);
 
   //INFO: Fetch all project details
   useEffect(() => {
@@ -46,9 +48,14 @@ function DashProjectsPage() {
           setProjectsList(data.projectsList);
           setTotalProjects(data.totalProjectsCount);
           setFetchLoading(false);
+          setFetchError(false);
+        } else {
+          setFetchLoading(false);
+          setFetchError(true);
         }
       } catch (error) {
         setFetchLoading(false);
+        setFetchError(true);
         console.log(
           `Error from fetching all projects in DashProjectsPage: ${error}`
         );
@@ -117,6 +124,56 @@ function DashProjectsPage() {
         <div className="w-full max-w-[1200px] mx-auto flex items-center justify-center h-screen">
           <SyncLoader color="#18181B" size={10} />
         </div>
+      ) : projectsList.length === 0 || fetchError ? (
+        //INFO: Fetch Error display
+        <div className="relative flex flex-col items-center justify-center w-full px-5 py-5 overflow-hidden error-page sm:py-10">
+          <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 lg:gap-3">
+            {/* Eye Play */}
+            <div className="relative w-full h-[200px]">
+              <EyesPlayComponent queryClass="error-page" scale={0.7} />
+            </div>
+            {["OOPS!", "Projects Not", "Added Yet"].map((text, index) => {
+              const textId = `${text
+                .toLowerCase()
+                .split(" ")
+                .join("_")}${index}`;
+
+              return (
+                <div
+                  key={textId}
+                  className="px-2 pb-1 mx-auto sm:pb-2 w-fit"
+                  style={{ transform: "scaleY(1.3)" }}
+                >
+                  <h1
+                    className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"
+                    style={{ lineHeight: 0.8 }}
+                  >
+                    {text}
+                  </h1>
+                </div>
+              );
+            })}
+
+            {/* Create Skills Btn */}
+            <div className="flex justify-center mt-10 overflow-hidden">
+              <Link to="/dashboard?tab=create-project">
+                <button
+                  type="button"
+                  className="flex items-center font-poppins text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-800 hover:text-white gap-4 group transition-all duration-300 group"
+                >
+                  CREATE HERE
+                  <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
+                    <MdArrowOutward
+                      size="20"
+                      color="#000"
+                      className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
+                    />
+                  </div>
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
       ) : (
         //INFO: Main Content
         <div className="w-full max-w-[1200px] mx-auto overflow-x-auto">
@@ -126,6 +183,30 @@ function DashProjectsPage() {
             whileInView="view"
             className="w-full h-[30vh] flex items-center gap-1"
           >
+            <div
+              className="overflow-hidden"
+              style={{ transform: "scaleY(1.5)" }}
+            >
+              {"Total".split("").map((l, i) => (
+                <motion.span
+                  variants={{
+                    initial: { y: "100%" },
+                    view: { y: 0 },
+                  }}
+                  transition={{
+                    duration: 1.3,
+                    ease: [0.68, -0.6, 0.32, 1.6],
+                    delay: 0.035 * i,
+                  }}
+                  key={i}
+                  className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
+                    l === "C" ? "ml-3" : ""
+                  }`}
+                >
+                  {l}
+                </motion.span>
+              ))}
+            </div>
             <motion.div
               variants={{
                 initial: { width: 0 },
@@ -133,6 +214,7 @@ function DashProjectsPage() {
               }}
               transition={{
                 duration: 1.5,
+                delay: 0.3,
                 ease: [0.68, -0.6, 0.32, 1.6],
               }}
               className="overflow-hidden rounded-[8px]"
@@ -162,7 +244,7 @@ function DashProjectsPage() {
                     transition={{
                       duration: 1.3,
                       ease: [0.68, -0.6, 0.32, 1.6],
-                      delay: 0.035 * i,
+                      delay: 0.04 * i,
                     }}
                     key={i}
                     className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${

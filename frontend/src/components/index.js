@@ -19,6 +19,7 @@ import DashCertificatesPage from "./DashCertificatesPage";
 import DashCreateProjectsPage from "./DashCreateProjectsPage";
 import DashCreateAboutPage from "./DashCreateAboutPage";
 import ProjectItemDetails from "./ProjectItemDetails";
+import SwiperTechStacks from "./SwiperTechStacks";
 
 export {
   Header,
@@ -42,4 +43,5 @@ export {
   DashCreateProjectsPage,
   DashCreateAboutPage,
   ProjectItemDetails,
+  SwiperTechStacks,
 };

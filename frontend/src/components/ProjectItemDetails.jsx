@@ -203,8 +203,77 @@ function ProjectItemDetails() {
             </div>
           </div>
         </div>
+        {/* //INFO: Drift Image Section */}
+        <div className="relative w-full min-h-screen px-1 py-5 overflow-hidden sm:py-10 place-content-center bg-neutral-950 sm:px-5 rounded-tr-2xl rounded-tl-2xl">
+          <div className="relative w-full max-w-[1400px] h-screen mx-auto flex items-center justify-center">
+            <h2 className="relative z-0 text-[20vw] font-black text-neutral-800 md:text-[200px]">
+              DRIFT<span className="text-indigo-500">.</span>
+            </h2>
+
+            <Cards
+              thumbnailImage={
+                projectItemDetails.thumbnailURL &&
+                projectItemDetails.thumbnailURL
+              }
+              largeScreenViewImage={
+                projectItemDetails.largeScreenViewURL &&
+                projectItemDetails.largeScreenViewURL
+              }
+              mediumScreenViewImage={
+                projectItemDetails.mediumScreenViewURL &&
+                projectItemDetails.mediumScreenViewURL
+              }
+              smallScreenViewImage={
+                projectItemDetails.smallScreenViewURL &&
+                projectItemDetails.smallScreenViewURL
+              }
+            />
+          </div>
+          <div className="flex flex-col justify-center w-full gap-5 py-5 sm:py-10 sm:gap-10 sm:flex-row">
+            <Link
+              to={
+                projectItemDetails.projectLink && projectItemDetails.projectLink
+              }
+              target="_blank"
+            >
+              <button
+                type="button"
+                className="flex justify-center sm:justify-start items-center gap-4 px-5 py-2 text-sm font-semibold tracking-tighter text-white transition-all duration-100 ease-in-out bg-transparent border hover:border-[2px] rounded-full font-poppins border-zinc-100 hover:border-[#cdea68] hover:bg-zinc-950 group w-full sm:w-fit"
+              >
+                PROJECT LINK
+                <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 bg-white rounded-full group-hover:w-5 group-hover:h-5">
+                  <MdArrowOutward
+                    size="20"
+                    color="#000"
+                    className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
+                  />
+                </div>
+              </button>
+            </Link>
+            <Link
+              to={
+                projectItemDetails.gitHubLink && projectItemDetails.gitHubLink
+              }
+              target="_blank"
+            >
+              <button
+                type="button"
+                className="flex justify-center sm:justify-start items-center gap-4 px-5 py-2 text-sm font-semibold tracking-tighter text-white transition-all duration-100 ease-in-out bg-transparent border hover:border-[2px] rounded-full font-poppins border-zinc-100 hover:border-[#cdea68] hover:bg-zinc-950 group w-full sm:w-fit"
+              >
+                GITHUB LINK
+                <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 bg-white rounded-full group-hover:w-5 group-hover:h-5">
+                  <MdArrowOutward
+                    size="20"
+                    color="#000"
+                    className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
+                  />
+                </div>
+              </button>
+            </Link>
+          </div>
+        </div>
         {/* //INFO: Project Description */}
-        <div className="w-full bg-[#CDEA68] px-1 sm:px-5 rounded-tr-2xl rounded-tl-2xl">
+        <div className="w-full px-1 bg-transparent sm:px-5">
           <div className="w-full max-w-[1400px] mx-auto py-10">
             {/* Description Heading  */}
             <motion.div
@@ -212,7 +281,7 @@ function ProjectItemDetails() {
               whileInView="view"
               className="flex items-center mb-5 overflow-hidden"
             >
-              <span className="font-semibold tracking-tighter font-poppins">
+              <span className="text-2xl font-bold tracking-tighter font-poppins">
                 Description :
               </span>
               {/* EyePlay */}
@@ -259,75 +328,6 @@ function ProjectItemDetails() {
                   </span>
                 ))}
             </div>
-          </div>
-        </div>
-        {/* //INFO: Drift Image Section */}
-        <div className="relative w-full min-h-screen px-1 py-10 overflow-hidden place-content-center bg-neutral-950 sm:px-5">
-          <div className="relative w-full max-w-[1400px] h-screen mx-auto flex items-center justify-center">
-            <h2 className="relative z-0 text-[20vw] font-black text-neutral-800 md:text-[200px]">
-              DRIFT<span className="text-indigo-500">.</span>
-            </h2>
-
-            <Cards
-              thumbnailImage={
-                projectItemDetails.thumbnailURL &&
-                projectItemDetails.thumbnailURL
-              }
-              largeScreenViewImage={
-                projectItemDetails.largeScreenViewURL &&
-                projectItemDetails.largeScreenViewURL
-              }
-              mediumScreenViewImage={
-                projectItemDetails.mediumScreenViewURL &&
-                projectItemDetails.mediumScreenViewURL
-              }
-              smallScreenViewImage={
-                projectItemDetails.smallScreenViewURL &&
-                projectItemDetails.smallScreenViewURL
-              }
-            />
-          </div>
-          <div className="flex flex-col justify-center w-full gap-5 py-10 sm:gap-10 sm:flex-row">
-            <Link
-              to={
-                projectItemDetails.projectLink && projectItemDetails.projectLink
-              }
-              target="_blank"
-            >
-              <button
-                type="button"
-                className="flex justify-center sm:justify-start items-center gap-4 px-5 py-2 text-sm font-semibold tracking-tighter text-white transition-all duration-100 ease-in-out bg-transparent border hover:border-[2px] rounded-full font-poppins border-zinc-100 hover:border-[#cdea68] hover:bg-zinc-950 group w-full sm:w-fit"
-              >
-                PROJECT LINK
-                <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 bg-white rounded-full group-hover:w-5 group-hover:h-5">
-                  <MdArrowOutward
-                    size="20"
-                    color="#000"
-                    className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
-                  />
-                </div>
-              </button>
-            </Link>
-            <Link
-              to={
-                projectItemDetails.gitHubLink && projectItemDetails.gitHubLink
-              }
-              target="_blank"
-            >
-              <button
-                type="button"
-                className="flex justify-center sm:justify-start items-center gap-4 px-5 py-2 text-sm font-semibold tracking-tighter text-white transition-all duration-100 ease-in-out bg-transparent border hover:border-[2px] rounded-full font-poppins border-zinc-100 hover:border-[#cdea68] hover:bg-zinc-950 group w-full sm:w-fit"
-              >
-                GITHUB LINK
-                <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 bg-white rounded-full group-hover:w-5 group-hover:h-5">
-                  <MdArrowOutward
-                    size="20"
-                    color="#000"
-                    className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
-                  />
-                </div>
-              </button>
-            </Link>
           </div>
         </div>
         {/* //INFO: Ready To Start The Journey Section */}

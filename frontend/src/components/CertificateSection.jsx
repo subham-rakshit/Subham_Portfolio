@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion, useMotionValue } from "framer-motion";
-import { certificateList } from "../data/data";
 
-function CertificateSection() {
+function CertificateSection({ certificatesStack }) {
   const [imageIndex, setImageIndex] = useState(0);
   const [dragging, setDragging] = useState(false);
 
@@ -17,7 +16,7 @@ function CertificateSection() {
     const x = dragX.get(); // Storing motion value (How much drag movement after dragging ends)
 
     // If motion value is greater than or equal to +50px (for left drag) and -50px (for right drag) then we simply increase or decrease the imageIndex according to it.
-    if (x <= -50 && imageIndex < certificateList.length - 1) {
+    if (x <= -50 && imageIndex < certificatesStack.length - 1) {
       setImageIndex((prev) => prev + 1);
     } else if (x >= 50 && imageIndex > 0) {
       setImageIndex((prev) => prev - 1);
@@ -59,34 +58,36 @@ function CertificateSection() {
             onDragEnd={onDragEnd}
             className="flex items-center cursor-grab active:cursor-grabbing"
           >
-            {certificateList.map((certi, index) => (
-              <div
-                key={certi.id}
-                className="w-full overflow-hidden realtive shrink-0 rounded-xl group"
-              >
-                <img
-                  src={certi.image}
-                  alt={`${certi.date}${index}`}
-                  className="object-cover pointer-events-none"
-                />
-              </div>
-            ))}
+            {certificatesStack &&
+              certificatesStack.map((certificate, index) => (
+                <div
+                  key={certificate._id}
+                  className="w-full overflow-hidden realtive shrink-0 rounded-xl group"
+                >
+                  <img
+                    src={certificate.certificateImageURL}
+                    alt={`${certificate.issueDate}-${index}`}
+                    className="object-cover pointer-events-none"
+                  />
+                </div>
+              ))}
           </motion.div>
 
           {/* Changing Buttons */}
           <div className="flex justify-center w-full gap-2 mt-4">
-            {certificateList.map((_, index) => {
-              return (
-                <button
-                  type="button"
-                  key={index}
-                  className={`h-3 w-3 rounded-full transition-colors ${
-                    index === imageIndex ? "bg-[#8C5622]" : "bg-[#F4D075]"
-                  } duration-300 ease-in-out`}
-                  onClick={() => setImageIndex(index)}
-                ></button>
-              );
-            })}
+            {certificatesStack &&
+              certificatesStack.map((_, index) => {
+                return (
+                  <button
+                    type="button"
+                    key={index}
+                    className={`h-3 w-3 rounded-full transition-colors ${
+                      index === imageIndex ? "bg-[#8C5622]" : "bg-[#F4D075]"
+                    } duration-300 ease-in-out`}
+                    onClick={() => setImageIndex(index)}
+                  ></button>
+                );
+              })}
           </div>
         </div>
       </div>

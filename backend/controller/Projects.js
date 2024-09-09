@@ -120,6 +120,15 @@ export const projectsControllerObj = {
         })
         .limit(req.query.limit);
 
+      if (projectsList.length === 0) {
+        const noProjectError = {
+          status: 404,
+          message: "Projects are not found",
+          extraDetails: "Projects not found!",
+        };
+        return next(noProjectError);
+      }
+
       //INFO: Total count of projects
       const totalProjectsCount = await ProjectsCollection.countDocuments();
 
@@ -150,8 +159,6 @@ export const projectsControllerObj = {
 
   //IDEA: Delete specific project
   async deleteSpecificProject(req, res, next) {
-    console.log(req.params.projectId);
-
     if (req.user.userId !== req.params.userId) {
       const notAllowedErr = {
         status: 406, //INFO: Not acceptable status

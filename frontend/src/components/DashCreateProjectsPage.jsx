@@ -332,7 +332,7 @@ function DashCreateProjectsPage() {
           </motion.div>
 
           {/* Create Form */}
-          <div className="flex flex-col gap-4 my-5 lg:gap-8">
+          <div className="flex flex-col gap-4 my-5 lg:gap-5">
             {/* Project Name */}
             <div className="font-poppins tracking-tight text-[25px] sm:text-[35px] text-zinc-800 font-medium overflow-hidden">
               <motion.div
