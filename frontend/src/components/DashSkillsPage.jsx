@@ -304,7 +304,7 @@ function DashSkillsPage() {
                     </TableCell>
                     <TableCell>
                       <Link
-                        to={`/dashboard/aboutUpdate?skillID=${skill._id}`}
+                        to={`/dashboard/aboutUpdate?skillId=${skill._id}`}
                         className="font-medium text-cyan-600 hover:underline"
                       >
                         <MdEditNote size="30" />

@@ -349,4 +349,120 @@ export const aboutControllerObj = {
       next(error);
     }
   },
+
+  //NOTE: Update about details
+  async updateAbout(req, res, next) {
+    if (req.user.userId !== req.params.userId) {
+      const notAllowedErr = {
+        status: 406, //INFO: Not acceptable status
+        message: "User not valid administrator.",
+        extraDetails: "You are not allowed to update the about details!",
+      };
+      return next(notAllowedErr);
+    }
+
+    const skillId = req.query.skillId || "";
+    const certificateId = req.query.certificateId || "";
+    const { aboutDetails } = req.body;
+    const {
+      aboutMe,
+      techName,
+      selectedCategory,
+      techImageURL,
+      issueDate,
+      certificateImageURL,
+    } = aboutDetails;
+
+    //INFO: Validate required fields
+    if (
+      !aboutMe &&
+      !techName &&
+      !techImageURL &&
+      !issueDate &&
+      !certificateImageURL
+    ) {
+      const inputValueErr = {
+        status: 404,
+        message: "Input value missing!",
+        extraDetails: "Please fill the field properly.",
+      };
+
+      return next(inputValueErr);
+    }
+
+    // INFO: Update functionality
+    try {
+      const aboutDetails = await AboutCollection.findOne();
+
+      if (!aboutDetails) {
+        const aboutError = {
+          status: 404,
+          message: "About havn't created yet!",
+          extraDetails: "About details not found!",
+        };
+        return next(aboutError);
+      }
+
+      if (skillId) {
+        const skillIndex = aboutDetails.skillsArray.findIndex(
+          (skill) => skill._id.toString() === skillId
+        );
+
+        const updatedSkillData = {
+          techName: techName,
+          category: selectedCategory,
+          techImageURL: techImageURL,
+        };
+
+        if (skillIndex === -1) {
+          const skillError = {
+            status: 404,
+            message: "Skill haven't created yet!",
+            extraDetails: "Skill not found!",
+          };
+          return next(skillError);
+        }
+
+        //INFO: Update the skill data
+        aboutDetails.skillsArray[skillIndex] = {
+          ...aboutDetails.skillsArray[skillIndex],
+          ...updatedSkillData,
+        };
+        aboutDetails.aboutMe = aboutMe;
+      } else if (certificateId) {
+        const certificateIndex = aboutDetails.certificatesArray.findIndex(
+          (certificate) => certificate._id.toString() === certificateId
+        );
+
+        const updatedCertificateData = {
+          issueDate: issueDate,
+          certificateImageURL: certificateImageURL,
+        };
+
+        if (certificateIndex === -1) {
+          const certificateError = {
+            status: 404,
+            message: "Certificate haven't created yet!",
+            extraDetails: "Certificate not found!",
+          };
+          return next(certificateError);
+        }
+
+        //INFO: Update the Certificate data
+        aboutDetails.certificatesArray[certificateIndex] = {
+          ...aboutDetails.certificatesArray[certificateIndex],
+          ...updatedCertificateData,
+        };
+        aboutDetails.aboutMe = aboutMe;
+      }
+
+      // Save the updated document
+      await aboutDetails.save();
+      return res
+        .status(200)
+        .json({ message: "Update successful", aboutDetails });
+    } catch (error) {
+      return next(error);
+    }
+  },
 };

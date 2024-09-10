@@ -173,7 +173,10 @@ function DashboardProjectUpdate() {
         );
       }
     };
-    getProjectInfo();
+
+    if (userInfo) {
+      getProjectInfo();
+    }
   }, []);
 
   //INFO: Push Image file into Firebase storage and generate an image link
@@ -339,7 +342,7 @@ function DashboardProjectUpdate() {
                   style={{ transform: "scaleY(1.3)" }}
                 >
                   <h1
-                    className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"
+                    className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-7xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"
                     style={{ lineHeight: 0.8 }}
                   >
                     {text}
@@ -350,12 +353,12 @@ function DashboardProjectUpdate() {
 
             {/* Create Skills Btn */}
             <div className="flex justify-center mt-10 overflow-hidden">
-              <Link to="/dashboard?tab=create-projects">
+              <Link to="/dashboard?tab=dashboard">
                 <button
                   type="button"
                   className="flex items-center font-poppins text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-800 hover:text-white gap-4 group transition-all duration-300 group"
                 >
-                  CREATE HERE
+                  Dashboard
                   <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
                     <MdArrowOutward
                       size="20"

@@ -267,7 +267,7 @@ function DashCertificatesPage() {
                     </TableCell>
                     <TableCell>
                       <Link
-                        to={`/dashboard/aboutUpdate?certificateID=${certificate._id}`}
+                        to={`/dashboard/aboutUpdate?certificateId=${certificate._id}`}
                         className="font-medium text-cyan-600 hover:underline"
                       >
                         <MdEditNote size="30" />

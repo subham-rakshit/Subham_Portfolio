@@ -10,7 +10,7 @@ aboutRouter
   .post(verifyToken, aboutControllerObj.createAboutDetails);
 
 //NOTE: Get About Details
-  aboutRouter.route("/about").get(aboutControllerObj.getAboutDetails)
+aboutRouter.route("/about").get(aboutControllerObj.getAboutDetails);
 
 //NOTE: Get Skills details
 aboutRouter.route("/about/skills").get(aboutControllerObj.getSkillsDetails);
@@ -29,3 +29,8 @@ aboutRouter
 aboutRouter
   .route("/deleteCertificate/:certificateId/:userId")
   .delete(verifyToken, aboutControllerObj.deleteSpecificCertificate);
+
+//NOTE: Update about details
+aboutRouter
+  .route("/updateAbout/:userId")
+  .put(verifyToken, aboutControllerObj.updateAbout);
