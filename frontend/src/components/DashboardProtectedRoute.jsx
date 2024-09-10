@@ -4,7 +4,8 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function DashboardProtectedRoute() {
   const { userInfo } = useSelector((state) => state.user);
-  return <>{userInfo ? <Outlet /> : <Navigate to="/admin" />}</>;
+  const { isAuthenticated } = useSelector((state) => state.adminKey);
+  return <>{userInfo && isAuthenticated ? <Outlet /> : <Navigate to="/" />}</>;
 }
 
 export default DashboardProtectedRoute;

@@ -156,7 +156,7 @@ function DashProjectsPage() {
 
             {/* Create Skills Btn */}
             <div className="flex justify-center mt-10 overflow-hidden">
-              <Link to="/dashboard?tab=create-project">
+              <Link to="/dashboard?tab=create-projects">
                 <button
                   type="button"
                   className="flex items-center font-poppins text-sm font-semibold border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-800 hover:text-white gap-4 group transition-all duration-300 group"
@@ -316,12 +316,12 @@ function DashProjectsPage() {
                       </Link>
                     </TableCell>
                     <TableCell>
-                      <a
-                        href="#"
+                      <Link
+                        to={`/dashboard/projectUpdate/${project.slug}/${project._id}`}
                         className="font-medium text-cyan-600 hover:underline"
                       >
                         <MdEditNote size="30" />
-                      </a>
+                      </Link>
                     </TableCell>
                     <TableCell>
                       <MdDeleteForever

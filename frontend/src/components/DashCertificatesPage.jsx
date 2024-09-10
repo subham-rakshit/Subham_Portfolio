@@ -266,12 +266,12 @@ function DashCertificatesPage() {
                       />
                     </TableCell>
                     <TableCell>
-                      <a
-                        href="#"
+                      <Link
+                        to={`/dashboard/aboutUpdate?certificateID=${certificate._id}`}
                         className="font-medium text-cyan-600 hover:underline"
                       >
                         <MdEditNote size="30" />
-                      </a>
+                      </Link>
                     </TableCell>
                     <TableCell>
                       <MdDeleteForever

@@ -124,7 +124,7 @@ function Home({ isFixed }) {
                           </motion.div>
                         )}
                         <h1
-                          className={`mb-[1vw] uppercase text-[45px] sm:text-[88px] leading-[.75] tracking-tighter`}
+                          className={`mb-[1vw] uppercase text-[45px] sm:text-[80px] leading-[.75] tracking-tighter`}
                         >
                           {item}
                         </h1>
@@ -133,7 +133,7 @@ function Home({ isFixed }) {
                   );
                 })}
                 {/* Masker Info Animated Section */}
-                <div className="mt-2 sm:mt-3 masker">
+                <div className="masker">
                   <motion.div
                     initial={{ y: "100%" }}
                     whileInView={{ y: 0 }}
@@ -142,7 +142,7 @@ function Home({ isFixed }) {
                       ease: [0.34, 1.56, 0.64, 1],
                       duration: 1.5,
                     }}
-                    className="flex items-end gap-2 overflow-hidden w-fit"
+                    className="flex items-end gap-2 py-2 overflow-hidden w-fit"
                   >
                     <span className="mb-[1vw] capitalize text-[25px] sm:text-[40px] leading-[.75] tracking-tighter font-bold">
                       <Typewriter

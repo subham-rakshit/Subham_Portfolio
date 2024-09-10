@@ -9,7 +9,16 @@ import {
   ProjectItemDetails,
   ScrollToTop,
 } from "./components";
-import { About, Admin, Contact, Dashboard, Home, Projects } from "./pages";
+import {
+  About,
+  Admin,
+  Contact,
+  Dashboard,
+  DashboardAboutUpdate,
+  DashboardProjectUpdate,
+  Home,
+  Projects,
+} from "./pages";
 import Lenis from "lenis";
 import Headroom from "react-headroom";
 import { gsap, CSSPlugin, Expo } from "gsap";
@@ -126,6 +135,14 @@ function App() {
                 </Route>
                 <Route element={<DashboardProtectedRoute />}>
                   <Route path="/dashboard" element={<Dashboard />} />
+                  <Route
+                    path="/dashboard/projectUpdate/:slug/:projectId"
+                    element={<DashboardProjectUpdate />}
+                  />
+                  <Route
+                    path="/dashboard/aboutUpdate"
+                    element={<DashboardAboutUpdate />}
+                  />
                 </Route>
               </Routes>
             </PageTransition>

@@ -85,7 +85,7 @@ export const projectsControllerObj = {
         projectDescription: projectDescription.trim(),
         projectLink,
         gitHubLink,
-        thumbnailURL: thumbnailURL.trim(),
+        thumbnailURL,
         largeScreenViewURL,
         mediumScreenViewURL,
         smallScreenViewURL,
@@ -176,6 +176,99 @@ export const projectsControllerObj = {
       });
     } catch (error) {
       next(error);
+    }
+  },
+
+  //IDEA: Update specific project
+  async updateSpecificProject(req, res, next) {
+    const { projectDetails } = req.body;
+
+    const {
+      name,
+      technologies,
+      projectDescription,
+      projectLink,
+      gitHubLink,
+      thumbnailURL,
+      largeScreenViewURL,
+      mediumScreenViewURL,
+      smallScreenViewURL,
+    } = projectDetails;
+
+    //INFO: Check given userId is valid admin or not
+    if (req.user.userId !== req.params.userId) {
+      const notAllowedErr = {
+        status: 406, //INFO: Not acceptable status
+        message: "User not valid administrator.",
+        extraDetails: "You are not allowed to update this project!",
+      };
+      return next(notAllowedErr);
+    }
+
+    //INFO: Check projectId is provided or not
+    if (!req.params.projectId) {
+      const notFoundErr = {
+        status: 404,
+        message: "Project ID missing!",
+        extraDetails: "Invalid details. ID not found!",
+      };
+      return next(notFoundErr);
+    }
+
+    //INFO: Check all filed's value is present or not
+    if (
+      !name ||
+      technologies.length === 0 ||
+      !projectDescription ||
+      !projectLink ||
+      !gitHubLink ||
+      !thumbnailURL ||
+      !largeScreenViewURL ||
+      !mediumScreenViewURL ||
+      !smallScreenViewURL
+    ) {
+      const valueError = {
+        status: 404,
+        message: "Input value missing!",
+        extraDetails: "Please fill the field properly.",
+      };
+      return next(valueError);
+    }
+
+    //INFO: Create a slug for the project navigation URL purposes
+    const slug = name
+      .replace(/[^a-zA-Z0-9 ]/g, "")
+      .trim()
+      .split(" ")
+      .join("-")
+      .toLowerCase();
+
+    try {
+      const updatedProjectsInfo = await ProjectsCollection.findByIdAndUpdate(
+        req.params.projectId,
+        {
+          $set: {
+            name: name.trim(),
+            technologies,
+            projectDescription: projectDescription.trim(),
+            projectLink,
+            gitHubLink,
+            thumbnailURL,
+            largeScreenViewURL,
+            mediumScreenViewURL,
+            smallScreenViewURL,
+            slug,
+          },
+        },
+        { new: true }
+      );
+
+      res.status(200).json({
+        message: "You have successfully updated the project.",
+        updatedProjectsInfo,
+      });
+    } catch (error) {
+      return next(error);
     }
   },
 };

@@ -303,12 +303,12 @@ function DashSkillsPage() {
                       {skill.techName}
                     </TableCell>
                     <TableCell>
-                      <a
-                        href="#"
+                      <Link
+                        to={`/dashboard/aboutUpdate?skillID=${skill._id}`}
                         className="font-medium text-cyan-600 hover:underline"
                       >
                         <MdEditNote size="30" />
-                      </a>
+                      </Link>
                     </TableCell>
                     <TableCell>
                       <MdDeleteForever

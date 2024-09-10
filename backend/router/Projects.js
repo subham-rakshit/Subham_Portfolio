@@ -16,3 +16,8 @@ projectRouter.route("/projects/get").get(projectsControllerObj.getAllProjects);
 projectRouter
   .route("/deleteProject/:projectId/:userId")
   .delete(verifyToken, projectsControllerObj.deleteSpecificProject);
+
+//NOTE: Update specific project details
+projectRouter
+  .route("/updateProject/:userId/:projectId")
+  .put(verifyToken, projectsControllerObj.updateSpecificProject);

@@ -32,7 +32,7 @@ const Card = ({ cards, setCards, _id, techImageURL, techName, index }) => {
   };
   return (
     <motion.div
-      className="w-full max-w-[400px] border border-black rounded-xl overflow-hidden bg-white cursor-grab active:cursor-grabbing origin-bottom"
+      className="w-full max-w-[400px] border-[2px] border-black rounded-xl overflow-hidden bg-white cursor-grab active:cursor-grabbing origin-bottom"
       style={{
         gridRow: 1,
         gridColumn: 1,

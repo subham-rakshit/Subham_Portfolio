@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { FaGripLines } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
@@ -8,6 +8,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Button, Modal } from "flowbite-react";
 import { toast } from "react-toastify";
 import { PuffLoader } from "react-spinners";
+import { FiAlertCircle } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -31,6 +32,7 @@ function Header({ isFixed }) {
   const [isClicked, setIsClicked] = useState(false);
   const [isProfileClicked, setIsProfileClicked] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [path, setPath] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
@@ -257,7 +259,13 @@ function Header({ isFixed }) {
 
                 <button
                   type="button"
-                  onClick={handleSignOut}
+                  onClick={() => {
+                    if (userInfo) {
+                      setIsOpen(true);
+                    } else {
+                      handleSignOut();
+                    }
+                  }}
                   className="text-xs font-poppins font-[500] text-blue-800 hover:text-red-500 transition-all duration-200 ease-linear"
                 >
                   Sign out
@@ -401,6 +409,60 @@ function Header({ isFixed }) {
             </div>
           </Modal.Body>
         </Modal>
+
+        {/* Popup SignOUT */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-50 grid w-[100vw] h-[100vh] p-8 cursor-pointer bg-slate-900/20 backdrop-blur place-items-center"
+            >
+              <motion.div
+                initial={{ scale: 0, rotate: "12.5deg" }}
+                animate={{ scale: 1, rotate: "0deg" }}
+                exit={{ scale: 0, rotate: "0deg" }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-lg p-6 overflow-hidden text-white rounded-lg shadow-xl cursor-default bg-gradient-to-br from-violet-600 to-indigo-600"
+              >
+                <FiAlertCircle className="text-white/10 rotate-12 text-[250px] absolute z-0 -top-24 -left-24" />
+                <div className="relative z-10">
+                  <div className="grid w-16 h-16 mx-auto mb-2 text-3xl text-indigo-600 bg-white rounded-full place-items-center">
+                    <FiAlertCircle />
+                  </div>
+                  <h3 className="mb-2 text-2xl font-bold text-center sm:text-3xl">
+                    Before You Go!
+                  </h3>
+                  <p className="mb-6 text-sm text-center sm:text-lg">
+                    You're about to sign out of your account. Make sure you've
+                    saved all your work and completed any important tasks.
+                    Unsaved changes may be lost, and you'll need to log in again
+                    to continue.
+                  </p>
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="w-full py-2 font-semibold text-white transition-colors bg-transparent rounded hover:bg-white/10"
+                    >
+                      Nah, go back
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        handleSignOut();
+                      }}
+                      className="w-full py-2 font-semibold text-indigo-600 transition-opacity bg-white rounded hover:opacity-90"
+                    >
+                      Understood!
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
