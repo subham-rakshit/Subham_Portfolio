@@ -3,7 +3,7 @@ import React from "react";
 function Footer() {
   return (
     <div className="w-full bg-[#FBF9ED] pt-5 lg:pt-10 px-5">
-      <div className="w-full h-full max-w-[1300px] max-auto flex flex-col sm:flex-row justify-between gap-1 lg:gap-2 font-poppins">
+      <div className="w-full h-full max-w-[1400px] mx-auto flex flex-col sm:flex-row justify-between gap-1 lg:gap-2 font-poppins">
         <div className="flex items-center w-full gap-2 sm:w-1/2 sm:flex-col sm:items-start">
           <div className="flex items-end overflow-hidden w-fit">
             <h1 className="text-2xl font-extrabold tracking-tighter uppercase sm:text-4xl lg:text-6xl">
@@ -88,7 +88,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 pb-5 mt-5">
+      <div className="flex flex-wrap items-center justify-between w-full gap-2 pb-5 mt-5 max-w-[1400px] mx-auto">
         <img
           src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/PORTFOLIO%20LOGO%20(2).png?alt=media&token=ca91aa87-3de1-41af-9a8a-a0260af1a218"
           alt="portfolio logo"

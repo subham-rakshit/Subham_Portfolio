@@ -199,23 +199,23 @@ function About({ isFixed }) {
           </div>
 
           {/* //INFO: Swiper Tech Stacks Section */}
-          <div className="w-full max-w-[1400px] min-h-screen mx-auto px-1 sm:px-5 mt-10 sm:mt-20 flex flex-col gap-5 sm:gap-10">
-            <h1 className="text-xl tracking-tighter sm:text-3xl font-poppins">
+          <div className="w-full max-w-[1400px] min-h-screen mx-auto px-1 sm:px-5 flex flex-col gap-5 sm:gap-10 bg-neutral-800 py-10">
+            <h1 className="text-xl tracking-tighter sm:text-3xl font-poppins text-zinc-100">
               Featured Certificates
             </h1>
             {/* Tech Category Buttons */}
-            <div className="flex flex-row flex-wrap w-full gap-1 sm:gap-3 lg:gap-5">
+            <div className="flex flex-row flex-wrap w-full gap-2 sm:gap-3 lg:gap-5">
               {[...new Set(categoryList)].map((item) => {
                 return (
                   <button
                     type="button"
                     key={item}
                     id={item}
-                    className={`w-fit font-poppins text-xs sm:text-lg text-[#BFDA62] border-2 border-[#CDEA68] px-2 sm:px-4 py-1 rounded-lg sm:rounded-full cursor-pointer ${
+                    className={`w-fit font-poppins text-xs sm:text-lg text-zinc-100 border-2 border-[#CDEA68] px-2 sm:px-4 py-1 rounded-lg sm:rounded-full cursor-pointer ${
                       selectedCategory === item
-                        ? "blur-0 bg-[#CDEA68] text-black font-semibold"
+                        ? "blur-0 bg-zinc-950 text-red-500 font-semibold scale-[1.1]"
                         : "blur-[1px]"
-                    } hover:bg-[#CDEA68] hover:text-black transition-all duration-300 ease-in-out`}
+                    } transition-all duration-300 ease-in-out`}
                     onClick={(e) => setSelectedCategory(e.target.id)}
                   >
                     {item}
@@ -240,7 +240,7 @@ function About({ isFixed }) {
           {/* //INFO: Map Section */}
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1791.8098675173826!2d86.89186425639798!3d23.81294109463465!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6df5adbc3b40d%3A0x395a9735a3cc0a4b!2sMahabir%20Colony%20Kali%20mandir!5e1!3m2!1sen!2sin!4v1724230446001!5m2!1sen!2sin"
-            className="w-full min-h-[500px]"
+            className="w-full max-w-[1400px] mx-auto min-h-[500px]"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
