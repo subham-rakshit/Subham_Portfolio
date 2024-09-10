@@ -82,6 +82,114 @@ html::-webkit-scrollbar-track {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+/* Dashboard Projects Card */
+.dash-cards-projects {
+  box-shadow: 8px 5px 20px #0000008c;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dash-cards-projects::before {
+  content: "";
+  background-image: conic-gradient(#5850ec 10deg, transparent 120deg);
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  animation: rotate-project 2s linear infinite;
+}
+.dash-cards-projects::after {
+  content: "";
+  width: 95%;
+  height: 93%;
+  position: absolute;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  box-shadow: inset 10px 10px 10px #cfcfcf;
+}
+
+/* Dashboard Skills Card */
+.dash-cards-skills {
+  box-shadow: 8px 5px 20px #0000008c;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dash-cards-skills::before {
+  content: "";
+  background-image: conic-gradient(#65a30d 10deg, transparent 120deg);
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  animation: rotate-skill 3s linear infinite;
+}
+.dash-cards-skills::after {
+  content: "";
+  width: 95%;
+  height: 93%;
+  position: absolute;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  box-shadow: inset 10px 10px 10px #cfcfcf;
+}
+
+/* Dashboard Certificates Card */
+.dash-cards-certificates {
+  box-shadow: 8px 5px 20px #0000008c;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dash-cards-certificates::before {
+  content: "";
+  background-image: conic-gradient(#0891b2 10deg, transparent 120deg);
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  animation: rotate-certificate 4s linear infinite;
+}
+.dash-cards-certificates::after {
+  content: "";
+  width: 95%;
+  height: 93%;
+  position: absolute;
+  background-color: #fbfbfb;
+  border-radius: 15px;
+  box-shadow: inset 10px 10px 10px #cfcfcf;
+}
+@keyframes rotate-project {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotate-skill {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-certificate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 /* Project Item Details */
 .project-item-details-style p {
   font-family: "poppins";

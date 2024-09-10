@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { FaClipboardCheck, FaLongArrowAltUp } from "react-icons/fa";
-import { VscLightbulbSparkle } from "react-icons/vsc";
-import { IoRibbon } from "react-icons/io5";
+import { FaLongArrowAltUp } from "react-icons/fa";
 import EyesPlayComponent from "./EyesPlayComponent";
 import { Link } from "react-router-dom";
 import { MdArrowOutward } from "react-icons/md";
@@ -17,6 +15,7 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import { motion } from "framer-motion";
 
 function DashboardPage() {
   const { userInfo } = useSelector((state) => state.user);
@@ -29,10 +28,6 @@ function DashboardPage() {
     useState(0);
   const [fetchLoading, setFetchLoading] = useState(false);
   const [fetchError, setFetchError] = useState(false);
-
-  console.log(aboutDetails && aboutDetails.skillsArray);
-  console.log(aboutDetails && aboutDetails.certificatesArray);
-  console.log(projectsList);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,7 +88,7 @@ function DashboardPage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-1 sm:px-5">
+    <div className="flex-1 min-h-screen px-1 overflow-x-scroll table-auto sm:px-5 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-200">
       {fetchLoading ? (
         //INFO: Loading while fetch
         <div className="w-full max-w-[1200px] mx-auto flex items-center justify-center h-screen">
@@ -151,12 +146,20 @@ function DashboardPage() {
         </div>
       ) : (
         //INFO: Main Function
-        <div className="w-full max-w-[1100px] mx-auto py-10">
-          {/* Cards */}
-          <div className="grid w-full gap-2 md:gap-5 md:grid-cols-3 grid-col-1">
-            {/* Total Projects */}
-            <div className="h-[170px] sm:h-[200px] whitespace-nowrap rounded-lg shadow-customInset hover:shadow-custom p-5 flex justify-between col-span-1 overflow-hidden">
-              <div className="flex flex-col gap-2 sm:gap-5 font-poppins">
+        <div className="w-full max-w-[1200px] mx-auto px-5 lg:px-10 py-5 sm:py-10 overflow-x-auto">
+          {/* //NOTE: Cards */}
+          <div className="grid w-full gap-5 sm:grid-cols-3 grid-col-1">
+            {/* //NOTE: Total Projects */}
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.03 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+              }}
+              className="h-[170px] sm:h-[200px] flex justify-between col-span-1 overflow-hidden dash-cards-projects"
+            >
+              <div className="z-10 flex flex-col flex-1 gap-2 m-5 lg:m-10 sm:gap-5 font-poppins">
                 <h1
                   className="text-base font-semibold tracking-tighter text-indigo-500 uppercase lg:text-xl"
                   style={{ transform: "scaleY(1.1)" }}
@@ -177,7 +180,7 @@ function DashboardPage() {
                 <div className="flex items-center">
                   <FaLongArrowAltUp size="18" color="seagreen" />
                   {/* Number of projects in last month  */}
-                  <span className="text-xs text-indigo-500">
+                  <span className="text-xs text-[#ff0052]">
                     <CountUp
                       end={totalLastMonthProjects}
                       duration={7}
@@ -186,26 +189,31 @@ function DashboardPage() {
                       }
                     />
                   </span>
-                  <span className="ml-2 text-xs">Last month</span>
+                  <span className="ml-2 text-xs text-[#ff0052]">
+                    Last month
+                  </span>
                 </div>
               </div>
-              <img
-                src="/project-dash.jpg"
-                alt="project logo"
-                className="w-[70px] h-[70px] sm:w-[5vw] sm:h-[5vw]"
-              />
-            </div>
+            </motion.div>
 
-            {/* Total Skills */}
-            <div className="h-[170px] sm:h-[200px] whitespace-nowrap rounded-lg shadow-customInset hover:shadow-custom p-5 flex justify-between col-span-1 overflow-hidden">
-              <div className="flex flex-col gap-2 sm:gap-5 font-poppins">
+            {/* //INFO: Total Skills */}
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.03 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+              }}
+              className="h-[170px] sm:h-[200px] flex justify-between col-span-1 overflow-hidden dash-cards-skills"
+            >
+              <div className="z-10 flex flex-col flex-1 gap-2 m-5 lg:m-10 sm:gap-5 font-poppins">
                 <h1
-                  className="text-base font-semibold tracking-tighter uppercase lg:text-xl text-lime-500"
+                  className="text-base font-semibold tracking-tighter uppercase text-lime-500 lg:text-xl"
                   style={{ transform: "scaleY(1.1)" }}
                 >
                   Skills
                 </h1>
-                {/* Number of skills  */}
+                {/* //INFO: Number of skills  */}
                 <span
                   className="text-2xl font-extrabold tracking-tighter text-lime-600"
                   style={{ transform: "scaleY(1.3)" }}
@@ -218,8 +226,8 @@ function DashboardPage() {
                 </span>
                 <div className="flex items-center">
                   <FaLongArrowAltUp size="18" color="seagreen" />
-                  {/* Number of skills in last month  */}
-                  <span className="text-xs text-lime-500">
+                  {/* //INFO: Number of skills in last month  */}
+                  <span className="text-xs text-[#ff0052]">
                     <CountUp
                       end={totalLastMonthSkills}
                       duration={9}
@@ -228,26 +236,31 @@ function DashboardPage() {
                       }
                     />
                   </span>
-                  <span className="ml-2 text-xs">Last month</span>
+                  <span className="ml-2 text-xs text-[#ff0052]">
+                    Last month
+                  </span>
                 </div>
               </div>
-              <img
-                src="/skills-dash.png"
-                alt="project logo"
-                className="w-[70px] h-[70px] sm:w-[5vw] sm:h-[5vw]"
-              />
-            </div>
+            </motion.div>
 
-            {/* Total Certificates */}
-            <div className="h-[170px] sm:h-[200px] whitespace-nowrap rounded-lg shadow-customInset hover:shadow-custom p-5 flex justify-between col-span-1 overflow-hidden">
-              <div className="flex flex-col gap-2 sm:gap-5 font-poppins">
+            {/* //INFO: Total Certificates */}
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.03 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+              }}
+              className="h-[170px] sm:h-[200px] flex justify-between col-span-1 overflow-hidden dash-cards-certificates"
+            >
+              <div className="z-10 flex flex-col flex-1 gap-2 m-5 lg:m-10 sm:gap-5 font-poppins">
                 <h1
-                  className="text-base font-semibold tracking-tighter uppercase lg:text-xl text-cyan-500"
+                  className="text-base font-semibold tracking-tighter uppercase text-cyan-500 lg:text-xl"
                   style={{ transform: "scaleY(1.1)" }}
                 >
                   Certificates
                 </h1>
-                {/* Number of certificates */}
+                {/* //INFO: Number of certificates  */}
                 <span
                   className="text-2xl font-extrabold tracking-tighter text-cyan-600"
                   style={{ transform: "scaleY(1.3)" }}
@@ -262,8 +275,8 @@ function DashboardPage() {
                 </span>
                 <div className="flex items-center">
                   <FaLongArrowAltUp size="18" color="seagreen" />
-                  {/* Number of certificates in last month  */}
-                  <span className="text-xs text-cyan-500">
+                  {/* //INFO: Number of certificates in last month  */}
+                  <span className="text-xs text-[#ff0052]">
                     <CountUp
                       end={totalLastMonthCertificates}
                       duration={11}
@@ -272,17 +285,14 @@ function DashboardPage() {
                       }
                     />
                   </span>
-                  <span className="ml-2 text-xs">Last month</span>
+                  <span className="ml-2 text-xs text-[#ff0052]">
+                    Last month
+                  </span>
                 </div>
               </div>
-              <img
-                src="/certificates-dash.png"
-                alt="project logo"
-                className="w-[70px] h-[70px] sm:w-[5vw] sm:h-[5vw]"
-              />
-            </div>
+            </motion.div>
           </div>
-          {/* Skills & Certificates */}
+          {/* //NOTE: Skills & Certificates */}
           <div className="flex flex-col gap-5 my-10 md:justify-between md:flex-row">
             {/* Skills */}
             <div className="w-full max-w-1/2">
@@ -393,7 +403,7 @@ function DashboardPage() {
             </div>
           </div>
 
-          {/* Projects */}
+          {/* //NOTE: Projects */}
           <div className="w-full">
             <div className="flex items-center justify-between gap-2 mb-5">
               <h1
@@ -430,7 +440,10 @@ function DashboardPage() {
                     if (i < 5) {
                       const formatedDate = formateDate(project.createdAt);
                       return (
-                        <TableRow className="text-xs bg-white">
+                        <TableRow
+                          className="text-xs bg-white"
+                          key={project._id}
+                        >
                           <TableCell>{project.name}</TableCell>
                           <TableCell>
                             <img
