@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -25,64 +26,94 @@ function Footer() {
             <div className="flex flex-col w-full">
               <h1 className="text-lg font-medium">S:</h1>
               <div className="flex flex-col gap-1 mt-2">
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Linkedin
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  GitHub
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Instagram
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Facebook
-                </span>
+                <Link
+                  to="https://www.linkedin.com/in/subhamjitu97/"
+                  target="_blank"
+                >
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Linkedin
+                  </span>
+                </Link>
+
+                <Link to="https://github.com/subham-rakshit" target="_blank">
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    GitHub
+                  </span>
+                </Link>
+
+                <Link
+                  to="https://www.instagram.com/subham_rakshit_1/"
+                  target="_blank"
+                >
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Instagram
+                  </span>
+                </Link>
+
+                <Link
+                  to="https://www.facebook.com/subham.rakshit.142"
+                  target="_blank"
+                >
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Facebook
+                  </span>
+                </Link>
               </div>
             </div>
             {/* Links */}
             <div className="flex flex-col w-full">
               <h1 className="text-lg font-medium">L:</h1>
               <div className="flex flex-col gap-1 mt-2">
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Home
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Services
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Projects
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  About
-                </span>
-                <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
-                  Contact
-                </span>
+                <Link to="/">
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Home
+                  </span>
+                </Link>
+
+                <Link to="/about">
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    About
+                  </span>
+                </Link>
+
+                <Link to="/projects">
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Projects
+                  </span>
+                </Link>
+
+                <Link to="/contact">
+                  <span className="w-[fit-content] text-sm font-light underline hover:font-medium transition-all duration-300 cursor-pointer">
+                    Contact
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
           {/* Address */}
-          <div className="flex flex-col flex-wrap gap-1 mt-5">
-            <h1 className="text-lg font-medium">A:</h1>
-            <div className="w-[fit-content] flex flex-col gap-1 mt-2 group">
-              <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
-                Mahabir Colony East Rangamatia
-              </span>
-              <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
-                Rupnarayanpur, Paschim Bardhaman
-              </span>
-              <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
-                WestBengal
-              </span>
-              <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
-                713386
-              </span>
+          <Link to="https://maps.app.goo.gl/N1MV9cJfvp4pdD4V6" target="_blank">
+            <div className="flex flex-col flex-wrap gap-1 mt-5">
+              <h1 className="text-lg font-medium">A:</h1>
+              <div className="w-[fit-content] flex flex-col gap-1 mt-2 group">
+                <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
+                  Mahabir Colony East Rangamatia
+                </span>
+                <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
+                  Rupnarayanpur, Paschim Bardhaman
+                </span>
+                <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
+                  WestBengal
+                </span>
+                <span className="text-sm font-light transition-all duration-300 cursor-pointer group-hover:font-medium group-hover:underline">
+                  713386
+                </span>
+              </div>
             </div>
-          </div>
+          </Link>
           {/* Email */}
           <div className="flex flex-col gap-1 mt-5">
             <h1 className="text-lg font-medium">E:</h1>
-            <span className="w-[fit-content] text-sm font-light hover:font-medium underline transition-all duration-300 cursor-pointer">
+            <span className="w-[fit-content] text-sm font-light hover:font-medium transition-all duration-300 cursor-pointer">
               subhamrakshit667@gmail.com
             </span>
           </div>

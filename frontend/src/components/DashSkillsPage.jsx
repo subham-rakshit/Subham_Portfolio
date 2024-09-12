@@ -34,7 +34,7 @@ function DashSkillsPage() {
     const getAllSkills = async () => {
       try {
         setFetchLoading(true);
-        const api = `/api/admin/about/skills${
+        const api = `${import.meta.env.VITE_BASE_URL}/api/admin/about/skills${
           selectedCategory === "All Categories"
             ? ""
             : `?category=${selectedCategory}`
@@ -71,9 +71,12 @@ function DashSkillsPage() {
   //INFO: Handle specific skill
   const handleDeleteSkill = async () => {
     try {
-      const api = `/api/admin/deleteSkill/${selectedSkillId}/${userInfo._id}`;
+      const api = `${
+        import.meta.env.VITE_BASE_URL
+      }/api/admin/deleteSkill/${selectedSkillId}/${userInfo._id}`;
       const options = {
         method: "DELETE",
+        credentials: "include",
       };
       const res = await fetch(api, options);
       const data = await res.json();

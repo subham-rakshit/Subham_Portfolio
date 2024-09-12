@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
-import { OAuth } from "../components";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +59,6 @@ function Admin() {
   //INFO: Handle Admin form
   const handleAdminForm = async (e) => {
     e.preventDefault();
-    console.log(formDetails);
     if (
       formDetails.firstname &&
       formDetails.lastname &&
@@ -69,12 +67,13 @@ function Admin() {
     ) {
       try {
         dispatch(loginStart());
-        const apiUrl = "/api/admin/login";
+        const apiUrl = `${import.meta.env.VITE_BASE_URL}/api/admin/login`;
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ formDetails }),
         };
         const res = await fetch(apiUrl, options);

@@ -70,7 +70,7 @@ function Header({ isFixed }) {
     if (authKey.length > 0) {
       try {
         dispatch(keyAuthStart());
-        const apiURL = "/api/admin/key";
+        const apiURL = `${import.meta.env.VITE_BASE_URL}/api/admin/key`;
         const options = {
           method: "POST",
           headers: {
@@ -118,12 +118,13 @@ function Header({ isFixed }) {
     if (userInfo) {
       try {
         dispatch(signOutStart());
-        const apiURL = "/api/admin/signout";
+        const apiURL = `${import.meta.env.VITE_BASE_URL}/api/admin/signout`;
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
         };
         const res = await fetch(apiURL, options);
         if (res.ok) {
@@ -349,7 +350,7 @@ function Header({ isFixed }) {
                 link: "https://www.instagram.com/subham_rakshit_1/",
               },
             ].map((logo) => (
-              <Link to={logo.link} key={logo.name}>
+              <Link to={logo.link} key={logo.name} target="_blank">
                 <li
                   key={logo.name}
                   className={`w-fit hover:scale-[1.2] transition-all duration-300 ease-in-out`}

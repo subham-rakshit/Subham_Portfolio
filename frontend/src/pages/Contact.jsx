@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MdArrowOutward } from "react-icons/md";
 import { EyesPlayComponent, FlipWords } from "../components";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 function Contact({ isFixed }) {
   const [formDetails, setFormDetails] = useState({
@@ -21,7 +23,9 @@ function Contact({ isFixed }) {
     phonenumber: false,
   });
 
-  // Handle placeholder gets disappear when specific input field gets focused
+  const [isSending, setIsSending] = useState(false);
+
+  //INFO: Handle placeholder gets disappear when specific input field gets focused
   const handleOnFocus = (e) => {
     const { id } = e.target;
     setFocusedInput((prev) => ({
@@ -30,7 +34,7 @@ function Contact({ isFixed }) {
     }));
   };
 
-  // Handle placeholder gets visible when specific input filed gets empty value
+  //INFO: Handle placeholder gets visible when specific input filed gets empty value
   const handleOnBlur = (e) => {
     const { id, value } = e.target;
     if (!value) {
@@ -41,6 +45,7 @@ function Contact({ isFixed }) {
     }
   };
 
+  //INFO: formDetails state value changes according to name and its value
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormDetails({
@@ -49,9 +54,74 @@ function Contact({ isFixed }) {
     });
   };
 
+  //INFO: Handle Send Message Query
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+
+    if (
+      formDetails.username &&
+      formDetails.companyname &&
+      formDetails.jobrole &&
+      formDetails.jobdetails &&
+      formDetails.email &&
+      formDetails.phonenumber
+    ) {
+      try {
+        setIsSending(true);
+        const api = `${import.meta.env.VITE_BASE_URL}/api/user/contact/query`;
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ formDetails }),
+        };
+        const res = await fetch(api, options);
+        const data = await res.json();
+
+        if (res.ok) {
+          setIsSending(false);
+          setFormDetails({
+            username: "",
+            companyname: "",
+            jobrole: "",
+            jobdetails: "",
+            email: "",
+            phonenumber: "",
+          });
+          setFocusedInput({
+            username: false,
+            companyname: false,
+            jobrole: false,
+            jobdetails: false,
+            email: false,
+            phonenumber: false,
+          });
+          toast.success(data.message, {
+            theme: "colored",
+            position: "bottom-center",
+          });
+        } else {
+          setIsSending(false);
+          toast.error(data.extraDetails, {
+            theme: "colored",
+            position: "bottom-center",
+          });
+        }
+      } catch (error) {
+        console.log(`Error from send query from Contact page: ${error}`);
+      }
+    } else {
+      toast.error("Please fill the input fields first!", {
+        theme: "colored",
+        position: "bottom-center",
+      });
+    }
+  };
+
   return (
     <div className="w-full min-h-screen contact-page-section">
-      {/* Contact Landing Section */}
+      {/* //INFO: Contact Landing Section */}
       <div className="w-full min-h-[50vh] sm:min-h-[55vh] lg:min-h-[60vh] px-5 flex items-center justify-center">
         <div className="w-full max-w-[1400px] mx-auto flex flex-col overflow-hidden">
           {["Let's Start", "Working Together"].map((item, index) => {
@@ -85,10 +155,10 @@ function Contact({ isFixed }) {
         </div>
       </div>
 
-      {/* Contact Form */}
+      {/* //INFO: Contact Form */}
       <div className="w-full min-h-screen px-5 py-8">
         <div className="w-full max-w-[1400px] mx-auto py-2">
-          {/* Heading */}
+          {/* //INFO: Heading */}
           <div className="overflow-hidden">
             <motion.h1
               initial={{ y: "100%" }}
@@ -101,9 +171,12 @@ function Contact({ isFixed }) {
             </motion.h1>
           </div>
 
-          {/* Contact Form */}
-          <div className="flex flex-col gap-2 my-5 sm:gap-5 sm:my-10">
-            {/* Name and Company name */}
+          {/* //INFO: Contact Form */}
+          <form
+            onSubmit={handleContactSubmit}
+            className="flex flex-col gap-2 my-5 sm:gap-5 sm:my-10"
+          >
+            {/* //INFO: Name and Company name */}
             <div className="flex flex-col flex-wrap gap-2 overflow-hidden text-xl font-medium tracking-tight lg:flex-row lg:items-center sm:gap-4 lg:gap-5 font-poppins sm:text-3xl text-zinc-800">
               <motion.div
                 initial={{ y: "100%" }}
@@ -113,7 +186,7 @@ function Contact({ isFixed }) {
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
                 <span style={{ transform: "scaleY(1.1)" }}>Hi! My name is</span>
-                {/* Input Filed */}
+                {/* //INFO: Input Filed */}
                 <div className="relative flex-1 group">
                   {!focusedInput.username && !formDetails.username && (
                     <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
@@ -142,7 +215,7 @@ function Contact({ isFixed }) {
                 <span style={{ transform: "scaleY(1.1)" }}>
                   and I represent
                 </span>
-                {/* Input Filed */}
+                {/* //INFO: Input Filed */}
                 <div className="relative flex-1 group">
                   {!focusedInput.companyname && !formDetails.companyname && (
                     <span className="absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins text-zinc-400 group-hover:text-zinc-500 font-light py-1 pointer-events-none">
@@ -163,7 +236,7 @@ function Contact({ isFixed }) {
               </motion.div>
             </div>
 
-            {/* Job role */}
+            {/* //INFO: Job role */}
             <div className="overflow-hidden text-xl font-medium tracking-tight font-poppins sm:text-3xl text-zinc-800">
               <motion.div
                 initial={{ y: "100%" }}
@@ -196,7 +269,7 @@ function Contact({ isFixed }) {
               </motion.div>
             </div>
 
-            {/* More Details About the Job */}
+            {/* //INFO: More Details About the Job */}
             <div className="overflow-hidden text-xl font-medium tracking-tight font-poppins sm:text-3xl text-zinc-800">
               <motion.div
                 initial={{ y: "100%" }}
@@ -229,7 +302,7 @@ function Contact({ isFixed }) {
               </motion.div>
             </div>
 
-            {/* Email Address */}
+            {/* //INFO: Email Address */}
             <div className="overflow-hidden text-xl font-medium tracking-tight font-poppins sm:text-3xl text-zinc-800">
               <motion.div
                 initial={{ y: "100%" }}
@@ -265,7 +338,7 @@ function Contact({ isFixed }) {
               </motion.div>
             </div>
 
-            {/* Phone Number */}
+            {/* //INFO: Phone Number */}
             <div className="overflow-hidden text-xl font-medium tracking-tight font-poppins sm:text-3xl text-zinc-800">
               <motion.div
                 initial={{ y: "100%" }}
@@ -298,7 +371,7 @@ function Contact({ isFixed }) {
               </motion.div>
             </div>
 
-            {/* Send Inquiry Button */}
+            {/* //INFO: Send Inquiry Button */}
             <div className="mt-10 overflow-hidden">
               <motion.div
                 initial={{ y: "100%" }}
@@ -308,25 +381,29 @@ function Contact({ isFixed }) {
                 className="flex justify-start w-full sm:justify-end"
               >
                 <button
-                  type="button"
+                  type="submit"
                   className="h-fit flex items-center text-sm font-normal font-poppins tracking-tight border border-zinc-900 rounded-full px-5 py-3 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase"
                 >
-                  Send Inquiry
-                  <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
-                    <MdArrowOutward
-                      size="20"
-                      color="#000"
-                      className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
-                    />
-                  </div>
+                  {isSending ? "Sending" : "Send Message"}
+                  {isSending ? (
+                    <BeatLoader color="#CDEA68" />
+                  ) : (
+                    <div className="flex items-center justify-center w-1 h-1 overflow-hidden transition-all duration-300 rounded-full group-hover:w-5 group-hover:h-5 bg-zinc-800 group-hover:bg-zinc-200">
+                      <MdArrowOutward
+                        size="20"
+                        color="#000"
+                        className="relative top-[2vw] group-hover:top-0 transition-all duration-700"
+                      />
+                    </div>
+                  )}
                 </button>
               </motion.div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 
-      {/* Social Links */}
+      {/* //INFO: Social Links */}
       <div className="w-full h-fit py-5 flex flex-col justify-center items-center px-1 sm:px-5 text-zinc-900 bg-[#CDEA68]">
         <div className="relative w-full h-[30vh]">
           <EyesPlayComponent queryClass="contact-page-section" scale={0.8} />

@@ -67,7 +67,7 @@ function PageTransition({ children }) {
       {prevPathname.current !== location.pathname && (
         <>
           <div className="transition-slide fixed top-0 left-0 w-full h-full bg-zinc-800 z-[999999999999] flex flex-col justify-between">
-            <div className="relative w-full h-full p-10">
+            <div className="relative w-full h-full p-2 borpder sm:p-5">
               <div className="absolute flex items-center overflow-hidden -translate-y-1/2 top-1/2 w-fit">
                 <motion.span
                   key={location.pathname}
@@ -79,7 +79,7 @@ function PageTransition({ children }) {
                     times: [0, 0.5, 1], //INFO: Timing for each phase
                     ease: [0.76, 0, 0.24, 1], //INFO: Easing function from easings.net (easeInOutQuart)
                   }}
-                  className="w-fit font-franklin text-4xl sm:text-6xl text-[#FBF9ED] font-extrabold uppercase"
+                  className="w-fit font-franklin text-3xl sm:text-6xl text-[#FBF9ED] font-extrabold uppercase"
                 >
                   {displayText}
                 </motion.span>

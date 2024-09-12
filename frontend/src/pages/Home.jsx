@@ -24,7 +24,9 @@ function Home({ isFixed }) {
     const getAllProjects = async () => {
       try {
         setFetchLoading(true);
-        const api = "/api/admin/projects/get?limit=4";
+        const api = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/projects/get?limit=4`;
         const options = {
           method: "GET",
         };
@@ -56,9 +58,9 @@ function Home({ isFixed }) {
   } else {
     return (
       <div className="home-section">
-        {/* Landing Section */}
+        {/* //INFO: Landing Section */}
         <div className="w-full min-h-screen bg-[#FBF9ED] flex flex-col">
-          {/* Masker Info Section */}
+          {/* //INFO: Masker Info Section */}
           <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-1 sm:px-5 overflow-hidden">
             {isFixed && (
               <motion.div
@@ -132,7 +134,7 @@ function Home({ isFixed }) {
                     </div>
                   );
                 })}
-                {/* Masker Info Animated Section */}
+                {/* //INFO: Masker Info Animated Section */}
                 <div className="masker">
                   <motion.div
                     initial={{ y: "100%" }}
@@ -170,7 +172,7 @@ function Home({ isFixed }) {
             )}
           </div>
 
-          {/* Landing Bottom Section */}
+          {/* //INFO: Landing Bottom Section */}
           <div className="flex flex-col justify-between gap-2 px-1 py-5 border-t sm:px-5 border-zinc-700 md:flex-row md:items-center">
             <div className="masker">
               <p className="font-poppins text-zinc-800 font-light text-[12px]">
@@ -190,7 +192,7 @@ function Home({ isFixed }) {
               className="flex items-center gap-2 transition-all duration-300 group"
             >
               <span className="font-poppins text-zinc-800 group-hover:text-zinc-100 group-hover:bg-zinc-900 font-light group-hover:font-medium text-xs border-[1px] border-zinc-600 rounded-full px-3 sm:px-5 py-2 transition-all duration-300">
-                DOWNLOAD RESUME
+                VIEW RESUME
               </span>
               <MdArrowOutward
                 size="35"
@@ -200,7 +202,7 @@ function Home({ isFixed }) {
           </div>
         </div>
 
-        {/* Markee Section */}
+        {/* //INFO: Markee Section */}
         <div className="w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px]">
           <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
             <motion.h1
@@ -222,9 +224,9 @@ function Home({ isFixed }) {
           </div>
         </div>
 
-        {/* About Section */}
+        {/* //INFO: About Section */}
         <div className="w-full min-h-screen bg-[#CDEA68] pt-10 pb-10">
-          {/* About basic info */}
+          {/* //INFO: About basic info */}
           <div className="w-full max-w-[1400px] mx-auto px-1 sm:px-5 text-[#212121] font-poppins">
             <h1 className="mb-4 overflow-hidden text-xl sm:text-3xl">
               Hello, I'm{" "}
@@ -263,7 +265,7 @@ function Home({ isFixed }) {
               ideas to life through code.
             </p>
           </div>
-          {/* Why choose me section */}
+          {/* //INFO: Why choose me section */}
           <div className="w-full max-w-[1400px] mx-auto border-t border-b border-zinc-900 py-5 px-1 sm:px-5 my-10">
             <div className="w-full max-w-[1300px] mx-auto flex flex-col sm:flex-row sm:justify-between">
               <div className="flex items-center gap-3 mb-5 sm:mb-0">
@@ -314,7 +316,7 @@ function Home({ isFixed }) {
               </ul>
             </div>
           </div>
-          {/* Read More Btn */}
+          {/* //INFO: Read More Btn */}
           <div className="flex justify-center">
             <Link to="/about">
               <button
@@ -334,12 +336,12 @@ function Home({ isFixed }) {
           </div>
         </div>
 
-        {/* Play Section */}
+        {/* //INFO: Play Section */}
         <div className="eyeplay relative w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center bg-fixed overflow-hidden cursor-pointer">
           <EyesPlayComponent queryClass="home-section" text="PLAY" />
         </div>
 
-        {/* Projects Lists */}
+        {/* //INFO: Projects Lists Section */}
         <div className="w-full px-1 my-10 sm:px-5">
           <div className="w-full max-w-[1400px] overflow-hidden">
             <motion.h1
@@ -367,7 +369,7 @@ function Home({ isFixed }) {
                 </Link>
               </div>
             ))}
-            {/* Read More Btn */}
+            {/* //INFO: Read More Btn */}
             <div className="flex justify-center w-full">
               <Link to="/projects">
                 <button
@@ -388,7 +390,7 @@ function Home({ isFixed }) {
           </div>
         </div>
 
-        {/* Journey Section */}
+        {/* //INFO: Journey Section */}
         <JourneySection queryClass="home-section" />
       </div>
     );

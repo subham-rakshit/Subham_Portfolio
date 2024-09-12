@@ -225,12 +225,15 @@ function DashCreateProjectsPage() {
   const handleCreateProjectForm = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = `/api/admin/project/create/${userInfo._id}`;
+      const apiUrl = `${
+        import.meta.env.VITE_BASE_URL
+      }/api/admin/project/create/${userInfo._id}`;
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ projectDetails }),
       };
       const res = await fetch(apiUrl, options);
@@ -241,7 +244,7 @@ function DashCreateProjectsPage() {
           theme: "colored",
           position: "bottom-center",
         });
-        navigate(`/project/${data.projectInfo.slug}`); //TODO: Create ProjectItem component
+        navigate(`/project/${data.projectInfo.slug}`);
       } else {
         toast.error(data.extraDetails, {
           theme: "colored",

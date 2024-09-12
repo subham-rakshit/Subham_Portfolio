@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { motion, transform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   EyesPlayComponent,
   FeaturedProjectsComponent,
@@ -7,7 +7,6 @@ import {
 } from "../components";
 import { SyncLoader } from "react-spinners";
 import { Link } from "react-router-dom";
-import { MdArrowOutward } from "react-icons/md";
 
 function Projects() {
   const [projectsList, setProjectsList] = useState([]);
@@ -19,7 +18,7 @@ function Projects() {
     const getAllProjects = async () => {
       try {
         setFetchLoading(true);
-        const api = "/api/admin/projects/get";
+        const api = `${import.meta.env.VITE_BASE_URL}/api/admin/projects/get`;
         const options = {
           method: "GET",
         };
@@ -52,13 +51,13 @@ function Projects() {
   } else {
     return (
       <div className="w-full min-h-screen projects-section">
-        {/* //IDEA: Projects Landing Section */}
+        {/* //INFO: Projects Landing Section */}
         <motion.div
           initial="initial"
           whileInView="view"
           className="w-full max-w-[1400px] mx-auto py-10 sm:py-20 overflow-hidden flex flex-col sm:flex-row sm:items-center"
         >
-          {/* Projects Masker */}
+          {/* //INFO: Projects Masker */}
           <div className="py-2 mx-1 overflow-hidden sm:mx-5 w-fit h-fit">
             <motion.div
               initial="initial"
@@ -88,7 +87,7 @@ function Projects() {
               </span>
             </motion.div>
           </div>
-          {/* Eye Playe Section */}
+          {/* //INFO: Eye Playe Section */}
           <div className="overflow-x-hidden h-fit">
             <motion.div
               variants={{
@@ -99,15 +98,15 @@ function Projects() {
                 duration: 2,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
-              className="relative w-[250px] h-[120px]"
+              className="relative w-[180px] sm:w-[250px] h-[100px] sm:h-[120px]"
             >
               <EyesPlayComponent queryClass="projects-section" scale={0.5} />
             </motion.div>
           </div>
         </motion.div>
-        {/* //IDEA: All Projects */}
+        {/* //INFO: All Projects */}
         <div className="w-full min-h-screen px-1 py-5 bg-transparent sm:px-5 sm:py-10 rounded-t-2xl">
-          {/* All Projects Heading */}
+          {/* //INFO: All Projects Heading */}
           <motion.div
             initial="initial"
             whileInView="view"
@@ -129,7 +128,7 @@ function Projects() {
             </motion.h1>
           </motion.div>
 
-          {/* Projects Lists */}
+          {/* //INFO: Projects Lists */}
           <div className="w-full max-w-[1400px] mx-auto mt-10 flex flex-wrap gap-5">
             {projectsList.map((project, i) => (
               <div
@@ -143,7 +142,7 @@ function Projects() {
             ))}
           </div>
         </div>
-        {/* //IDEA: Contact Section */}
+        {/* //INFO: Contact Section */}
         <JourneySection queryClass="projects-section" />
       </div>
     );

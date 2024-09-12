@@ -209,12 +209,15 @@ function DashCreateAboutPage() {
     ) {
       try {
         setIsFetching(true);
-        const apiUrl = `/api/admin/about/create/${userInfo._id}`;
+        const apiUrl = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/about/create/${userInfo._id}`;
         const options = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ aboutDetails }),
         };
         const res = await fetch(apiUrl, options);

@@ -118,7 +118,9 @@ function ProjectItemDetails() {
     const getProjectDetails = async () => {
       try {
         setFetchLoading(true);
-        const api = `/api/admin/projects/get?slug=${projectSlug}`;
+        const api = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/projects/get?slug=${projectSlug}`;
         const options = {
           method: "GET",
         };

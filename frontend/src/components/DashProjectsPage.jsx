@@ -37,7 +37,7 @@ function DashProjectsPage() {
     const getAllProjects = async () => {
       try {
         setFetchLoading(true);
-        const api = "/api/admin/projects/get";
+        const api = `${import.meta.env.VITE_BASE_URL}/api/admin/projects/get`;
         const options = {
           method: "GET",
         };
@@ -88,9 +88,12 @@ function DashProjectsPage() {
   //INFO: Handle specific project
   const handleDeleteProject = async () => {
     try {
-      const api = `/api/admin/deleteProject/${selectedProjectId}/${userInfo._id}`;
+      const api = `${
+        import.meta.env.VITE_BASE_URL
+      }/api/admin/deleteProject/${selectedProjectId}/${userInfo._id}`;
       const options = {
         method: "DELETE",
+        credentials: "include",
       };
       const res = await fetch(api, options);
       const data = await res.json();

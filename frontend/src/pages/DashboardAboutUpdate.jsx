@@ -74,6 +74,7 @@ function DashboardAboutUpdate() {
   //NOTE: Extract skillId or certificateId from path url
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
+
   const skillId = urlParams.get("skillId");
   const certificateId = urlParams.get("certificateId");
   const navigate = useNavigate();
@@ -129,7 +130,7 @@ function DashboardAboutUpdate() {
       try {
         setIsFetching(true);
         setFetchError(false);
-        const api = "/api/admin/about";
+        const api = `${import.meta.env.VITE_BASE_URL}/api/admin/about`;
         const res = await fetch(api);
         const data = await res.json();
 
@@ -275,7 +276,9 @@ function DashboardAboutUpdate() {
       aboutDetails.certificateImageURL
     ) {
       try {
-        const apiUrl = `/api/admin/updateAbout/${userInfo._id}?${
+        const apiUrl = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/updateAbout/${userInfo._id}?${
           skillId ? `skillId=${skillId}` : `certificateId=${certificateId}`
         }`;
         const options = {
@@ -283,6 +286,7 @@ function DashboardAboutUpdate() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ aboutDetails }),
         };
         const res = await fetch(apiUrl, options);
@@ -527,14 +531,14 @@ function DashboardAboutUpdate() {
                           {!focusedInput.techName && !aboutDetails.techName && (
                             <span
                               className={`absolute left-1/2 top-full -translate-x-[50%] -translate-y-[100%] text-sm w-full text-center font-poppins ${
-                                aboutDetails.techName
-                                  ? "text-zinc-400 group-hover:text-zinc-500"
-                                  : "text-red-500 group-hover:text-red-600 font-semibold"
+                                location.search.includes("certificateId")
+                                  ? "text-red-500 group-hover:text-red-600 font-semibold"
+                                  : "text-zinc-400 group-hover:text-zinc-500"
                               } font-light py-1 pointer-events-none`}
                             >
-                              {aboutDetails.techName
-                                ? "Tech name*"
-                                : "Not Allowed!"}
+                              {location.search.includes("certificateId")
+                                ? "Not Allowed!"
+                                : "Tech name*"}
                             </span>
                           )}
                           <input
@@ -550,12 +554,12 @@ function DashboardAboutUpdate() {
                                 techName: e.target.value,
                               })
                             }
-                            disabled={aboutDetails.techName ? false : true}
+                            disabled={location.search.includes("certificateId")}
                             autoComplete="off"
                             className={`border-t-0 border-l-0 border-r-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-zinc-500 text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full ${
-                              aboutDetails.techName
-                                ? "cursor-pointer"
-                                : "cursor-not-allowed"
+                              location.search.includes("certificateId")
+                                ? "cursor-not-allowed"
+                                : "cursor-pointer"
                             }`}
                           />
                         </div>
@@ -574,9 +578,9 @@ function DashboardAboutUpdate() {
                           <select
                             name="selectedCategory"
                             value={
-                              aboutDetails.selectedCategory
-                                ? aboutDetails.selectedCategory
-                                : "Not Allowed!"
+                              location.search.includes("certificateId")
+                                ? "Not Allowed!"
+                                : aboutDetails.selectedCategory
                             }
                             onChange={(e) =>
                               setAboutDetails({
@@ -584,17 +588,17 @@ function DashboardAboutUpdate() {
                                 selectedCategory: e.target.value,
                               })
                             }
-                            disabled={
-                              aboutDetails.selectedCategory ? false : true
-                            }
+                            disabled={location.search.includes("certificateId")}
                             id="selectedCategory"
                             className={`border-t-0 border-l-0 border-r-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full ${
-                              aboutDetails.selectedCategory
-                                ? "text-zinc-500 cursor-pointer"
-                                : "text-red-600 font-semibold cursor-not-allowed"
+                              location.search.includes("certificateId")
+                                ? "text-red-600 font-semibold cursor-not-allowed"
+                                : "text-zinc-500 cursor-pointer"
                             }`}
                           >
-                            {aboutDetails.selectedCategory ? (
+                            {location.search.includes("certificateId") ? (
+                              <option>Not Allowed!</option>
+                            ) : (
                               skillsLists.map((cat, i) => (
                                 <option
                                   value={cat.category}
@@ -603,8 +607,6 @@ function DashboardAboutUpdate() {
                                   {cat.category}
                                 </option>
                               ))
-                            ) : (
-                              <option>Not Allowed!</option>
                             )}
                           </select>
                         </div>
@@ -636,11 +638,11 @@ function DashboardAboutUpdate() {
                         accept="image/*"
                         onChange={handleImageChange}
                         autoComplete="off"
-                        disabled={aboutDetails.techImageURL ? false : true}
+                        disabled={location.search.includes("certificateId")}
                         className={`px-2 py-1 text-sm font-light text-center bg-transparent cursor-pointer text-zinc-500 focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-fit ${
-                          aboutDetails.techImageURL
-                            ? "cursor-pointer"
-                            : "cursor-not-allowed"
+                          location.search.includes("certificateId")
+                            ? "cursor-not-allowed"
+                            : "cursor-pointer"
                         }`}
                       />
                       {/* Upload Button */}
@@ -654,11 +656,11 @@ function DashboardAboutUpdate() {
                           type="button"
                           name="techImageURL"
                           className={`w-fit h-fit flex items-center text-xs font-normal font-poppins tracking-tight border border-zinc-900 rounded-full px-3 py-1 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase ${
-                            aboutDetails.techImageURL
-                              ? "cursor-pointer"
-                              : "cursor-not-allowed"
+                            location.search.includes("certificateId")
+                              ? "cursor-not-allowed"
+                              : "cursor-pointer"
                           }`}
-                          disabled={isImageUploading.techImage}
+                          disabled={location.search.includes("certificateId")}
                           onClick={handleImageUpdateInState}
                         >
                           {parseInt(imageUploadingProgress.techImage) < 100
@@ -708,13 +710,17 @@ function DashboardAboutUpdate() {
                       {/* Input Filed */}
                       <div className="relative flex-1 group">
                         <input
-                          type="date"
+                          type={
+                            location.search.includes("skillId")
+                              ? "text"
+                              : "date"
+                          }
                           id="issueDate"
                           name="issueDate"
                           value={
-                            aboutDetails.issueDate
-                              ? aboutDetails.issueDate
-                              : "Not Allowed!"
+                            location.search.includes("skillId")
+                              ? "Not Allowed!"
+                              : aboutDetails.issueDate
                           }
                           onChange={(e) =>
                             setAboutDetails({
@@ -722,11 +728,11 @@ function DashboardAboutUpdate() {
                               issueDate: e.target.value,
                             })
                           }
-                          disabled={aboutDetails.issueDate ? false : true}
+                          disabled={location.search.includes("skillId")}
                           className={`border-t-0 border-l-0 border-r-0 border-b-[1px] group-hover:border-b-[2px] border-zinc-500 group-hover:border-zinc-800 text-center font-light text-sm px-2 py-1 bg-transparent focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-full ${
-                            aboutDetails.issueDate
-                              ? "cursor-pointer text-zinc-500"
-                              : "cursor-not-allowed text-red-600 font-semibold"
+                            location.search.includes("skillId")
+                              ? "cursor-not-allowed text-red-600 font-semibold"
+                              : "cursor-pointer text-zinc-500"
                           }`}
                         />
                       </div>
@@ -757,9 +763,7 @@ function DashboardAboutUpdate() {
                         accept="image/*"
                         onChange={handleImageChange}
                         autoComplete="off"
-                        disabled={
-                          aboutDetails.certificateImageURL ? false : true
-                        }
+                        disabled={location.search.includes("skillId")}
                         className="px-2 py-1 text-sm font-light text-center bg-transparent cursor-pointer text-zinc-500 focus:outline-none focus:border-t-0 focus:border-r-0 focus:border-l-0 focus:ring-0 w-fit"
                       />
                       {/* Upload Button */}
@@ -773,11 +777,11 @@ function DashboardAboutUpdate() {
                           type="button"
                           name="certificateImageURL"
                           className={`w-fit h-fit flex items-center text-xs font-normal font-poppins tracking-tight border border-zinc-900 rounded-full px-3 py-1 bg-[transparent] hover:bg-zinc-950 text-zinc-900 hover:text-white gap-4 group transition-all duration-300 group uppercase ${
-                            aboutDetails.certificateImageURL
-                              ? "cursor-pointer"
-                              : "cursor-not-allowed"
+                            location.search.includes("skillId")
+                              ? "cursor-not-allowed"
+                              : "cursor-pointer"
                           }`}
-                          disabled={isImageUploading.certificateImage}
+                          disabled={location.search.includes("skillId")}
                           onClick={handleImageUpdateInState}
                         >
                           {parseInt(imageUploadingProgress.certificateImage) <

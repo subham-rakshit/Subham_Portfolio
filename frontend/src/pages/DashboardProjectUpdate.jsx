@@ -142,7 +142,9 @@ function DashboardProjectUpdate() {
       try {
         setFetchLoading(true);
 
-        const api = `/api/admin/projects/get?projectId=${projectId}`;
+        const api = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/projects/get?projectId=${projectId}`;
         const res = await fetch(api);
         const data = await res.json();
 
@@ -277,12 +279,15 @@ function DashboardProjectUpdate() {
   const handleUpdateProjectForm = async (e) => {
     e.preventDefault();
     try {
-      const apiUrl = `/api/admin/updateProject/${userInfo._id}/${projectId}`;
+      const apiUrl = `${
+        import.meta.env.VITE_BASE_URL
+      }/api/admin/updateProject/${userInfo._id}/${projectId}`;
       const options = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ projectDetails }),
       };
       const res = await fetch(apiUrl, options);
@@ -446,7 +451,7 @@ function DashboardProjectUpdate() {
                     duration: 1,
                     ease: [0.68, -0.6, 0.32, 1.6],
                   }}
-                  className="inline-block"
+                  className="inline-block text-lg"
                 >
                   Kindly fill out the form to make updates to your project
                   information :

@@ -23,7 +23,7 @@ function About({ isFixed }) {
       try {
         setFetchLoading(true);
         setFetchError(false);
-        const api = "/api/admin/about";
+        const api = `${import.meta.env.VITE_BASE_URL}/api/admin/about`;
         const res = await fetch(api);
         const data = await res.json();
 
@@ -64,7 +64,7 @@ function About({ isFixed }) {
       //INFO: Fetch Error display
       <div className="relative flex flex-col items-center justify-center w-full px-5 py-5 overflow-hidden error-page sm:py-10">
         <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 lg:gap-3">
-          {/* Eye Play */}
+          {/* //INFO: Eye Play */}
           <div className="relative w-full h-[200px]">
             <EyesPlayComponent queryClass="error-page" scale={0.7} />
           </div>
@@ -203,7 +203,7 @@ function About({ isFixed }) {
             <h1 className="text-xl tracking-tighter sm:text-3xl font-poppins text-zinc-100">
               Featured Certificates
             </h1>
-            {/* Tech Category Buttons */}
+            {/* //INFO: Tech Category Buttons */}
             <div className="flex flex-row flex-wrap w-full gap-2 sm:gap-3 lg:gap-5">
               {[...new Set(categoryList)].map((item) => {
                 return (
@@ -223,7 +223,7 @@ function About({ isFixed }) {
                 );
               })}
             </div>
-            {/* Swiper Cards */}
+            {/* //INFO: Swiper Cards */}
             <SwiperTechStacks
               techStacks={aboutDetails && aboutDetails.skillsArray}
               selectedCategory={selectedCategory}

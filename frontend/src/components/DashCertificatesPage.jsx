@@ -17,7 +17,6 @@ import { toast } from "react-toastify";
 import { SyncLoader } from "react-spinners";
 import EyesPlayComponent from "./EyesPlayComponent";
 import { Link } from "react-router-dom";
-import { Label, Select } from "flowbite-react";
 
 function DashCertificatesPage() {
   const [certificatesList, setCertificatesList] = useState([]);
@@ -33,7 +32,9 @@ function DashCertificatesPage() {
     const getAllCertificates = async () => {
       try {
         setFetchLoading(true);
-        const api = `/api/admin/about/certificates`;
+        const api = `${
+          import.meta.env.VITE_BASE_URL
+        }/api/admin/about/certificates`;
         const options = {
           method: "GET",
         };
@@ -66,9 +67,12 @@ function DashCertificatesPage() {
   //INFO: Handle specific certificate delete
   const handleDeleteCertificate = async () => {
     try {
-      const api = `/api/admin/deleteCertificate/${selectedCertificateId}/${userInfo._id}`;
+      const api = `${
+        import.meta.env.VITE_BASE_URL
+      }/api/admin/deleteCertificate/${selectedCertificateId}/${userInfo._id}`;
       const options = {
         method: "DELETE",
+        credentials: "include",
       };
       const res = await fetch(api, options);
       const data = await res.json();

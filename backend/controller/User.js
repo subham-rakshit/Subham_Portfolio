@@ -90,6 +90,8 @@ export const userController = {
             .status(200)
             .cookie("token", await userExists.generateToken(), {
               httpOnly: true,
+              secure: true,
+              sameSite: "None", // Allow cross-site cookie sharing
               expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days from now
             })
             .json({
@@ -135,6 +137,8 @@ export const userController = {
           .status(201)
           .cookie("token", await userCreated.generateToken(), {
             httpOnly: true,
+            secure: true,
+            sameSite: "None", // Allow cross-site cookie sharing
             expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), //INFO: 30 days
           })
           .json({
@@ -152,10 +156,17 @@ export const userController = {
   //NOTE: Signout Controller
   async signOut(req, res, next) {
     try {
-      return res.clearCookie("token").status(200).json({
-        success: true,
-        message: "You have successfully Signed Out.",
-      });
+      return res
+        .clearCookie("token", {
+          httpOnly: true,
+          secure: true,
+          sameSite: "None", // Set to None for cross-origin cookies
+        })
+        .status(200)
+        .json({
+          success: true,
+          message: "You have successfully Signed Out.",
+        });
     } catch (error) {
       console.log(`SingOut Controller Error: ${error}`);
       return next(error);

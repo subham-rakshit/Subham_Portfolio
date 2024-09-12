@@ -69,12 +69,15 @@ function DashProfilePage() {
     ) {
       try {
         dispatch(updateStart());
-        const apiUrl = `/api/admin/updateInfo/${userInfo._id}`;
+        const apiUrl = `${import.meta.env.VITE_BASE_URL}/api/admin/updateInfo/${
+          userInfo._id
+        }`;
         const options = {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({ formDetails }),
         };
         const res = await fetch(apiUrl, options);

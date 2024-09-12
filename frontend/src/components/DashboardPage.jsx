@@ -41,8 +41,8 @@ function DashboardPage() {
         //NOTE: Promise.all() => is a method in JavaScript used to handle multiple promises concurrently.It takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved or rejects as soon as one of them rejects.
 
         const [projectRes, aboutRes] = await Promise.all([
-          fetch("/api/admin/projects/get"),
-          fetch("/api/admin/about"),
+          fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/projects/get`),
+          fetch(`${import.meta.env.VITE_BASE_URL}/api/admin/about`),
         ]);
 
         if (aboutRes.ok && projectRes.ok) {
@@ -293,9 +293,9 @@ function DashboardPage() {
             </motion.div>
           </div>
           {/* //NOTE: Skills & Certificates */}
-          <div className="flex flex-col gap-5 my-10 md:justify-between md:flex-row">
+          <div className="flex flex-col w-full gap-5 my-10 md:justify-between md:flex-row">
             {/* Skills */}
-            <div className="w-full max-w-1/2">
+            <div className="w-full overflow-x-auto max-w-1/2">
               <h1
                 className="mb-5 font-semibold tracking-tighter font-poppins"
                 style={{ transform: "scaleY(1.2)" }}
@@ -349,8 +349,8 @@ function DashboardPage() {
               </Link>
             </div>
 
-            {/* Category */}
-            <div className="w-full max-w-1/2">
+            {/* Certificates */}
+            <div className="w-full overflow-x-auto max-w-1/2">
               <h1
                 className="mb-5 font-semibold tracking-tighter font-poppins"
                 style={{ transform: "scaleY(1.2)" }}
@@ -404,7 +404,7 @@ function DashboardPage() {
           </div>
 
           {/* //NOTE: Projects */}
-          <div className="w-full">
+          <div className="w-full overflow-y-auto">
             <div className="flex items-center justify-between gap-2 mb-5">
               <h1
                 className="font-semibold tracking-tighter font-poppins"
