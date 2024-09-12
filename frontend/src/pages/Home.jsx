@@ -59,9 +59,9 @@ function Home({ isFixed }) {
     return (
       <div className="home-section">
         {/* //INFO: Landing Section */}
-        <div className="w-full min-h-screen bg-[#FBF9ED] flex flex-col">
+        <div className="w-full h-fit bg-[#FBF9ED] flex flex-col">
           {/* //INFO: Masker Info Section */}
-          <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-1 sm:px-5 overflow-hidden">
+          <div className="w-full max-w-[1400px] mx-auto my-auto flex flex-col lg:flex-row lg:items-center justify-between px-2 sm:px-5 overflow-hidden py-5">
             {isFixed && (
               <motion.div
                 initial={{ scale: 0, opacity: 0, rotate: 360 }}
@@ -70,7 +70,6 @@ function Home({ isFixed }) {
                   opacity: 1,
                   rotate: 0,
                 }}
-                viewport={{ margin: "-50px" }}
                 transition={{
                   ease: [0.34, 1.56, 0.64, 1],
                   duration: 1.1,
@@ -97,7 +96,6 @@ function Home({ isFixed }) {
                       <motion.div
                         initial={{ y: "100%" }}
                         whileInView={{ y: 0 }}
-                        viewport={{ margin: "-50px" }}
                         transition={{
                           ease: [0.34, 1.56, 0.64, 1],
                           duration: 1.2,
@@ -108,25 +106,24 @@ function Home({ isFixed }) {
                           <motion.div
                             initial={{ width: 0 }}
                             whileInView={{ width: "fit-content" }}
-                            viewport={{ margin: "-50px" }}
                             transition={{
                               ease: [0.34, 1.56, 0.64, 1],
                               duration: 0.8,
                               delay: 0.4,
                             }}
-                            className="hidden overflow-hidden sm:inline-block"
+                            className="overflow-hidden"
                           >
-                            <div className="w-[90px] rounded-md h-[65px] flex justify-center items-center bg-[#B8D253] overflow-hidden">
+                            <div className="sm:w-[90px] rounded-sm sm:rounded-md sm:h-[60px] flex justify-center items-center bg-[#B8D253] overflow-hidden w-[55px] h-[35px]">
                               <img
                                 src="https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/BG%20Remove%20Subham.png?alt=media&token=9602e2d7-57fd-4095-914e-317ef801d2b7"
                                 alt="profile image"
-                                className="w-[80px] h-[60px] bg-cover relative top-[2px]"
+                                className="sm:w-[78px] sm:h-[60px] bg-cover relative top-[2px] w-[45px] h-[36px]"
                               />
                             </div>
                           </motion.div>
                         )}
                         <h1
-                          className={`mb-[1vw] uppercase text-[45px] sm:text-[80px] leading-[.75] tracking-tighter`}
+                          className={`mb-[1vw] uppercase text-[45px] sm:text-[80px] leading-[.75] tracking-tighter font-extrabold`}
                         >
                           {item}
                         </h1>
@@ -135,7 +132,7 @@ function Home({ isFixed }) {
                   );
                 })}
                 {/* //INFO: Masker Info Animated Section */}
-                <div className="masker">
+                <div className="overflow-hidden masker">
                   <motion.div
                     initial={{ y: "100%" }}
                     whileInView={{ y: 0 }}
@@ -144,9 +141,13 @@ function Home({ isFixed }) {
                       ease: [0.34, 1.56, 0.64, 1],
                       duration: 1.5,
                     }}
-                    className="flex items-end gap-2 py-2 overflow-hidden w-fit"
+                    className="flex items-end gap-2 py-2 w-fit"
+                    style={{ transform: "scaleY(1.2)" }}
                   >
-                    <span className="mb-[1vw] capitalize text-[25px] sm:text-[40px] leading-[.75] tracking-tighter font-bold">
+                    <span
+                      className="mb-[1vw] capitalize text-[25px] sm:text-[40px] leading-[.75] tracking-tighter font-bold"
+                      style={{ transform: "scaleY(1.2)" }}
+                    >
                       <Typewriter
                         words={[
                           "MERN Stack Developer",
@@ -173,7 +174,7 @@ function Home({ isFixed }) {
           </div>
 
           {/* //INFO: Landing Bottom Section */}
-          <div className="flex flex-col justify-between gap-2 px-1 py-5 border-t sm:px-5 border-zinc-700 md:flex-row md:items-center">
+          <div className="flex flex-col justify-between gap-2 px-2 py-5 border-t sm:px-5 border-zinc-700 md:flex-row md:items-center">
             <div className="masker">
               <p className="font-poppins text-zinc-800 font-light text-[12px]">
                 Building user-friendly interface
@@ -204,7 +205,7 @@ function Home({ isFixed }) {
 
         {/* //INFO: Markee Section */}
         <div className="w-full py-10 sm:py-20 bg-[#004D43] rounded-tl-[20px] sm:rounded-tl-[40px] rounded-tr-[20px] sm:rounded-tr-[40px]">
-          <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex">
+          <div className="border-t-[1px] border-b-[1px] border-zinc-300 overflow-hidden whitespace-nowrap text-white flex items-center">
             <motion.h1
               initial={{ x: "0" }}
               animate={{ x: "-100%" }}
@@ -225,9 +226,9 @@ function Home({ isFixed }) {
         </div>
 
         {/* //INFO: About Section */}
-        <div className="w-full min-h-screen bg-[#CDEA68] pt-10 pb-10">
+        <div className="w-full h-fit bg-[#CDEA68] py-10">
           {/* //INFO: About basic info */}
-          <div className="w-full max-w-[1400px] mx-auto px-1 sm:px-5 text-[#212121] font-poppins">
+          <div className="w-full max-w-[1400px] mx-auto px-2 sm:px-5 text-[#212121] font-poppins">
             <h1 className="mb-4 overflow-hidden text-xl sm:text-3xl">
               Hello, I'm{" "}
               <span className="overflow-hidden font-bold">
@@ -266,7 +267,7 @@ function Home({ isFixed }) {
             </p>
           </div>
           {/* //INFO: Why choose me section */}
-          <div className="w-full max-w-[1400px] mx-auto border-t border-b border-zinc-900 py-5 px-1 sm:px-5 my-10">
+          <div className="w-full max-w-[1400px] mx-auto border-t border-b border-zinc-900 py-5 px-2 sm:px-5 my-10">
             <div className="w-full max-w-[1300px] mx-auto flex flex-col sm:flex-row sm:justify-between">
               <div className="flex items-center gap-3 mb-5 sm:mb-0">
                 <BsFillPersonCheckFill size="30" />
@@ -337,17 +338,16 @@ function Home({ isFixed }) {
         </div>
 
         {/* //INFO: Play Section */}
-        <div className="eyeplay relative w-full h-screen bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] bg-cover bg-center bg-fixed overflow-hidden cursor-pointer">
+        <div className="eyeplay relative w-full h-[50vh] lg:h-[80vh] bg-[url('https://firebasestorage.googleapis.com/v0/b/shibaji-website.appspot.com/o/Portfolio%20play%20image.jpg?alt=media&token=331061ea-9018-4a79-90c3-bcf00b7259cd')] object-cover bg-center overflow-hidden cursor-pointer">
           <EyesPlayComponent queryClass="home-section" text="PLAY" />
         </div>
 
         {/* //INFO: Projects Lists Section */}
-        <div className="w-full px-1 my-10 sm:px-5">
+        <div className="w-full px-2 py-10 sm:px-5">
           <div className="w-full max-w-[1400px] overflow-hidden">
             <motion.h1
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
-              viewport={{ amout: 0.5 }}
               transition={{
                 ease: [0.34, 1.56, 0.64, 1],
                 duration: 0.8,
@@ -358,7 +358,7 @@ function Home({ isFixed }) {
               Featured projects
             </motion.h1>
           </div>
-          <div className="w-full max-w-[1400px] mx-auto mt-10 flex flex-wrap gap-5">
+          <div className="w-full max-w-[1400px] mx-auto mt-5 flex flex-wrap gap-5">
             {projectsList.map((project, i) => (
               <div
                 className="w-full sm:w-[48%] lg:w-[45vw] whitespace-nowrap rounded-lg p-4 shadow-custom"

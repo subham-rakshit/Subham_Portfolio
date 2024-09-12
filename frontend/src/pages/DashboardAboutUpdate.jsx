@@ -375,13 +375,13 @@ function DashboardAboutUpdate() {
       );
     } else {
       return (
-        <div className="flex-1 min-h-screen px-1 sm:px-5">
-          <div className="w-full max-w-[1200px] mx-auto py-10">
+        <div className="flex-1 min-h-screen px-2 sm:px-5">
+          <div className="w-full max-w-[1200px] mx-auto">
             {/* //IDEA: Masker section */}
             <motion.div
               initial="initial"
               whileInView="view"
-              className="w-full h-[30vh] flex items-center gap-1"
+              className="flex items-center w-full gap-1 py-10 h-fit"
             >
               <motion.div
                 variants={{
@@ -416,7 +416,7 @@ function DashboardAboutUpdate() {
                       delay: 0.035 * i,
                     }}
                     key={i}
-                    className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
+                    className={`inline-block text-3xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
                       l === "C" ? "ml-3" : ""
                     }`}
                   >
@@ -809,7 +809,7 @@ function DashboardAboutUpdate() {
               <motion.div
                 initial="initial"
                 whileInView="view"
-                className="relative h-[30vh] flex rounded-xl overflow-hidden"
+                className="relative h-[20vh] flex rounded-xl overflow-hidden"
               >
                 {/* Left Silde Container */}
                 <motion.div

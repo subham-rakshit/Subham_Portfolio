@@ -122,7 +122,7 @@ function DashProfilePage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-1 sm:px-5">
+    <div className="flex-1 min-h-screen px-2 sm:px-5">
       <div className="w-full max-w-[1200px] mx-auto">
         {/* Profile Image section */}
         <motion.div
@@ -191,14 +191,13 @@ function DashProfilePage() {
         {/* Form Section */}
         <form
           onSubmit={handleUpdateForm}
-          className="w-full max-w-[1400px] min-h-screen mx-auto py-10"
+          className="w-full max-w-[1400px] min-h-screen mx-auto"
         >
           {/* Form Heading */}
           <div className="overflow-hidden">
             <motion.h1
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
-              viewport={{ margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
               className="tracking-tighter font-poppins"
             >
@@ -214,7 +213,6 @@ function DashProfilePage() {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-10px" }}
                 transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
@@ -245,7 +243,6 @@ function DashProfilePage() {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-10px" }}
                 transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
@@ -277,7 +274,6 @@ function DashProfilePage() {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-10px" }}
                 transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-end lg:gap-5"
               >
@@ -311,7 +307,6 @@ function DashProfilePage() {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-10px" }}
                 transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
@@ -348,18 +343,17 @@ function DashProfilePage() {
           <motion.div
             initial="initial"
             whileInView="view"
-            className="relative h-[30vh] flex rounded-xl overflow-hidden"
+            className="relative h-[20vh] flex rounded-xl overflow-hidden"
           >
             {/* Left Silde Container */}
             <motion.div
               variants={{
                 initial: { y: 0, opacity: 1 },
-                view: { y: "-100%", opacity: 1 },
+                view: { y: "-100%", opacity: 0 },
               }}
-              viewport={{ margin: "-100px" }}
               transition={{
-                duration: 1.8,
-                delay: 0.2,
+                duration: 2,
+                delay: 0.5,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
               className="bg-[#CDEA68] w-[50%] h-full rounded-l-xl z-[99]"
@@ -370,10 +364,9 @@ function DashProfilePage() {
                 initial: { y: 0, opacity: 1 },
                 view: { y: "100%", opacity: 1 },
               }}
-              viewport={{ margin: "-100px" }}
               transition={{
-                duration: 1.8,
-                delay: 0.2,
+                duration: 2,
+                delay: 0.5,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
               className="bg-[#CDEA68] w-[50%] h-full rounded-r-xl z-[99]"
@@ -391,7 +384,6 @@ function DashProfilePage() {
                     initial: { y: "100%" },
                     buttonView: { y: 0 },
                   }}
-                  viewport={{ margin: "-100px" }}
                   transition={{
                     duration: 0.5,
                     delay: 0.3,

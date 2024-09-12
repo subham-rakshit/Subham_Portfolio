@@ -58,7 +58,7 @@ function Projects() {
           className="w-full max-w-[1400px] mx-auto py-10 sm:py-20 overflow-hidden flex flex-col sm:flex-row sm:items-center"
         >
           {/* //INFO: Projects Masker */}
-          <div className="py-2 mx-1 overflow-hidden sm:mx-5 w-fit h-fit">
+          <div className="py-2 mx-2 overflow-hidden sm:mx-5 w-fit h-fit">
             <motion.div
               initial="initial"
               whileInView="view"
@@ -105,7 +105,7 @@ function Projects() {
           </div>
         </motion.div>
         {/* //INFO: All Projects */}
-        <div className="w-full min-h-screen px-1 py-5 bg-transparent sm:px-5 sm:py-10 rounded-t-2xl">
+        <div className="w-full min-h-screen px-2 py-5 bg-transparent sm:px-5 sm:py-10 rounded-t-2xl">
           {/* //INFO: All Projects Heading */}
           <motion.div
             initial="initial"

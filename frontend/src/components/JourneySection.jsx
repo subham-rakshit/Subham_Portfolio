@@ -5,10 +5,10 @@ import EyesPlayComponent from "./EyesPlayComponent";
 
 function JourneySection({ queryClass }) {
   return (
-    <div className="journey relative w-full bg-[#cdea68] py-5 sm:py-10 px-5 flex flex-col justify-center items-center overflow-hidden">
+    <div className="journey relative w-full bg-[#cdea68] py-5 sm:py-10 px-2 flex flex-col justify-center items-center overflow-hidden">
       <div className="w-full max-w-[1400px] mx-auto flex flex-col gap-2 lg:gap-3">
         {/* Eye Play */}
-        <div className="relative w-full h-[200px]">
+        <div className="relative w-full h-[150px] sm:h-[200px]">
           <EyesPlayComponent queryClass={queryClass} scale={0.7} />
         </div>
         {["Ready", "To Start", "The Journey"].map((text, index) => {
@@ -21,7 +21,7 @@ function JourneySection({ queryClass }) {
               style={{ transform: "scaleY(1.3)" }}
             >
               <h1
-                className="font-Founders_Grotesk_X-Condensed text-4xl sm:text-7xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"
+                className="font-Founders_Grotesk_X-Condensed text-[50px] sm:text-7xl lg:text-8xl font-extrabold tracking-tighter text-center text-zinc-950 uppercase z-[99] leading-none pt-0"
                 style={{ lineHeight: 0.8 }}
               >
                 {text}
@@ -31,7 +31,7 @@ function JourneySection({ queryClass }) {
         })}
 
         {/* Read More Btn */}
-        <div className="flex justify-center mt-10 overflow-hidden">
+        <div className="flex justify-center mt-5 overflow-hidden">
           <Link to="/contact">
             <button
               type="button"

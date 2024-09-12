@@ -153,8 +153,8 @@ function ProjectItemDetails() {
     return (
       <div className="w-full min-h-screen project-item-details-section">
         {/* //INFO: Landing Section */}
-        <div className="w-full px-1 sm:px-5">
-          <div className="w-full max-w-[1400px] mx-auto h-[30vh] sm:h-[50vh] flex items-center">
+        <div className="w-full px-2 sm:px-5">
+          <div className="w-full max-w-[1400px] mx-auto h-fit flex items-center py-10 sm:py-14">
             <div className="flex items-center gap-1">
               <motion.div
                 initial={{ width: 0 }}
@@ -164,7 +164,7 @@ function ProjectItemDetails() {
                   delay: 0.8,
                   ease: "easeInOut",
                 }}
-                className="sm:flex sm:items-center sm:justify-center sm:overflow-hidden sm:rounded-[5px] hidden"
+                className="sm:flex items-center justify-center overflow-hidden rounded-[5px] hidden"
               >
                 <img
                   src={
@@ -173,14 +173,14 @@ function ProjectItemDetails() {
                       : ""
                   }
                   alt={projectItemDetails.name ? projectItemDetails.name : ""}
-                  className="w-[100px] h-[60px] bg-cover"
+                  className="w-[80px] h-[70px] object-cover"
                 />
               </motion.div>
               <motion.div
                 initial="initial"
                 whileInView="view"
-                className="pr-2 overflow-hidden text-2xl font-extrabold tracking-tighter uppercase sm:text-5xl font-poppins text-zinc-800"
-                style={{ transform: "scaleY(1.3)" }}
+                className="pr-2 overflow-hidden text-[35px] font-extrabold tracking-tighter uppercase sm:text-[60px] font-poppins text-zinc-800"
+                style={{ transform: "scaleY(1.5)" }}
               >
                 {`${projectItemDetails.slug ? projectItemDetails.slug : ""}`
                   .split("")
@@ -206,8 +206,8 @@ function ProjectItemDetails() {
           </div>
         </div>
         {/* //INFO: Drift Image Section */}
-        <div className="relative w-full min-h-screen px-1 py-5 overflow-hidden sm:py-10 place-content-center bg-neutral-950 sm:px-5 rounded-tr-2xl rounded-tl-2xl">
-          <div className="relative w-full max-w-[1400px] h-screen mx-auto flex items-center justify-center">
+        <div className="relative w-full px-2 py-5 overflow-hidden h-fit sm:py-10 place-content-center bg-neutral-950 sm:px-5 rounded-tr-2xl rounded-tl-2xl">
+          <div className="relative w-full max-w-[1400px] h-[70vh] sm:h-[50vh] mx-auto flex items-center justify-center">
             <h2 className="relative z-0 text-[20vw] font-black text-neutral-800 md:text-[200px]">
               DRIFT<span className="text-indigo-500">.</span>
             </h2>
@@ -231,7 +231,7 @@ function ProjectItemDetails() {
               }
             />
           </div>
-          <div className="flex flex-col justify-center w-full gap-5 py-5 sm:py-10 sm:gap-10 sm:flex-row">
+          <div className="flex flex-col justify-center w-full gap-5 py-5 sm:gap-10 sm:flex-row">
             <Link
               to={
                 projectItemDetails.projectLink && projectItemDetails.projectLink
@@ -275,7 +275,7 @@ function ProjectItemDetails() {
           </div>
         </div>
         {/* //INFO: Project Description */}
-        <div className="w-full px-1 bg-transparent sm:px-5">
+        <div className="w-full px-2 bg-transparent sm:px-5">
           <div className="w-full max-w-[1400px] mx-auto py-10">
             {/* Description Heading  */}
             <motion.div

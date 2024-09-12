@@ -68,7 +68,7 @@ function DashSideBar({ tab }) {
                 opacity: 0,
               }
         }
-        transition={{ duration: 0.3, ease: [0.68, -0.2, 0.32, 1.6] }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`flex flex-col gap-3 py-5 w-full overflow-y-auto overflow-x-hidden ${
           open ? "inline-block" : "hidden"
         } transition-all duration-500 ease-in-out sidebar-tab-container`}

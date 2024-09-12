@@ -146,7 +146,7 @@ function DashboardPage() {
         </div>
       ) : (
         //INFO: Main Function
-        <div className="w-full max-w-[1200px] mx-auto px-5 lg:px-10 py-5 sm:py-10 overflow-x-auto">
+        <div className="w-full max-w-[1200px] mx-auto px-2 sm:px-5 lg:px-10 py-14 overflow-x-auto">
           {/* //NOTE: Cards */}
           <div className="grid w-full gap-5 sm:grid-cols-3 grid-col-1">
             {/* //NOTE: Total Projects */}

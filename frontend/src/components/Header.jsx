@@ -162,7 +162,7 @@ function Header({ isFixed }) {
   }, [location, isFixed]);
 
   return (
-    <div className="relative w-full px-1 py-2 transition-all duration-300 ease-in-out navbar sm:px-5 font-poppins text-zinc-800 z-[9999]">
+    <div className="relative w-full px-2 py-2 transition-all duration-300 ease-in-out navbar sm:px-5 font-poppins text-zinc-800 z-[9999]">
       <div className="w-full max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="logo">
           <Link to="/">
@@ -327,7 +327,7 @@ function Header({ isFixed }) {
           </ul>
 
           {/* Social Links Mobile view */}
-          <ul className="flex items-center justify-between gap-2 pl-0 mt-5 list-none">
+          <ul className="flex items-center justify-between gap-2 pl-0 mt-5 mb-10 list-none">
             {[
               {
                 name: "linkedin_1",
@@ -355,7 +355,7 @@ function Header({ isFixed }) {
                   key={logo.name}
                   className={`w-fit hover:scale-[1.2] transition-all duration-300 ease-in-out`}
                 >
-                  <img src={logo.href} alt={logo.name} className="w-7 h-w-7" />
+                  <img src={logo.href} alt={logo.name} className="w-8 h-8" />
                 </li>
               </Link>
             ))}
@@ -388,7 +388,7 @@ function Header({ isFixed }) {
                   </span>
                 )}
                 <input
-                  type="text"
+                  type="password"
                   id="authKey"
                   name="authKey"
                   value={authKey}

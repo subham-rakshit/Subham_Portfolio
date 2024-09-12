@@ -102,7 +102,7 @@ function DashCertificatesPage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-1 overflow-x-scroll table-auto sm:px-5 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-200">
+    <div className="flex-1 min-h-screen px-2 overflow-x-scroll table-auto sm:px-5 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-200">
       {fetchLoading ? (
         //INFO: Loading while fetch
         <div className="w-full max-w-[1200px] mx-auto flex items-center justify-center min-h-screen">
@@ -165,7 +165,7 @@ function DashCertificatesPage() {
           <motion.div
             initial="initial"
             whileInView="view"
-            className="w-full h-[30vh] flex items-center gap-2"
+            className="flex items-center w-full gap-2 h-fit py-14"
           >
             <div
               className="overflow-hidden"
@@ -183,7 +183,7 @@ function DashCertificatesPage() {
                     delay: 0.035 * i,
                   }}
                   key={i}
-                  className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
+                  className={`inline-block text-4xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
                     l === "C" ? "ml-3" : ""
                   }`}
                 >
@@ -231,7 +231,7 @@ function DashCertificatesPage() {
                       delay: 0.04 * i,
                     }}
                     key={i}
-                    className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
+                    className={`inline-block text-4xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
                       l === "C" ? "ml-3" : ""
                     }`}
                   >
@@ -242,7 +242,7 @@ function DashCertificatesPage() {
           </motion.div>
 
           {/* Skills Details Table */}
-          <Table hoverable className="mb-10 tracking-tighter font-poppins">
+          <Table hoverable className="mb-5 tracking-tighter font-poppins">
             <TableHead className="text-xs">
               <TableHeadCell>Issued Date</TableHeadCell>
               <TableHeadCell>Certificate</TableHeadCell>

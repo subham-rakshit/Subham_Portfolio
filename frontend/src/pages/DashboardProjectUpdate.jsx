@@ -380,13 +380,13 @@ function DashboardProjectUpdate() {
     } else {
       //NOTE: Main function
       return (
-        <div className="flex-1 min-h-screen px-1 sm:px-5">
-          <div className="w-full max-w-[1200px] mx-auto py-10">
+        <div className="flex-1 min-h-screen px-2 sm:px-5">
+          <div className="w-full max-w-[1200px] mx-auto">
             {/* Masker section */}
             <motion.div
               initial="initial"
               whileInView="view"
-              className="w-full h-[30vh] flex items-center gap-1"
+              className="flex items-center w-full gap-1 py-10 h-fit"
             >
               <motion.div
                 variants={{
@@ -407,7 +407,7 @@ function DashboardProjectUpdate() {
               </motion.div>
               <div
                 className="overflow-hidden"
-                style={{ transform: "scaleY(1.5)" }}
+                style={{ transform: "scaleY(1.6)" }}
               >
                 {"Your Project".split("").map((l, i) => (
                   <motion.span

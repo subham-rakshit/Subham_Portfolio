@@ -122,7 +122,7 @@ function Contact({ isFixed }) {
   return (
     <div className="w-full min-h-screen contact-page-section">
       {/* //INFO: Contact Landing Section */}
-      <div className="w-full min-h-[50vh] sm:min-h-[55vh] lg:min-h-[60vh] px-5 flex items-center justify-center">
+      <div className="flex items-center justify-center w-full px-2 py-10 h-fit sm:px-5 sm:py-14">
         <div className="w-full max-w-[1400px] mx-auto flex flex-col overflow-hidden">
           {["Let's Start", "Working Together"].map((item, index) => {
             return (
@@ -156,14 +156,13 @@ function Contact({ isFixed }) {
       </div>
 
       {/* //INFO: Contact Form */}
-      <div className="w-full min-h-screen px-5 py-8">
+      <div className="w-full min-h-screen px-2 py-5 sm:px-5">
         <div className="w-full max-w-[1400px] mx-auto py-2">
           {/* //INFO: Heading */}
           <div className="overflow-hidden">
             <motion.h1
               initial={{ y: "100%" }}
               whileInView={{ y: 0 }}
-              viewport={{ margin: "-100px" }}
               transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
               className="tracking-tighter font-poppins"
             >
@@ -181,7 +180,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
@@ -208,7 +206,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap flex-1 gap-2 py-2 sm:flex-row sm:items-end sm:gap-5"
               >
@@ -241,7 +238,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
@@ -274,7 +270,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 1.4, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
@@ -307,7 +302,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 1.6, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
@@ -343,7 +337,6 @@ function Contact({ isFixed }) {
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
-                viewport={{ margin: "-100px" }}
                 transition={{ duration: 1.8, ease: [0.34, 1.56, 0.64, 1] }}
                 className="flex flex-col flex-wrap gap-2 py-2 lg:flex-row lg:items-center lg:gap-5"
               >
@@ -372,7 +365,7 @@ function Contact({ isFixed }) {
             </div>
 
             {/* //INFO: Send Inquiry Button */}
-            <div className="mt-10 overflow-hidden">
+            <div className="mt-5 overflow-hidden">
               <motion.div
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}

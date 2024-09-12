@@ -262,13 +262,13 @@ function DashCreateAboutPage() {
   };
 
   return (
-    <div className="flex-1 min-h-screen px-1 sm:px-5">
-      <div className="w-full max-w-[1200px] mx-auto py-10">
+    <div className="flex-1 min-h-screen px-2 sm:px-5">
+      <div className="w-full max-w-[1200px] mx-auto">
         {/* //IDEA: Masker section */}
         <motion.div
           initial="initial"
           whileInView="view"
-          className="w-full h-[30vh] flex items-center gap-1"
+          className="flex items-center w-full gap-1 py-14 h-fit"
         >
           <motion.div
             variants={{
@@ -300,9 +300,7 @@ function DashCreateAboutPage() {
                   delay: 0.035 * i,
                 }}
                 key={i}
-                className={`inline-block text-2xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900 ${
-                  l === "C" ? "ml-3" : ""
-                }`}
+                className={`inline-block text-4xl sm:text-5xl font-extrabold tracking-tighter uppercase font-poppins text-zinc-900`}
               >
                 {l}
               </motion.span>
@@ -311,7 +309,7 @@ function DashCreateAboutPage() {
         </motion.div>
 
         {/* //IDEA: Create Projects Form Section */}
-        <form onSubmit={handleCreateAboutForm} className="mt-10 font-poppins">
+        <form onSubmit={handleCreateAboutForm} className="font-poppins">
           {/* //NOTE: Form Heading */}
           <motion.div
             initial="initial"
@@ -334,7 +332,7 @@ function DashCreateAboutPage() {
           </motion.div>
 
           {/* //IDEA: Create Form */}
-          <div className="flex flex-col gap-2 my-10 sm:gap-5 lg:gap-10">
+          <div className="flex flex-col gap-2 my-5 sm:gap-5 lg:gap-10">
             {/* //NOTE: About Me Input details STARTS */}
             <div>
               <span
@@ -620,7 +618,7 @@ function DashCreateAboutPage() {
           <motion.div
             initial="initial"
             whileInView="view"
-            className="relative h-[30vh] flex rounded-xl overflow-hidden"
+            className="relative h-[15vh] flex rounded-xl overflow-hidden"
           >
             {/* Left Silde Container */}
             <motion.div
@@ -628,10 +626,9 @@ function DashCreateAboutPage() {
                 initial: { y: 0, opacity: 1 },
                 view: { y: "-100%", opacity: 0 },
               }}
-              viewport={{ margin: "-100px" }}
               transition={{
                 duration: 1.8,
-                delay: 0.2,
+                delay: 0.5,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
               className="bg-[#CDEA68] w-[50%] h-full rounded-l-xl z-[99]"
@@ -642,10 +639,9 @@ function DashCreateAboutPage() {
                 initial: { y: 0, opacity: 1 },
                 view: { y: "100%", opacity: 0 },
               }}
-              viewport={{ margin: "-100px" }}
               transition={{
                 duration: 1.8,
-                delay: 0.2,
+                delay: 0.5,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
               className="bg-[#CDEA68] w-[50%] h-full rounded-r-xl z-[99]"

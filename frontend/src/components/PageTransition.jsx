@@ -79,7 +79,7 @@ function PageTransition({ children }) {
                     times: [0, 0.5, 1], //INFO: Timing for each phase
                     ease: [0.76, 0, 0.24, 1], //INFO: Easing function from easings.net (easeInOutQuart)
                   }}
-                  className="w-fit font-franklin text-3xl sm:text-6xl text-[#FBF9ED] font-extrabold uppercase"
+                  className="w-fit font-franklin text-4xl sm:text-6xl text-[#FBF9ED] font-extrabold uppercase"
                 >
                   {displayText}
                 </motion.span>

@@ -92,7 +92,7 @@ function About({ isFixed }) {
       return (
         <div className="w-full min-h-screen about-section">
           {/* //INFO: About Masker Section */}
-          <div className="masker-section-container w-full h-[40vh] sm:h-[50vh] px-1 sm:px-5 border-b border-zinc-600">
+          <div className="w-full px-2 py-10 masker-section-container h-fit sm:px-5 border-zinc-600">
             <div className="masker-outer-container w-full h-full max-w-[1400px] mx-auto flex flex-col justify-center gap-0 sm:gap-4">
               {["Driving Innovation", "with code"].map((item, index) => {
                 return (
@@ -109,7 +109,6 @@ function About({ isFixed }) {
                             width: "fit-content",
                             marginRight: "5px",
                           }}
-                          viewport={{ margin: "-10px" }}
                           transition={{
                             ease: [0.34, 1.56, 0.64, 1],
                             duration: 1.5,
@@ -119,12 +118,12 @@ function About({ isFixed }) {
                           <img
                             src="/about-photo.png"
                             alt="about image"
-                            className="w-[50px] sm:w-[92px] h-[30px] sm:h-[65px] bg-cover"
+                            className="w-[50px] sm:w-[92px] h-[35px] sm:h-[65px] bg-cover"
                           />
                         </motion.div>
                       )}
                       <h1
-                        className="font-poppins font-extrabold text-xl sm:text-5xl uppercase tracking-none leading-[0.75]"
+                        className="font-poppins font-extrabold text-2xl sm:text-5xl uppercase tracking-tighter leading-[0.75]"
                         style={{ transform: "scaleY(1.5)" }}
                       >
                         {item}
@@ -136,7 +135,7 @@ function About({ isFixed }) {
             </div>
           </div>
           {/* //INFO: About Details Section */}
-          <div className="w-full px-1 py-5 sm:py-10 sm:px-5">
+          <div className="w-full px-2 py-5 sm:py-10 sm:px-5">
             <div className="w-full max-w-[1400px] mx-auto font-familjen flex flex-col lg:flex-row justify-between gap-5">
               <h1 className="w-full">About me:</h1>
               <div className="flex flex-col w-full gap-3 tracking-tighter">
@@ -170,7 +169,7 @@ function About({ isFixed }) {
               ease: [0.34, 1.56, 0.64, 1],
               duration: 0.6,
             }}
-            className="relative w-full h-[60vh] p-5 hidden sm:inline-block"
+            className="relative w-full h-[60vh] p-5 hidden lg:inline-block"
           >
             <EyesPlayComponent queryClass="about-section" scale={1.2} />
           </motion.div>
@@ -199,9 +198,9 @@ function About({ isFixed }) {
           </div>
 
           {/* //INFO: Swiper Tech Stacks Section */}
-          <div className="w-full max-w-[1400px] min-h-screen mx-auto px-1 sm:px-5 flex flex-col gap-5 sm:gap-10 bg-neutral-800 py-10">
+          <div className="w-full max-w-[1400px] h-fit mx-auto px-2 sm:px-5 flex flex-col gap-5 sm:gap-10 bg-neutral-800 py-10">
             <h1 className="text-xl tracking-tighter sm:text-3xl font-poppins text-zinc-100">
-              Featured Certificates
+              Featured Technologies
             </h1>
             {/* //INFO: Tech Category Buttons */}
             <div className="flex flex-row flex-wrap w-full gap-2 sm:gap-3 lg:gap-5">
@@ -231,7 +230,7 @@ function About({ isFixed }) {
           </div>
 
           {/* //INFO: Certificate Sections */}
-          <div className="w-full px-1 py-20 sm:px-5 certificated-main-container">
+          <div className="w-full px-2 py-10 sm:px-5 certificated-main-container">
             <CertificateSection
               certificatesStack={aboutDetails && aboutDetails.certificatesArray}
             />
