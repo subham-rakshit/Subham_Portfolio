@@ -1,8 +1,3 @@
 [build]
-  command = "npm run build --prefix frontend"  # Command to build your project
-  publish = "frontend/dist"                     # Directory containing the built files
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+command = "npm --prefix frontend run build"  # Build command for the frontend
+publish = "frontend/dist"                    # Publish directory
